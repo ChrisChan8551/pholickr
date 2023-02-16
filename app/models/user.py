@@ -23,8 +23,8 @@ class User(db.Model, UserMixin):
     firstName = db.Column(db.String(20), nullable=False)
     lastName = db.Column(db.String(20), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
     image = db.Column(db.String(1500), nullable=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     following = db.relationship(
@@ -57,7 +57,7 @@ class User(db.Model, UserMixin):
                 self.following.remove(user)
 
     def __repr__(self):
-        return f'<Userid: {self.id},firstName:{self.firstName}, lastName:{self.lastName} image:{self.image}, username: {self.username}, password: {self.password}>'
+        return f'<Userid:{self.id},firstName:{self.firstName}, lastName:{self.lastName},username:{self.username},image:{self.image},password:{self.password},email:{self.email}>'
 
     def to_dict(self):
         return {
