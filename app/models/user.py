@@ -10,7 +10,7 @@ from flask_login import UserMixin
 #     db.Column('followed_id', db.Integer, db.ForeignKey(
 #         add_prefix_for_prod('users.id')), primary_key=True),
 #     schema=SCHEMA
-# )
+# ).
 
 
 class User(db.Model, UserMixin):
