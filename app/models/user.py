@@ -2,15 +2,15 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-followers = db.Table(
-    'followers',
-    db.Model.metadata,
-    db.Column('follower_id', db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), primary_key=True),
-    db.Column('followed_id', db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), primary_key=True),
-    schema=SCHEMA
-)
+# followers = db.Table(
+#     'followers',
+#     db.Model.metadata,
+#     db.Column('follower_id', db.Integer, db.ForeignKey(
+#         add_prefix_for_prod('users.id')), primary_key=True),
+#     db.Column('followed_id', db.Integer, db.ForeignKey(
+#         add_prefix_for_prod('users.id')), primary_key=True),
+#     schema=SCHEMA
+# )
 
 
 class User(db.Model, UserMixin):
@@ -27,15 +27,15 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    following = db.relationship(
-        'User', secondary=followers,
-        primaryjoin=(followers.c.follower_id == id),
-        secondaryjoin=(followers.c.followed_id == id), lazy='dynamic')
+    # following = db.relationship(
+    #     'User', secondary=followers,
+    #     primaryjoin=(followers.c.follower_id == id),
+    #     secondaryjoin=(followers.c.followed_id == id), lazy='dynamic')
 
-    followers = db.relationship(
-        'User', secondary=followers,
-        primaryjoin=(followers.c.followed_id == id),
-        secondaryjoin=(followers.c.follower_id == id), lazy='dynamic')
+    # followers = db.relationship(
+    #     'User', secondary=followers,
+    #     primaryjoin=(followers.c.followed_id == id),
+    #     secondaryjoin=(followers.c.follower_id == id), lazy='dynamic')
 
     @property
     def password(self):
@@ -48,13 +48,13 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def follow(self, user):
-        self.following.append(user)
+    # def follow(self, user):
+    #     self.following.append(user)
 
-    def unfollow(self, user):
-        for other_user in self.following:
-            if other_user.id == user.id:
-                self.following.remove(user)
+    # def unfollow(self, user):
+    #     for other_user in self.following:
+    #         if other_user.id == user.id:
+    #             self.following.remove(user)
 
     def __repr__(self):
         return f'<Userid:{self.id},firstName:{self.firstName}, lastName:{self.lastName},username:{self.username},image:{self.image},password:{self.password},email:{self.email}>'
@@ -69,14 +69,14 @@ class User(db.Model, UserMixin):
             'email': self.email,
         }
 
-    def to_dict_with_counts(self):
-        return self.to_dict() | {
-            'followingCount': self.following.count(),
-            'followersCount': self.followers.count(),
-        }
+    # def to_dict_with_counts(self):
+    #     return self.to_dict() | {
+    #         'followingCount': self.following.count(),
+    #         'followersCount': self.followers.count(),
+    #     }
 
-    def to_dict_with_related(self):
-        return self.to_dict() | {
-            'following': list(map(lambda u: u.to_dict_with_counts(), self.following)),
-            'followers': list(map(lambda u: u.to_dict_with_counts(), self.followers)),
-        }
+    # def to_dict_with_related(self):
+    #     return self.to_dict() | {
+    #         'following': list(map(lambda u: u.to_dict_with_counts(), self.following)),
+    #         'followers': list(map(lambda u: u.to_dict_with_counts(), self.followers)),
+    #     }
