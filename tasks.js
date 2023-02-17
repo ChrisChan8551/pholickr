@@ -1,3 +1,7 @@
+// flask db migrate
+// flask db upgrade
+// flask seed all
+
 // - [] db schema
 // - [] read me
 // - [] album route - create
