@@ -1,23 +1,23 @@
-flask db migrate
-flask db upgrade
-flask seed all
+// flask db migrate
+// flask db upgrade
+// flask seed all
 
 // - [] db schema
 // - [] read me
 // - [] album route - create
-// - [] album route - get
+// - [x] album route - get
 // - [] album route - edit
-// - [] album route - delete
+// - [x] album route - delete
 // - [] photo route - create
-// - [] photo route - get
+// - [x] photo route - get
 // - [] photo route - edit
-// - [] photo route - delete
+// - [x] photo route - delete
 // - [] user route - create
-// - [] user route - get
+// - [x] user route - get
 // - [] user route - edit
 // - [] user route - delete
-// - [] seeds photos
-// - [] seeds albums
+// - [x] seeds photos
+// - [x] seeds albums
 
 
 // - [] home page

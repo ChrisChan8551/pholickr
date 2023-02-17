@@ -36,5 +36,5 @@ class Album(db.Model):
             'userId': self.userId,
             'title': self.title,
             'imageUrl': self.imageUrl,
-            'photos': list(map(lambda p: p.to_dict(), self.photos))
+            # 'photos': list(map(lambda p: p.to_dict(), self.photos))
         }
