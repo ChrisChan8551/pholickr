@@ -25,10 +25,10 @@
 // - [] profile
 // - [] photos
 
-// - [] AlbumsPage
+// - [x] AlbumsPage
 // - [] AlbumsDetailPage
 // - [] EditAlbumForm
-// - [] PhotoPage
+// - [x] PhotoPage
 // - [] PhotoDetailPage
 // - [] EditPhotoForm
 // - [] SignupFormPage
