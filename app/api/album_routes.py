@@ -25,7 +25,7 @@ def get_all_albums():
     # print("**************** GET ALL ALBUMS ****************")
 
     # print(albums)
-    return {'albums': [album.to_dict() for album in albums]}
+    return jsonify ([album.to_dict() for album in albums])
 
 
 @album_routes.route('/<int:id>')

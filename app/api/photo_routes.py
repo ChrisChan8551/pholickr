@@ -17,7 +17,8 @@ def validation_errors_to_error_messages(validation_errors):
 def get_all_photos():
     photos = Photo.query.all()
     print('********GET ALL PHOTOS********')
-    return {'photos': [photo.to_dict() for photo in photos]}
+    # print([photo.to_dict() for photo in photos])
+    return jsonify ([photo.to_dict() for photo in photos])
 
 @photo_routes.route('/<int:id>')
 # @login_required
