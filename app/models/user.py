@@ -57,16 +57,16 @@ class User(db.Model, UserMixin):
     #             self.following.remove(user)
 
     def __repr__(self):
-        return f'<Userid:{self.id},firstName:{self.firstName}, lastName:{self.lastName},username:{self.username},image:{self.image},password:{self.password},email:{self.email}>'
+        return f'<Userid:{self.id},username:{self.username},firstName:{self.firstName},  lastName:{self.lastName},email:{self.email}>,password:{self.password},image:{self.image},'
 
     def to_dict(self):
         return {
             'id': self.id,
+            'username': self.username,
             'firstName': self.firstName,
             'lastName': self.lastName,
-            'username': self.username,
-            'image': self.image,
             'email': self.email,
+            'image': self.image,
         }
 
     # def to_dict_with_counts(self):

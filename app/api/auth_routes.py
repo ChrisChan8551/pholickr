@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request,redirect
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -51,6 +51,8 @@ def logout():
     Logs a user out
     """
     logout_user()
+    print('*********LOGGED OUT**********')
+    redirect('/')
     return {'message': 'User logged out'}
 
 
@@ -63,13 +65,18 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
+            firstName=form.data['firstName'],
+            lastName=form.data['lastName'],
             username=form.data['username'],
+            image='https://cdn-icons-png.flaticon.com/512/1144/1144709.png',
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
+        print('*********USER SIGNUP********', user.to_dict())
+        redirect('/photos')
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
