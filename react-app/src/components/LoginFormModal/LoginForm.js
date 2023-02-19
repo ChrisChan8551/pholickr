@@ -12,27 +12,20 @@ const LoginForm = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	if (user) {
+		return <Redirect to='/photos' />;
+	}
+
 	const onLogin = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(email, password));
 		if (data) {
 			setErrors(data);
-		} else {
-			return <Redirect to="/photos" />;
 		}
+		// else {
+		// 	return <Redirect to="/photos"/>;
+		// }
 	};
-
-	const updateEmail = (e) => {
-		setEmail(e.target.value);
-	};
-
-	const updatePassword = (e) => {
-		setPassword(e.target.value);
-	};
-
-	if (user) {
-		return <Redirect to='/photos' />;
-	}
 
 	return (
 		<form onSubmit={onLogin}>
@@ -47,8 +40,8 @@ const LoginForm = () => {
 					name='email'
 					type='text'
 					placeholder='Email'
+					onChange={(e) => setEmail(e.target.value)}
 					value={email}
-					onChange={updateEmail}
 				/>
 			</div>
 			<div>
@@ -58,7 +51,7 @@ const LoginForm = () => {
 					type='password'
 					placeholder='Password'
 					value={password}
-					onChange={updatePassword}
+					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<button type='submit'>Login</button>
 			</div>

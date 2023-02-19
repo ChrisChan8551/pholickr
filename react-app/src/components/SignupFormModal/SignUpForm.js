@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 // import "./SignUpForm.css";
 
-const SignUpForm = ({ onSuccess }) => {
+const SignUpForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -16,24 +16,22 @@ const SignUpForm = ({ onSuccess }) => {
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
-	const onSignUp = async (e) => {
+	if (user) return <Redirect to='/' />;
+
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === repeatPassword) {
-			const data = await dispatch(
+			setErrors([]);
+			return dispatch(
 				signUp(firstName, lastName, username, email, password)
-			);
-			if (data) {
-				setErrors(data);
-			} else if (typeof onSuccess === 'function') {
-				onSuccess();
-			}
+			).catch(async (res) => {
+				const data = await res.json();
+				console.log(data.errors);
+				if (data && data.errors) setErrors([data.errors]);
+			});
 		}
 	};
-
-	
-	if (user) {
-		return <Redirect to='/' />;
-	}
 
 	return (
 		<div className='signup_container'>
@@ -41,7 +39,7 @@ const SignUpForm = ({ onSuccess }) => {
 				<h1>Sign Up</h1>
 			</div>
 
-			<form onSubmit={onSignUp}>
+			<form onSubmit={handleSubmit}>
 				<div>
 					{errors.map((error, ind) => (
 						<div className='errors' key={ind}>

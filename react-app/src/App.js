@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import LoginForm from './components/auth/LoginForm';
-import LoginForm from './components/LoginFormModal'
+import LoginForm from './components/LoginFormModal';
 // import SignUpForm from './components/SignupFormModal';
 import SignUpForm from './components/SignupFormModal/SignUpForm';
 import Navigation from './components/Navigation';
@@ -30,34 +30,40 @@ function App() {
 	}
 
 	return (
-		<BrowserRouter>
-			<Navigation />
+		<div>
+			<Navigation/>
 			<Switch>
-				<Route path='/login' exact={true}>
+				{/* <Route exact path='/login'>
 					<LoginForm />
-				</Route>
-				<Route path='/sign-up' exact={true}>
+				</Route> */}
+				<Route exact path='/sign-up'>
 					<SignUpForm />
 				</Route>
-				<ProtectedRoute path='/users' exact={true}>
+				<ProtectedRoute exact path='/users'>
 					<UsersList />
 				</ProtectedRoute>
-				<ProtectedRoute path='/users/:userId' exact={true}>
+				<ProtectedRoute exact path='/users/:userId'>
 					<User />
 				</ProtectedRoute>
-				<Route path='/' exact={true}>
+				<Route exact path='/'>
 					<h1>My Home Page</h1>
 				</Route>
-				<Route path='/photos' exact={true}>
+				<ProtectedRoute exact path='/photos'>
 					<PhotoPage />
-				</Route>
-				<Route path='/albums' exact={true}>
-					<AlbumPage/>
-				</Route>
-				<Route></Route>
-				<Route></Route>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/photos/:photoId'>
+					<PhotoPage />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/albums'>
+					<AlbumPage />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/albums/:albumId'></ProtectedRoute>
+				<ProtectedRoute></ProtectedRoute>
+				{/* create photo form */}
+				<ProtectedRoute></ProtectedRoute>
+				{/* create album form */}
 			</Switch>
-		</BrowserRouter>
+		</div>
 	);
 }
 
