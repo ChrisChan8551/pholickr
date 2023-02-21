@@ -13,7 +13,6 @@ import GridLayout from '../GridLayout';
 import CreatePhotoModal from '../CreatePhotoModal';
 
 function PhotoPage() {
-
 	const currentUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -22,9 +21,10 @@ function PhotoPage() {
 	const [showCreatePhotoForm, setShowCreatePhotoForm] = useState(false);
 	let createPhotoForm;
 	// const photos = useSelector((state) => state.photo)
-	// const photo = Object.values(photos)
+
 	console.log('****************PHOTOS***************', photos);
-	// console.log('****************PHOTOS***************',photo)
+	// console.log('****************CURRENT USER***************',currentUser.id)
+	console.log('****************PHOTO USER ID***************', photos[currentUser.id]);
 
 	useEffect(() => {
 		dispatch(getAllPhotos());

@@ -12,6 +12,7 @@ import User from './components/User';
 import PhotoPage from './components/PhotosPage';
 import { authenticate } from './store/session';
 import AlbumPage from './components/AlbumsPage';
+import PhotoDetailPage from './components/PhotoDetailPage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -51,9 +52,9 @@ function App() {
 				<ProtectedRoute exact path='/photos'>
 					<PhotoPage />
 				</ProtectedRoute>
-				{/* <ProtectedRoute exact path='/photos/:photoId'>
+				<ProtectedRoute exact path='/photos/:photoId'>
 					<PhotoDetailPage />
-				</ProtectedRoute> */}
+				</ProtectedRoute>
 				<ProtectedRoute exact path='/albums'>
 					<AlbumPage />
 				</ProtectedRoute>

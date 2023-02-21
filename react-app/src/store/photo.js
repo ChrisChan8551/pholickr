@@ -75,23 +75,23 @@ export const addPhoto = (photos) => async (dispatch) => {
   }
 };
 
-// export const editAPhoto = (id, photoData) => async (dispatch) => {
-//   const response = await fetch(`/api/photos/${id}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(photoData),
-//   });
-//   if (response.ok) {
-//     const photoData = await response.json();
-//     dispatch(loadOnePhoto(photoData));
-//     return photoData;
-//   } else {
-//     const error = await response.json();
-//     return error;
-//   }
-// };
+export const editPhoto = (id, photoData) => async (dispatch) => {
+  const response = await fetch(`/api/photos/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(photoData),
+  });
+  if (response.ok) {
+    const photoData = await response.json();
+    dispatch(loadOnePhoto(photoData));
+    return photoData;
+  } else {
+    const error = await response.json();
+    return error;
+  }
+};
 
 export const deleteAPhoto = (photoId) => async (dispatch) => {
   const response = await fetch(`/api/photos/${photoId}`, {
