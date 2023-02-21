@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -13,7 +13,7 @@ import GridLayout from '../GridLayout';
 import CreatePhotoModal from '../CreatePhotoModal';
 
 function PhotoPage() {
-	const backdropRef = useRef();
+
 	const currentUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
