@@ -1,6 +1,6 @@
-flask db migrate
-flask db upgrade
-flask seed all
+// flask db migrate
+// flask db upgrade
+// flask seed all
 
 // - [] db schema
 // - [] read me
@@ -13,7 +13,7 @@ flask seed all
     //! need to add current user delete
 // - [x] photo route - create
 // - [x] photo route - get
-// - [] photo route - edit
+// - [x] photo route - edit
 // - [x] photo route - delete
     //! need to add current user delete
 
@@ -36,8 +36,8 @@ flask seed all
 // - [] AlbumsDetailPage
 // - [] EditAlbumForm
 // - [x] PhotoPage
-// - [] PhotoDetailPage
-// - [] EditPhotoForm
+// - [x] PhotoDetailPage
+// - [x] EditPhotoForm
 // - [] SignupFormPage
 // - []
 // - []
