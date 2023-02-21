@@ -51,9 +51,9 @@ function App() {
 				<ProtectedRoute exact path='/photos'>
 					<PhotoPage />
 				</ProtectedRoute>
-				<ProtectedRoute exact path='/photos/:photoId'>
-					<PhotoPage />
-				</ProtectedRoute>
+				{/* <ProtectedRoute exact path='/photos/:photoId'>
+					<PhotoDetailPage />
+				</ProtectedRoute> */}
 				<ProtectedRoute exact path='/albums'>
 					<AlbumPage />
 				</ProtectedRoute>

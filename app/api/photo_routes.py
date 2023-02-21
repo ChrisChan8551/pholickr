@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, render_template, redirect, request
 from flask_login import login_required, current_user
 from app.models import Photo, db
+from app.forms import PhotoForm
 
 photo_routes = Blueprint('photos', __name__)
 
@@ -31,6 +32,34 @@ def get_photo(id):
 # @login_required
 def delete_photo(id):
     photo = Photo.query.get(id)
-    db.session.delete(photo)
-    db.session.commit()
-    return "Successfully Deleted Photo"
+    if photo:
+        db.session.delete(photo)
+        db.session.commit()
+        return "Successfully Deleted Photo"
+    else:
+        return "Photo not found"
+
+@photo_routes.route('/', methods=['POST'])
+@login_required
+def create_photo():
+    # print("************CREATE NEW PHOTO********************")
+    form = PhotoForm()
+    #!POSTMAN Testing
+    # data = request.json
+    # print(data)
+    # new_photo = photo(userId=current_user.get_id(),title=data['title'], url=data['url'], imageUrl=data['imageUrl'])
+    # print(form.data)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        data = form.data
+        # new_photo = Photo(userId=current_user.get_id(),
+        #               title=data['title'], description=data['description'], imageUrl=data['imageUrl'])
+        new_photo = Photo(userId=current_user.get_id())
+        for key, value in data.items():
+            setattr(new_photo, key, value)
+        form.populate_obj(new_photo)
+        print('*********************CREATED*******************************')
+        db.session.add(new_photo)
+        db.session.commit()
+        return new_photo.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
