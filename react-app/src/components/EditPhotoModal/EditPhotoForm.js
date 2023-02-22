@@ -5,6 +5,7 @@ import { editPhoto, getOnePhoto } from '../../store/photo';
 
 function EditPhotoForm({ photo, hideForm }) {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { photoId } = useParams();
 	const allPhotos = useSelector((state) => state.photo);
     const specificPhoto = allPhotos[photoId];
@@ -13,7 +14,6 @@ function EditPhotoForm({ photo, hideForm }) {
 	const [imageUrl, setImageUrl] = useState(photo.imageUrl);
 	const [description, setDescription] = useState(photo.description);
 	const [errors, setErrors] = useState([]);
-	const history = useHistory();
 
 	const handleClickAway = (e) => {
 		e.preventDefault();

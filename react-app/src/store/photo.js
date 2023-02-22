@@ -41,8 +41,8 @@ export const getAllPhotosByAUser = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/photos`);
 
   if (response.ok) {
-    const list = await response.json();
-    dispatch(loadPhotos(list));
+    const photos = await response.json();
+    dispatch(loadPhotos(photos));
   }
 };
 
@@ -50,9 +50,9 @@ export const getOnePhoto = (photoId) => async (dispatch) => {
   const response = await fetch(`/api/photos/${photoId}`);
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(loadOnePhoto(data));
-    return data;
+    const photo = await response.json();
+    dispatch(loadOnePhoto(photo));
+    return photo;
   }
 };
 
@@ -66,9 +66,9 @@ export const addPhoto = (photos) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(loadOnePhoto(data));
-    return data;
+    const photo = await response.json();
+    dispatch(loadOnePhoto(photo));
+    return photo;
   } else {
     const error = await response.json();
     return error;

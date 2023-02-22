@@ -12,6 +12,7 @@ import User from './components/User';
 import PhotoPage from './components/PhotosPage';
 import { authenticate } from './store/session';
 import AlbumPage from './components/AlbumsPage';
+import AlbumDetailPage from './components/AlbumDetailPage';
 import PhotoDetailPage from './components/PhotoDetailPage';
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
 
 	return (
 		<div>
-			<Navigation/>
+			<Navigation />
 			<Switch>
 				{/* <Route exact path='/login'>
 					<LoginForm />
@@ -58,7 +59,9 @@ function App() {
 				<ProtectedRoute exact path='/albums'>
 					<AlbumPage />
 				</ProtectedRoute>
-				<ProtectedRoute exact path='/albums/:albumId'></ProtectedRoute>
+				<ProtectedRoute exact path='/albums/:albumId'>
+					<AlbumDetailPage />
+				</ProtectedRoute>
 				<ProtectedRoute></ProtectedRoute>
 				{/* create photo form */}
 				<ProtectedRoute></ProtectedRoute>

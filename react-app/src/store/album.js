@@ -1,37 +1,33 @@
-// import { FULL_RESET } from "./full-reset";
+import { FULL_RESET } from './full-reset';
 
-// const EDIT_ALBUM = 'album/EDIT_ALBUM';
-const LOAD_ALBUMS = 'album/LOAD_ALBUMS';
-// const DELETE_ALBUM = 'album/DELETE_ALBUM';
-// const ADD_ALBUM = 'album/ADD_ALBUM';
+const LOAD_ALL_ALBUMS = 'album/LOAD_ALL_ALBUMS';
+const LOAD_ONE_ALBUM = 'album/LOAD_ONE_ALBUM';
+const DELETE_ALBUM = 'album/DELETE_ALBUM';
+const ADD_ALBUM = 'album/ADD_ALBUM';
 
-// export const editAlbum = (album) => {
-//   return {
-//     type: EDIT_ALBUM,
-//     album,
-//   };
-// };
 
 const loadAlbums = (albums) => {
 	return {
-		type: LOAD_ALBUMS,
+		type: LOAD_ALL_ALBUMS,
 		albums,
 	};
 };
 
-// const addAlbum = (albums) => {
-//   return {
-//     type: ADD_ALBUM,
-//     albums,
-//   };
-// };
+const loadOneAlbum = (albums) => {
+  return {
+    type: LOAD_ONE_ALBUM,
+    albums,
+  };
+};
 
-// const deleteAlbum = (albums) => {
-//   return {
-//     type: DELETE_ALBUM,
-//     albums,
-//   };
-// };
+
+const removeAlbum = (albumId) => {
+  return {
+    type: DELETE_ALBUM,
+    albumId,
+  };
+};
+
 
 export const getAllAlbums = () => async (dispatch) => {
 	const res = await fetch('/api/albums/');
@@ -42,109 +38,98 @@ export const getAllAlbums = () => async (dispatch) => {
 	}
 };
 
-// export const getAllAlbumsByAUser = (userId) => async (dispatch) => {
-//   const res = await fetch(`/api/users/${userId}/albums`);
+export const getAllAlbumsByAUser = (userId) => async (dispatch) => {
+	const res = await fetch(`/api/users/${userId}/albums`);
 
-//   if (res.ok) {
-//     const albums = await res.json();
-//     dispatch(loadAlbums(albums));
-//   }
-// };
+	if (res.ok) {
+		const albums = await res.json();
+		dispatch(loadAlbums(albums));
+	}
+};
 
-// export const getOneAlbumThunk = (albumId) => async (dispatch) => {
-//   const res = await fetch(`/api/albums/${albumId}`);
+export const getOneAlbum = (albumId) => async (dispatch) => {
+	const res = await fetch(`/api/albums/${albumId}`);
 
-//   if (res.ok) {
-//     const album = await res.json();
-//     dispatch(loadAlbums(album));
-//     return album;
-//   }
-// };
+	if (res.ok) {
+		const album = await res.json();
+		dispatch(loadOneAlbum(album));
+		return album;
+	}
+};
 
-// export const createAlbumThunk = (albums) => async (dispatch) => {
-//   const res = await fetch("/api/albums/", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(albums),
-//   });
+export const addAlbum = (albums) => async (dispatch) => {
+	const res = await fetch('/api/albums/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(albums),
+	});
 
-//   if (res.ok) {
-//     const newData = await res.json();
-//     dispatch(addAlbum(newData));
-//     return newData;
-//   } else {
-//     const error = await res.json();
-//     return error;
-//   }
-// };
+	if (res.ok) {
+		const album = await res.json();
+		dispatch(addAlbum(album));
+		return album;
+	} else {
+		const error = await res.json();
+		return error;
+	}
+};
 
-// export const editAlbumThunk = (albumId, albumData) => async (dispatch) => {
-//   const res = await fetch(`/api/albums/${albumId}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(albumData),
-//   });
+export const editAlbum = (albumId, albumData) => async (dispatch) => {
+	const res = await fetch(`/api/albums/${albumId}`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(albumData),
+	});
 
-//   if (res.ok) {
-//     const albumData = await res.json();
-//     dispatch(addAlbum(albumData));
-//     return albumData;
-//   } else {
-//     const error = await res.json();
-//     return error;
-//   }
-// };
+	if (res.ok) {
+		const albumData = await res.json();
+		dispatch(addAlbum(albumData));
+		return albumData;
+	} else {
+		const error = await res.json();
+		return error;
+	}
+};
 
-// export const deleteAlbumThunk = (albumId) => async (dispatch) => {
-//   const res = await fetch(`/api/albums/${albumId}`, {
-//     method: "DELETE",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
+export const deleteAlbum = (albumId) => async (dispatch) => {
+	const res = await fetch(`/api/albums/${albumId}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 
-//   if (res.ok) {
-//     dispatch(deleteAlbum(albumId));
-//   }
-// };
+	if (res.ok) {
+		dispatch(removeAlbum(albumId));
+	}
+};
 
 const initialState = {};
 
 const albumsReducer = (state = initialState, action) => {
-	//   let newState = { ...state };
-
+	let newState = { ...state };
 	switch (action.type) {
-		// case FULL_RESET:
-		//   return { ...defaultState };
-
-		// case EDIT_ALBUM:
-		// 	const newState = { ...state };
-		// 	newState[action.album.id] = action.album;
-		// 	return newState;
-
-		case LOAD_ALBUMS: {
-			const newState = { ...state };
+		case FULL_RESET:
+			return { ...initialState };
+		case LOAD_ALL_ALBUMS: {
 			action.albums.forEach((album) => {
 				newState[album.id] = album;
 			});
-
 			return newState;
 		}
 
-		// case ADD_ALBUM: {
-		// 	const newState = { ...state };
-		// 	newState[action.albums.id] = action.albums;
-		// 	return newState;
-		// }
-		// case DELETE_ALBUM: {
-		// 	const newState = { ...state };
-		// 	delete newState[action.albums];
-		// 	return newState;
-		// }
+		case LOAD_ONE_ALBUM:
+			newState[action.albums.id] = action.albums;
+			return newState;
+
+		case DELETE_ALBUM:
+			delete newState[action.albumId];
+			return newState;
+
 		default:
 			return state;
 	}
@@ -152,14 +137,14 @@ const albumsReducer = (state = initialState, action) => {
 
 export default albumsReducer;
 
-// export function selectMyAlbums(state) {
-// 	const currentUser = state.session.user;
+export function selectMyAlbums(state) {
+	const currentUser = state.session.user;
 
-// 	if (!currentUser) {
-// 		return [];
-// 	}
+	if (!currentUser) {
+		return [];
+	}
 
-// 	return Object.values(state.album).filter(
-// 		({ userId: albumAuthorId }) => albumAuthorId === currentUser.id
-// 	);
-// }
+	return Object.values(state.album).filter(
+		({ userId: albumAuthorId }) => albumAuthorId === currentUser.id
+	);
+}
