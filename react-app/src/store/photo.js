@@ -75,8 +75,8 @@ export const addPhoto = (photos) => async (dispatch) => {
   }
 };
 
-export const editPhoto = (id, photoData) => async (dispatch) => {
-  const response = await fetch(`/api/photos/${id}`, {
+export const editPhoto = (photoId, photoData) => async (dispatch) => {
+  const response = await fetch(`/api/photos/${photoId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
