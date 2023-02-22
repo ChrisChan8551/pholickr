@@ -10,7 +10,7 @@ function LoginFormModal() {
       <button className='login-button-font'onClick={() => setShowModal(true)}>Log In</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <LoginForm />
+          <LoginForm showModal={setShowModal}/>
         </Modal>
       )}
     </>

@@ -12,7 +12,6 @@ function CreateAlbumForm({ album, hideForm }) {
 	// const [description, setDescription] = useState('');
 	const [errors, setErrors] = useState([]);
 
-  
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setErrors([]);
@@ -24,10 +23,8 @@ function CreateAlbumForm({ album, hideForm }) {
 		} else {
 			history.push(`/albums/${data.id}`);
 		}
-
-
 	};
-  useEffect(() => {
+	useEffect(() => {
 		const handleClick = (e) => {
 			if (!e.target.closest('.create-album-form')) {
 				hideForm();
@@ -40,7 +37,6 @@ function CreateAlbumForm({ album, hideForm }) {
 			document.removeEventListener('click', handleClick);
 		};
 	}, [hideForm]);
-
 
 	return (
 		<section className='create-album-form'>

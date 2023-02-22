@@ -4,15 +4,15 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { useHistory } from 'react-router-dom';
 
-const LoginForm = () => {
-	const [errors, setErrors] = useState([]);
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const user = useSelector((state) => state.session.user);
+const LoginForm = ({showModal}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [errors, setErrors] = useState([]);
+	const user = useSelector((state) => state.session.user);
 
-	if (user) {
+	if (user?.id) {
 		return <Redirect to='/photos' />;
 	}
 
@@ -22,6 +22,7 @@ const LoginForm = () => {
 		if (data) {
 			setErrors(data);
 		}
+		showModal(false)
 		// else {
 		// 	return <Redirect to="/photos"/>;
 		// }
