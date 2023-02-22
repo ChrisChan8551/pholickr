@@ -3,7 +3,6 @@ import { FULL_RESET } from './full-reset';
 const LOAD_ALL_ALBUMS = 'album/LOAD_ALL_ALBUMS';
 const LOAD_ONE_ALBUM = 'album/LOAD_ONE_ALBUM';
 const DELETE_ALBUM = 'album/DELETE_ALBUM';
-const ADD_ALBUM = 'album/ADD_ALBUM';
 
 
 const loadAlbums = (albums) => {

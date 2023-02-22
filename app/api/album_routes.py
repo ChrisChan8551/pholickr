@@ -24,7 +24,6 @@ def validation_errors_to_error_messages(validation_errors):
 def get_all_albums():
     albums = Album.query.all()
     # print("**************** GET ALL ALBUMS ****************")
-
     # print(albums)
     return jsonify ([album.to_dict() for album in albums])
 

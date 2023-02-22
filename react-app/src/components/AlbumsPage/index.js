@@ -1,40 +1,38 @@
-import React, { useState,useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 // import { getAllAlbums, deleteAAlbum, selectMyAlbums } from "../../../store/album";
-import { getAllAlbums,deleteAlbum,selectMyAlbums } from "../../store/album";
-import GridLayout from "../GridLayout";
+import { getAllAlbums, deleteAlbum, selectMyAlbums } from '../../store/album';
+import GridLayout from '../GridLayout';
 // import { AddAlbumningControls } from "../../AlbumterestLayout";
 import CreateAlbumModal from '../CreateAlbumModal';
 
 function AlbumPage() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  // const albums = Object.values(useSelector((state) => state.album))
-  const albums = useSelector(selectMyAlbums)
-  // const albums = useSelector((state) => state.album)
-  // const album = Object.values(albums)
-  const currentUser = useSelector((state) => state.session.user);
-  const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
-  let createAlbumForm;
-  console.log('****************ALBUMS***************',albums)
-  // console.log('****************ALBUMS***************',album)
+	const dispatch = useDispatch();
+	const history = useHistory();
+	// const albums = Object.values(useSelector((state) => state.album))
+	const albums = useSelector(selectMyAlbums);
+	// const albums = useSelector((state) => state.album)
+	// const album = Object.values(albums)
+	const currentUser = useSelector((state) => state.session.user);
+	const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
+	let createAlbumForm;
+	// console.log('****************ALBUMS***************', albums);
+	// console.log('****************ALBUMS***************',album)
 
+	useEffect(() => {
+		dispatch(getAllAlbums());
+	}, [dispatch]);
 
-
-  useEffect(() => {
-    dispatch(getAllAlbums());
-  }, [dispatch]);
-
-  useEffect(() => {
+	useEffect(() => {
 		setShowCreateAlbumForm(false);
 	}, [dispatch]);
 
-  if (!albums) {
-    return null;
-  }
+	if (!albums) {
+		return null;
+	}
 
-  if (showCreateAlbumForm && currentUser?.id) {
+	if (showCreateAlbumForm && currentUser?.id) {
 		createAlbumForm = (
 			<CreateAlbumModal
 				album={null}
@@ -43,20 +41,20 @@ function AlbumPage() {
 		);
 	}
 
-//   const navigateToCreateAlbumForm = async (e) => {
-//     history.push("/albumform");
-//   };
+	//   const navigateToCreateAlbumForm = async (e) => {
+	//     history.push("/albumform");
+	//   };
 
-const navigateToAlbumPage = (album) => {
-  history.push(`/albums/${album.id}`);
-};
+	const navigateToAlbumPage = (album) => {
+		history.push(`/albums/${album.id}`);
+	};
 
-  return (
-    <div>
-      <div>
-        <h1>ALBUMS I'VE CREATED</h1>
-        {createAlbumForm}
-        {!showCreateAlbumForm && currentUser?.id && (
+	return (
+		<div>
+			<div>
+				<h1>ALBUMS I'VE CREATED</h1>
+				{createAlbumForm}
+				{!showCreateAlbumForm && currentUser?.id && (
 					<button
 						className='add-Album-button'
 						onClick={(e) => {
@@ -66,7 +64,7 @@ const navigateToAlbumPage = (album) => {
 						Create Album
 					</button>
 				)}
-        <GridLayout
+				<GridLayout
 					items={albums}
 					onItemClick={navigateToAlbumPage}
 					renderItemActions={(album, closeActionPopOver) => (
@@ -88,9 +86,9 @@ const navigateToAlbumPage = (album) => {
 						</>
 					)}
 				/>
-      </div>
-    </div>
-  );
+			</div>
+		</div>
+	);
 }
 
 export default AlbumPage;

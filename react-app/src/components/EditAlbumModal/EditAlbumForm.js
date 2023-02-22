@@ -13,7 +13,6 @@ const EditAlbumForm = ({ album, hideForm }) => {
 	const [title, setTitle] = useState(album.title);
 	const [imageUrl, setImageUrl] = useState(album.imageUrl);
 	const [errors, setErrors] = useState([]);
-	const [disabled, setDisabled] = useState([]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -68,7 +67,6 @@ const EditAlbumForm = ({ album, hideForm }) => {
 						type='text'
 						value={imageUrl}
 						onChange={(e) => {
-							setDisabled(false);
 							setImageUrl(e.target.value);
 						}}
 					/>
