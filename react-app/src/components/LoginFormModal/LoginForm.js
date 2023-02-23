@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { useHistory } from 'react-router-dom';
 
-const LoginForm = ({ showLoginModal, onClose }) => {
+const LoginForm = ({ showLoginModal }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ const LoginForm = ({ showLoginModal, onClose }) => {
 			setErrors(data);
 		} else {
 			showLoginModal(false);
-			onClose();
+			// onClose();
 		}
 	};
 

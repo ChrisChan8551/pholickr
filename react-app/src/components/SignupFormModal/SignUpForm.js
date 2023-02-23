@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 // import "./SignUpForm.css";
 
-const SignUpForm = ({showSignupModal,onClose}) => {
+const SignUpForm = ({ showSignupModal, onClose }) => {
 	const dispatch = useDispatch();
 	const [username, setUsername] = useState('');
 	const [firstName, setFirstName] = useState('');
@@ -18,23 +18,23 @@ const SignUpForm = ({showSignupModal,onClose}) => {
 
 	if (user?.id) return <Redirect to='/photos' />;
 
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === repeatPassword) {
-			const data =await dispatch(
-				signUp(firstName, lastName, username, email, password));
-				if (data) {
-					setErrors(data);
-				}
+			const data = await dispatch(
+				signUp(firstName, lastName, username, email, password)
+			);
+			if (data) {
+				setErrors(data);
+			}
 			// ).catch(async (res) => {
 			// 	const data = await res.json();
 			// 	console.log(data.errors);
 			// 	if (data && data.errors) setErrors([data.errors]);
 			// });
 		} else {
-			showSignupModal(false)
-			onClose();
+			showSignupModal(false);
+			// onClose();
 		}
 	};
 
