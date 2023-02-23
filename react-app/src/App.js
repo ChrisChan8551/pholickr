@@ -14,6 +14,8 @@ import { authenticate } from './store/session';
 import AlbumPage from './components/AlbumsPage';
 import AlbumDetailPage from './components/AlbumDetailPage';
 import PhotoDetailPage from './components/PhotoDetailPage';
+import PhotoLayout from './components/PhotoLayout';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -33,7 +35,7 @@ function App() {
 
 	return (
 		<div>
-			<Navigation />
+			{!!currentUser && <Navigation loaded={loaded} />}
 			<Switch>
 				{/* <Route exact path='/login'>
 					<LoginForm />
@@ -48,7 +50,7 @@ function App() {
 					<User />
 				</ProtectedRoute>
 				<Route exact path='/'>
-					<h1>My Home Page</h1>
+				{currentUser ? <PhotoLayout /> : <HomePage />}
 				</Route>
 				<ProtectedRoute exact path='/photos'>
 					<PhotoPage />

@@ -4,32 +4,37 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 // import "./SignUpForm.css";
 
-const SignUpForm = () => {
-	const [errors, setErrors] = useState([]);
+const SignUpForm = ({showSignupModal,onClose}) => {
+	const dispatch = useDispatch();
 	const [username, setUsername] = useState('');
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	// const [image, setImage] = useState('');
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
+	const [errors, setErrors] = useState([]);
 	const user = useSelector((state) => state.session.user);
-	const dispatch = useDispatch();
 
-	if (user) return <Redirect to='/' />;
+	if (user?.id) return <Redirect to='/photos' />;
 
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === repeatPassword) {
-			setErrors([]);
-			return dispatch(
-				signUp(firstName, lastName, username, email, password)
-			).catch(async (res) => {
-				const data = await res.json();
-				console.log(data.errors);
-				if (data && data.errors) setErrors([data.errors]);
-			});
+			const data =await dispatch(
+				signUp(firstName, lastName, username, email, password));
+				if (data) {
+					setErrors(data);
+				}
+			// ).catch(async (res) => {
+			// 	const data = await res.json();
+			// 	console.log(data.errors);
+			// 	if (data && data.errors) setErrors([data.errors]);
+			// });
+		} else {
+			showSignupModal(false)
+			onClose();
 		}
 	};
 

@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session'
 import photosReducer from './photo';
 import albumsReducer from './album';
+import searchbarReducer from "./searchbar";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   photo: photosReducer,
   album: albumsReducer,
+  searchbar: searchbarReducer,
 });
 
 

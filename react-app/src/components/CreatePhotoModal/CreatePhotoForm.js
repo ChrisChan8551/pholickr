@@ -5,11 +5,11 @@ import { addPhoto } from '../../store/photo';
 
 function CreatePhotoForm({ album, hideForm }) {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [description, setDescription] = useState('');
 	const [errors, setErrors] = useState([]);
-	const history = useHistory();
 	const { albumId } = useParams();
 
 	const handleClickAway = (e) => {

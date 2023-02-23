@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from '../Modal/Modal';
 import LoginForm from './LoginForm';
 
-function LoginFormModal() {
-  const [showModal, setShowModal] = useState(false);
+function LoginFormModal({ showLoginModal }) {
+	// const [showLoginModal, setShowLoginModal] = useState(false);
 
-  return (
-    <>
-      <button className='login-button-font'onClick={() => setShowModal(true)}>Log In</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <LoginForm showModal={setShowModal}/>
-        </Modal>
-      )}
-    </>
-  );
+
+	return (
+		<>
+			{/* <button className='login-button-font'onClick={() => setShowLoginModal(true)}>Log In</button> */}
+			{showLoginModal && (
+				<Modal onClose={() => showLoginModal(false)}>
+					<LoginForm showLoginModal={showLoginModal} />
+				</Modal>
+			)}
+		</>
+	);
 }
 
 export default LoginFormModal;

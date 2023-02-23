@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { useHistory } from 'react-router-dom';
 
-const LoginForm = ({showModal}) => {
+const LoginForm = ({ showLoginModal, onClose }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [email, setEmail] = useState('');
@@ -21,42 +21,46 @@ const LoginForm = ({showModal}) => {
 		const data = await dispatch(login(email, password));
 		if (data) {
 			setErrors(data);
+		} else {
+			showLoginModal(false);
+			onClose();
 		}
-		showModal(false)
-		// else {
-		// 	return <Redirect to="/photos"/>;
-		// }
 	};
 
 	return (
-		<form onSubmit={onLogin}>
-			<div>
-				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
-				))}
+		<div className='login_container'>
+			<div className='login_header'>
+				<h1>Login</h1>
+				<form onSubmit={onLogin}>
+					<div>
+						{errors.map((error, ind) => (
+							<div key={ind}>{error}</div>
+						))}
+					</div>
+					<div>
+						<label htmlFor='email'>Email</label>
+						<input
+							name='email'
+							type='text'
+							placeholder='Email'
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
+						/>
+					</div>
+					<div>
+						<label htmlFor='password'>Password</label>
+						<input
+							name='password'
+							type='password'
+							placeholder='Password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<button type='submit'>Login</button>
+					</div>
+				</form>
 			</div>
-			<div>
-				<label htmlFor='email'>Email</label>
-				<input
-					name='email'
-					type='text'
-					placeholder='Email'
-					onChange={(e) => setEmail(e.target.value)}
-					value={email}
-				/>
-			</div>
-			<div>
-				<label htmlFor='password'>Password</label>
-				<input
-					name='password'
-					type='password'
-					placeholder='Password'
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<button type='submit'>Login</button>
-			</div>
-		</form>
+		</div>
 	);
 };
 

@@ -1,9 +1,16 @@
 import { FULL_RESET } from './full-reset';
 
+const REPLACE_ALBUM = 'board/REPLACE_ALBUM';
 const LOAD_ALL_ALBUMS = 'album/LOAD_ALL_ALBUMS';
 const LOAD_ONE_ALBUM = 'album/LOAD_ONE_ALBUM';
 const DELETE_ALBUM = 'album/DELETE_ALBUM';
 
+export const replaceAlbum = (album) => {
+	return {
+		type: REPLACE_ALBUM,
+		album,
+	};
+};
 
 const loadAlbums = (albums) => {
 	return {
@@ -13,20 +20,18 @@ const loadAlbums = (albums) => {
 };
 
 const loadOneAlbum = (albums) => {
-  return {
-    type: LOAD_ONE_ALBUM,
-    albums,
-  };
+	return {
+		type: LOAD_ONE_ALBUM,
+		albums,
+	};
 };
-
 
 const removeAlbum = (albumId) => {
-  return {
-    type: DELETE_ALBUM,
-    albumId,
-  };
+	return {
+		type: DELETE_ALBUM,
+		albumId,
+	};
 };
-
 
 export const getAllAlbums = () => async (dispatch) => {
 	const res = await fetch('/api/albums/');
@@ -114,6 +119,10 @@ const albumsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FULL_RESET:
 			return { ...initialState };
+
+		case REPLACE_ALBUM:
+			newState[action.album.id] = action.album;
+			return newState;
 		case LOAD_ALL_ALBUMS: {
 			action.albums.forEach((album) => {
 				newState[album.id] = album;

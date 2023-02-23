@@ -1,34 +1,121 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import LogoutButton from '../auth/LogoutButton';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+import React, { useState, useRef } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import LogoutButton from "../auth/LogoutButton";
+import "./Navigation.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchbarValue, selectSearchbarValue } from "../../store/searchbar";
 
 const Navigation = () => {
-	return (
-		<nav>
-			<ul>
-				<li>
-					<NavLink to='/' exact={true} activeClassName='active'>
-						Home
-					</NavLink>
-				</li>
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef();
+  const history = useHistory();
+  const location = useLocation();
 
-				<LoginFormModal to='login' />
-				<SignupFormModal to='signup' />
+  const dispatch = useDispatch();
+  const { currentUser, searchbarValue } = useSelector((state) => {
+    const currentUser = state.session.user;
+    const searchbarValue = selectSearchbarValue(state);
+    return {
+      currentUser,
+      searchbarValue,
+    };
+  });
 
-				<li>
-					<NavLink to='/users' exact={true} activeClassName='active'>
-						Users
-					</NavLink>
-				</li>
-				<li>
-					<LogoutButton />
-				</li>
-			</ul>
-		</nav>
-	);
+  const navigateToHomePage = () => {
+    history.push("/");
+  };
+
+  const navigateToPhotos = () => {
+    history.push("/photos");
+  };
+
+  const navigateToAlbums = () => {
+    history.push("/albums");
+  };
+
+  const navigateToMyProfile = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setOpen(false);
+    history.push("/my-profile");
+  };
+
+  return (
+    <div className="main-container">
+      <div className="Nav-container">
+        <nav id="navigation-bar">
+          <div className="left_side">
+            <div className="icon">
+              <img src="/favicon.ico" />
+              Pholickr
+            </div>
+
+            <button className="regular-button" onClick={navigateToHomePage}>
+              Home
+            </button>
+            <button className="create-button" onClick={navigateToPhotos}>
+              My Photos
+            </button>
+			<button className="create-button" onClick={navigateToAlbums}>
+              My Albums
+            </button>
+          </div>
+
+          <div
+            className={`search_middle ${
+              location.pathname === "/" ? "" : "hidden_search"
+            }`}
+          >
+            <input
+              type="Text"
+              placeholder="Search"
+              value={searchbarValue}
+              onChange={(event) => {
+                dispatch(setSearchbarValue(event.target.value));
+              }}
+            />
+          </div>
+
+          <div className="right_side" onClick={() => setOpen(!open)}>
+            <div className="profile">
+              <img src={'https://cdn-icons-png.flaticon.com/512/9591/9591054.png'} alt="" />
+            </div>
+
+            <div className="dropdown_button">
+              <FontAwesomeIcon icon={faChevronDown} />
+            </div>
+            <div
+              className={`dropdown-menu ${open ? "active" : "inactive"}`}
+              ref={menuRef}
+            >
+              {currentUser && (
+                <div className="menu_dropdown">
+                  <div>
+                    <h5>Currently in</h5>
+                    <div className="profile" onClick={navigateToMyProfile}>
+                      <div className="prof_icon">
+                        <button>
+                          <img src={'https://cdn-icons-png.flaticon.com/512/9591/9591054.png'} alt="" />
+                        </button>
+                      </div>
+                      <div className="user_info">
+                        {currentUser.username}
+                        <h5>Personal</h5>
+                        {currentUser.email}
+                      </div>
+                    </div>
+                  </div>
+                  <LogoutButton />
+                </div>
+              )}
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  );
 };
 
 export default Navigation;
