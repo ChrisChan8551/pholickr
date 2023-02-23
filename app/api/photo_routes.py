@@ -17,14 +17,14 @@ def validation_errors_to_error_messages(validation_errors):
 # @login_required
 def get_all_photos():
     photos = Photo.query.all()
-    print('********GET ALL PHOTOS********')
+    # print('********GET ALL PHOTOS********')
     # print([photo.to_dict() for photo in photos])
     return jsonify ([photo.to_dict() for photo in photos])
 
 @photo_routes.route('/<int:id>')
 # @login_required
 def get_photo(id):
-    print('************GET 1 PHOTO********************')
+    # print('************GET 1 PHOTO********************')
     photo = Photo.query.get(id)
     return photo.to_dict()
 
@@ -58,7 +58,7 @@ def create_photo():
         for key, value in data.items():
             setattr(new_photo, key, value)
         form.populate_obj(new_photo)
-        print('*********************CREATED*******************************')
+        # print('*********************CREATED*******************************')
         db.session.add(new_photo)
         db.session.commit()
         return new_photo.to_dict()

@@ -2,16 +2,16 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import photosReducer from './photo';
-import albumsReducer from './album';
+import albumReducer from './album';
 import userReducer from './user';
 import searchbarReducer from './searchbar';
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	photo: photosReducer,
-	album: albumsReducer,
-	searchbar: searchbarReducer,
+	album: albumReducer,
 	otherUser: userReducer,
+	searchbar: searchbarReducer,
 });
 
 let enhancer;

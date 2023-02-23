@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import LoginForm from './components/auth/LoginForm';
-import LoginForm from './components/LoginFormModal';
+// import LoginForm from './components/LoginFormModal';
 // import SignUpForm from './components/SignupFormModal';
 import SignUpForm from './components/SignupFormModal/SignUpForm';
 import Navigation from './components/Navigation';
@@ -11,7 +11,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import PhotoPage from './components/PhotosPage';
 import { authenticate } from './store/session';
-import AlbumPage from './components/AlbumsPage';
+import AlbumsPage from './components/AlbumsPage';
 import AlbumDetailPage from './components/AlbumDetailPage';
 import PhotoDetailPage from './components/PhotoDetailPage';
 import PhotoLayout from './components/PhotoLayout';
@@ -58,16 +58,13 @@ function App() {
 				<ProtectedRoute exact path='/photos/:photoId'>
 					<PhotoDetailPage />
 				</ProtectedRoute>
-				<ProtectedRoute exact path='/albums'>
-					<AlbumPage />
-				</ProtectedRoute>
+				<Route exact path='/albums'>
+					<AlbumsPage />
+				</Route>
 				<ProtectedRoute exact path='/albums/:albumId'>
 					<AlbumDetailPage />
 				</ProtectedRoute>
-				<ProtectedRoute></ProtectedRoute>
-				{/* create photo form */}
-				<ProtectedRoute></ProtectedRoute>
-				{/* create album form */}
+	
 			</Switch>
 		</div>
 	);

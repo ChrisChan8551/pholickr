@@ -75,7 +75,7 @@ function HomePage() {
 						</button>
 					)}
 
-              {SignupForm}
+					{SignupForm}
 
 					{!showSignupModal && !currentUser?.id && (
 						<button

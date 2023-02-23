@@ -35,12 +35,12 @@ const Navigation = () => {
     history.push("/albums");
   };
 
-  const navigateToMyProfile = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    setOpen(false);
-    history.push("/my-profile");
-  };
+  // const navigateToMyProfile = (event) => {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  //   setOpen(false);
+  //   history.push("/my-profile");
+  // };
 
   return (
     <div className="main-container">
@@ -93,17 +93,17 @@ const Navigation = () => {
               {currentUser && (
                 <div className="menu_dropdown">
                   <div>
-                    <h5>Currently in</h5>
-                    <div className="profile" onClick={navigateToMyProfile}>
+                  {/* <div className="profile" onClick={navigateToMyProfile}> */}
+                    <div className="profile">
                       <div className="prof_icon">
-                        <button>
+                        {/* <button> */}
                           <img src={'https://cdn-icons-png.flaticon.com/512/9591/9591054.png'} alt="" />
-                        </button>
+                        {/* </button> */}
                       </div>
                       <div className="user_info">
-                        {currentUser.username}
-                        <h5>Personal</h5>
-                        {currentUser.email}
+                        <div>Username: {currentUser.username}</div>
+                        {/* <h5>Personal</h5> */}
+                        <div>Email: {currentUser.email}</div>
                       </div>
                     </div>
                   </div>

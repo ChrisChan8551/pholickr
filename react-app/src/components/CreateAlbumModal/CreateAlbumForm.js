@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { addAlbum } from '../../store/album';
+import { createAlbum } from '../../store/album';
 
 function CreateAlbumForm({ album, hideForm }) {
 	const dispatch = useDispatch();
@@ -16,12 +16,12 @@ function CreateAlbumForm({ album, hideForm }) {
 		e.preventDefault();
 		setErrors([]);
 		const payload = { title, imageUrl };
-		let data = await dispatch(addAlbum(payload));
+		let data = await dispatch(createAlbum(payload));
 
 		if (data.errors) {
 			setErrors([...Object.values(data.errors)]);
 		} else {
-			history.push(`/albums/${data.id}`);
+			history.push(`/albums`);
 		}
 	};
 	useEffect(() => {
@@ -42,6 +42,13 @@ function CreateAlbumForm({ album, hideForm }) {
 		<section className='create-album-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
 				<h1 className='create'>Create your Album!</h1>
+				<ul>
+					{errors.map((error, idx) => (
+						<li className='edit-errors' key={idx}>
+							{error}
+						</li>
+					))}
+				</ul>
 				<label>
 					Title
 					<input
@@ -66,13 +73,7 @@ function CreateAlbumForm({ album, hideForm }) {
 					Create new Album!
 				</button>
 
-				<ul>
-					{errors.map((error, idx) => (
-						<li className='edit-errors' key={idx}>
-							{error}
-						</li>
-					))}
-				</ul>
+
 			</form>
 		</section>
 	);

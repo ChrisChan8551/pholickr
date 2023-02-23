@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import { getAllAlbums, deleteAAlbum, selectMyAlbums } from "../../../store/album";
 import { getAllAlbums, deleteAlbum, selectMyAlbums } from '../../store/album';
 import GridLayout from '../GridLayout';
-// import { AddAlbumningControls } from "../../AlbumterestLayout";
+import { AddPinningControls } from '../PhotoLayout';
 import CreateAlbumModal from '../CreateAlbumModal';
 
-function AlbumPage() {
+function AlbumsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	// const albums = Object.values(useSelector((state) => state.album))
-	const albums = useSelector(selectMyAlbums);
+	const myAlbums = useSelector(selectMyAlbums);
 	// const albums = useSelector((state) => state.album)
 	// const album = Object.values(albums)
 	const currentUser = useSelector((state) => state.session.user);
@@ -28,7 +27,7 @@ function AlbumPage() {
 		setShowCreateAlbumForm(false);
 	}, [dispatch]);
 
-	if (!albums) {
+	if (!myAlbums) {
 		return null;
 	}
 
@@ -45,7 +44,7 @@ function AlbumPage() {
 	//     history.push("/albumform");
 	//   };
 
-	const navigateToAlbumPage = (album) => {
+	const navigateToAlbum = (album) => {
 		history.push(`/albums/${album.id}`);
 	};
 
@@ -65,14 +64,14 @@ function AlbumPage() {
 					</button>
 				)}
 				<GridLayout
-					items={albums}
-					onItemClick={navigateToAlbumPage}
+					items={myAlbums}
+					onItemClick={navigateToAlbum}
 					renderItemActions={(album, closeActionPopOver) => (
 						<>
-							{/* <AddPinningControls
-                 photo={album}
-                 onPinningDone={closeActionPopOver}
-                 /> */}
+							<AddPinningControls
+								photo={album}
+								onPinningDone={closeActionPopOver}
+							/>
 
 							<button
 								className='regular-button'
@@ -91,4 +90,4 @@ function AlbumPage() {
 	);
 }
 
-export default AlbumPage;
+export default AlbumsPage;

@@ -1,9 +1,9 @@
 import { FULL_RESET } from './full-reset';
 
 const REPLACE_ALBUM = 'board/REPLACE_ALBUM';
-const LOAD_ALL_ALBUMS = 'album/LOAD_ALL_ALBUMS';
-const LOAD_ONE_ALBUM = 'album/LOAD_ONE_ALBUM';
-const DELETE_ALBUM = 'album/DELETE_ALBUM';
+const LOAD_ALBUMS = 'album/LOAD_ALBUMS';
+const REMOVE_ALBUM = 'album/REMOVE_ALBUM';
+const ADD_ALBUM = 'board/ADD_ALBUM';
 
 export const replaceAlbum = (album) => {
 	return {
@@ -14,24 +14,25 @@ export const replaceAlbum = (album) => {
 
 const loadAlbums = (albums) => {
 	return {
-		type: LOAD_ALL_ALBUMS,
+		type: LOAD_ALBUMS,
 		albums,
 	};
 };
 
-const loadOneAlbum = (albums) => {
+const addAlbum = (albums) => {
 	return {
-		type: LOAD_ONE_ALBUM,
+		type: ADD_ALBUM,
 		albums,
 	};
 };
 
-const removeAlbum = (albumId) => {
+const removeAlbum = (albums) => {
 	return {
-		type: DELETE_ALBUM,
-		albumId,
+		type: REMOVE_ALBUM,
+		albums,
 	};
 };
+
 
 export const getAllAlbums = () => async (dispatch) => {
 	const res = await fetch('/api/albums/');
@@ -56,12 +57,12 @@ export const getOneAlbum = (albumId) => async (dispatch) => {
 
 	if (res.ok) {
 		const album = await res.json();
-		dispatch(loadOneAlbum(album));
+		dispatch(loadAlbums(album));
 		return album;
 	}
 };
 
-export const addAlbum = (albums) => async (dispatch) => {
+export const createAlbum = (albums) => async (dispatch) => {
 	const res = await fetch('/api/albums/', {
 		method: 'POST',
 		headers: {
@@ -114,7 +115,7 @@ export const deleteAlbum = (albumId) => async (dispatch) => {
 
 const initialState = {};
 
-const albumsReducer = (state = initialState, action) => {
+const albumReducer = (state = initialState, action) => {
 	let newState = { ...state };
 	switch (action.type) {
 		case FULL_RESET:
@@ -123,19 +124,20 @@ const albumsReducer = (state = initialState, action) => {
 		case REPLACE_ALBUM:
 			newState[action.album.id] = action.album;
 			return newState;
-		case LOAD_ALL_ALBUMS: {
+
+		case LOAD_ALBUMS: {
 			action.albums.forEach((album) => {
 				newState[album.id] = album;
 			});
 			return newState;
 		}
-
-		case LOAD_ONE_ALBUM:
+		
+		case ADD_ALBUM:
 			newState[action.albums.id] = action.albums;
 			return newState;
 
-		case DELETE_ALBUM:
-			delete newState[action.albumId];
+		case REMOVE_ALBUM:
+			delete newState[action.albums];
 			return newState;
 
 		default:
@@ -143,7 +145,7 @@ const albumsReducer = (state = initialState, action) => {
 	}
 };
 
-export default albumsReducer;
+export default albumReducer;
 
 export function selectMyAlbums(state) {
 	const currentUser = state.session.user;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { getAllAlbums, selectMyAlbums } from '../../store/album';
 import {
 	getAllPhotos,
 	deleteAPhoto,
@@ -9,7 +10,7 @@ import {
 	getAllPhotosByAUser,
 } from '../../store/photo';
 import GridLayout from '../GridLayout';
-// import { AddPinningControls } from "../../PhototerestLayout";
+import { AddPinningControls } from '../PhotoLayout';
 import CreatePhotoModal from '../CreatePhotoModal';
 
 function PhotoPage() {
@@ -24,16 +25,19 @@ function PhotoPage() {
 
 	console.log('****************PHOTOS***************', photos);
 	// console.log('****************CURRENT USER***************',currentUser.id)
-	console.log('****************PHOTO USER ID***************', photos[currentUser.id]);
+	console.log(
+		'****************PHOTO USER ID***************',
+		photos[currentUser.id]
+	);
 
 	useEffect(() => {
 		dispatch(getAllPhotos());
+		dispatch(getAllAlbums());
 	}, [dispatch]);
 
 	useEffect(() => {
 		setShowCreatePhotoForm(false);
 	}, [dispatch]);
-	
 	if (!photos) {
 		return null;
 	}
@@ -76,10 +80,10 @@ function PhotoPage() {
 					onItemClick={navigateToPhotoPage}
 					renderItemActions={(photo, closeActionPopOver) => (
 						<>
-							{/* <AddPinningControls
-                 photo={photo}
-                 onPinningDone={closeActionPopOver}
-                 /> */}
+							<AddPinningControls
+								photo={photo}
+								onPinningDone={closeActionPopOver}
+							/>
 
 							<button
 								className='regular-button'

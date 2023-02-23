@@ -136,10 +136,10 @@
     display: flex;
     align-items: center;
 }
-.profile:hover {
+/* .profile:hover {
     cursor: pointer;
     background-color: lightgrey;
-}
+} */
 .profile h5 {
     font-style:italic;
     margin: 0;

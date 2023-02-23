@@ -8,14 +8,14 @@ import { useHistory } from "react-router-dom";
 import { addPinning } from "../../store/pinning";
 import { selectSearchbarValue } from "../../store/searchbar";
 
-const MAX_PIN_COUNT = 120;
+const MAX_PHOTO_COUNT = 120;
 
 function getLimitedPhotosList(photos, searchbarValue = "") {
   return photos
     .filter((photo) =>
       photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
     )
-    .slice(0, MAX_PIN_COUNT);
+    .slice(0, MAX_PHOTO_COUNT);
 }
 
 function PhotoLayout() {
@@ -68,17 +68,17 @@ function PhotoLayout() {
       <GridLayout
         items={photos}
         onItemClick={!!sessionUser && navigateToPhotoPage}
-        renderItemActions={
-          !!sessionUser &&
-          ((photo, closeActionPopOver) => (
-            <>
-              <AddPinningControls
-                photo={photo}
-                onPinningDone={closeActionPopOver}
-              />
-            </>
-          ))
-        }
+        // renderItemActions={
+        //   !!sessionUser &&
+        //   ((photo, closeActionPopOver) => (
+        //     <>
+        //       <AddPinningControls
+        //         photo={photo}
+        //         onPinningDone={closeActionPopOver}
+        //       />
+        //     </>
+        //   ))
+        // }
       />
     </div>
   );

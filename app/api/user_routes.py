@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, db
+from app.models import User, db, Photo, Album
 
 user_routes = Blueprint('users', __name__)
 
@@ -33,6 +33,18 @@ def user(id):
 
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/photos')
+# @login_required
+def user_photos(id):
+    photos = Photo.query.filter_by(userId=id)
+    return jsonify([photo.to_dict() for photo in photos])
+
+@user_routes.route('/<int:id>/albums')
+# @login_required
+def user_albums(id):
+    albums = Album.query.filter_by(userId=id)
+    return jsonify([album.to_dict() for album in albums])
 
 # @user_routes.route('/<int:id>', methods=['PUT'])
 # # @login_required

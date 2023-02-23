@@ -23,7 +23,7 @@ def validation_errors_to_error_messages(validation_errors):
 # @login_required
 def get_all_albums():
     albums = Album.query.all()
-    # print("**************** GET ALL ALBUMS ****************")
+    print("**************** GET ALL ALBUMS ****************")
     # print(albums)
     return jsonify ([album.to_dict() for album in albums])
 
@@ -31,7 +31,7 @@ def get_all_albums():
 @album_routes.route('/<int:id>')
 # @login_required
 def get_album(id):
-    # print("************GET 1 ALBUM********************")
+    print("************GET 1 ALBUM********************")
     album = Album.query.get(id)
     return album.to_dict()
 
@@ -47,7 +47,7 @@ def delete_album(id):
 @album_routes.route('/', methods=['GET', 'POST'])
 # @login_required
 def create_album():
-     # print("************CREATE NEW ALBUM********************")
+    print("************CREATE NEW ALBUM********************")
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -94,3 +94,32 @@ def edit_album(id):
         db.session.commit()
         return album.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@album_routes.route('/<int:album_id>/photo/<int:photo_id>', methods=["POST"])
+# @login_required
+def add_pinning(album_id, photo_id):
+    photo = Photo.query.get(photo_id)
+    album = Album.query.get(album_id)
+
+    if album.userId != current_user.id:
+        return {'errors': ['Unauthorized']}, 403
+
+    album.photos.append(photo)
+
+    db.session.commit()
+    return album.to_dict()
+
+@album_routes.route('/<int:album_id>/photo/<int:photo_id>', methods=['DELETE'])
+@login_required
+def remove_pinning(album_id, photo_id):
+    album = Album.query.get(album_id)
+
+    if album.userId != current_user.id:
+        return {'errors': ['Unauthorized']}, 403
+
+    for photo in album.photos:
+        if photo.id == photo_id:
+            album.photos.remove(photo)
+
+    db.session.commit()
+    return album.to_dict()

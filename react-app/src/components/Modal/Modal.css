@@ -19,10 +19,12 @@
 }
 
 #modal-content {
+	display: flex;
+	flex-direction: column;
 	word-wrap: break-word;
 	position: absolute;
 	background-color: white;
-	border-radius: 10px;
-	padding: 0;
-	max-width: auto;
+	/* border-radius: 10px; */
+	padding: 20px;
+	max-width: 250px;
 }
