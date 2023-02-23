@@ -3,7 +3,7 @@ const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const LOAD_USERS = 'user/LOAD_USERS';
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
 });

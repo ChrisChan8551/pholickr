@@ -24,6 +24,8 @@ function AlbumDetailPage() {
 	const currentUser = useSelector((state) => state.session.user);
 	let editAlbumForm;
 	let createPhotoForm;
+	const { userId: albumAuthorId, photos = [] } =
+    useSelector((state) => state.album[albumId]) || {};
 
 	useEffect(() => {
 		setShowEditAlbumForm(false);
@@ -34,6 +36,10 @@ function AlbumDetailPage() {
 		setShowCreatePhotoForm(false);
 		dispatch(getOneAlbum(albumId));
 	}, [albumId, dispatch]);
+
+	useEffect(() => {
+		dispatch(getAllAlbums());
+	}, [dispatch]);
 
 	if (!album) {
 		return null;
@@ -78,7 +84,6 @@ function AlbumDetailPage() {
 						></img>
 					</div>
 					<ul>
-						
 						<li
 							id='album-artist'
 							key={`${album.id}${album?.userId}`}
