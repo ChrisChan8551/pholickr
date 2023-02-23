@@ -69,7 +69,7 @@ def create_album():
 # @login_required
 def edit_album(id):
     # data = request.json
-    # print('*********************EDIT PHOTO*******************************')
+    # print('*********************EDIT ALBUM*******************************')
     # print(data)
 
     # album = album.query.get(id)
