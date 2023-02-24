@@ -50,7 +50,7 @@ function App() {
 					<User />
 				</ProtectedRoute>
 				<Route exact path='/'>
-				{currentUser ? <PhotoLayout /> : <HomePage />}
+					{currentUser ? <PhotoLayout /> : <HomePage />}
 				</Route>
 				<ProtectedRoute exact path='/photos'>
 					<PhotoPage />
@@ -64,7 +64,6 @@ function App() {
 				<ProtectedRoute exact path='/albums/:albumId'>
 					<AlbumDetailPage />
 				</ProtectedRoute>
-	
 			</Switch>
 		</div>
 	);

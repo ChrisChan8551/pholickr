@@ -1,12 +1,49 @@
-.GridLayout--Container {
-  padding: 0 60px;
-  column-count: auto;
-  column-width: 240px;
-  column-fill: balance;
-  gap: 1rem;
+.AlbumDetail--Editor--Container {
+	display: flex;
+	justify-content: left;
 }
 
-@media (min-width: 480px) {
+.album-form-container {
+	/* display: flex; */
+	/* justify-content: space-around; */
+	margin-top: 20px;
+	width: 200px;
+	padding: 10px;
+	border: solid 0.5px black;
+}
+
+.AlbumDetail--Editor--Card {
+	/* display: flex; */
+	/* flex-direction: column; */
+	width: 100px;
+}
+
+.GridLayout--Container {
+	/* padding: 0 60px; */
+	column-count: auto;
+	column-width: 400px;
+	column-fill: balance;
+	gap: 1rem;
+	width: 1700px;
+}
+
+.photo-main-container {
+	display: flex;
+	justify-content: center;
+	min-width: 1900px;
+}
+
+.album-photo-container {
+	display: flex;
+	justify-content: center;
+}
+
+.album-h1 {
+	display: flex;
+	justify-content: center;
+}
+
+/* @media (min-width: 480px) {
   .GridLayout--Container {
     padding: 0 120px;
     column-width: 180px;
@@ -18,49 +55,50 @@
     padding: 0 80px;
     column-width: 240px;
   }
-}
+} */
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   .GridLayout--Container {
     padding: 0 120px;
   }
-}
+} */
 
 .GridLayout--Container .GridLayout--Item {
-  display: inline-block;
-  background: white;
-  border: 1px solid #aaa;
-  box-shadow: rgba(0,0,0,0.1) 2.5px 2.5px 2.5px;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+	display: inline-block;
+	/* background: white; */
+	/* border: 1px solid #aaa; */
+	/* box-shadow: rgba(0,0,0,0.1) 2.5px 2.5px 2.5px; */
+	/* border-radius: 0.75rem; */
+	/* margin-bottom: 1rem; */
+	overflow: hidden;
+	position: relative;
+	width: 100%;
 }
 
 .GridLayout--Item .GridLayout--Image {
-  object-fit: cover;
-  width: 100%;
-  min-height: 120px;
+	object-fit: cover;
+	width: 100%;
+	min-height: 120px;
 }
 
 .GridLayout--Item .GridLayout--Actions {
-  position: absolute;
-  width: calc(100% - 20px);
-  height: calc(100% - 20px);
-  top: 0;
-  left: 0;
-  padding: 10px;
-  color: white;
-  opacity: 0;
+	/* left button positioning */
+	position: absolute;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+	top: 0;
+	left: 0;
+	padding: 10px;
+	color: white;
+	opacity: 0;
 }
 
 .GridLayout--Item .GridLayout--Actions:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
 .GridLayout--Item .GridLayout--Action--Content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }

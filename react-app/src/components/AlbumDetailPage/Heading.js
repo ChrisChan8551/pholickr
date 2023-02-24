@@ -43,14 +43,14 @@ function AlbumDetailHeading() {
 			{editorOpen && <Editor setOpen={setEditorOpen} />}
 			<div className='AlbumDetail--Heading'>
 				<div className='AlbumDetail--Title'>
-					<h1>{title}</h1>
+					<h1 className='album-h1'>{title}</h1>
 					{!!isMyAlbum && (
 						<PopOver
 							open={popOverOpen}
 							setOpen={setPopOverOpen}
 							button={
 								<button
-									className='create-button'
+									className='blue-button'
 									onClick={() => setPopOverOpen(true)}
 								>
 									Options
@@ -59,26 +59,26 @@ function AlbumDetailHeading() {
 						>
 							<div className='AlbumDetail--Actions'>
 								<button
-									className='regular-button'
+									className='blue-button'
 									onClick={() => {
 										setEditorOpen(true);
 										setPopOverOpen(false);
 									}}
 								>
-									edit
+									Edit
 								</button>
 								<button
-									className='create-button'
+									className='grey-button'
 									type='button'
 									onClick={removeAlbum}
 								>
-									delete
+									Delete
 								</button>
 							</div>
 						</PopOver>
 					)}
 				</div>
-				{imageUrl && <img src={imageUrl}/>}
+				{/* {imageUrl && <img src={imageUrl}/>} */}
 			</div>
 		</>
 	);

@@ -49,13 +49,13 @@ function AlbumsPage() {
 	};
 
 	return (
-		<div>
-			<div>
-				<h1>ALBUMS I'VE CREATED</h1>
+		<div className='photo-main-container'>
+			<div className='photo-container'>
+				<div><h1>ALBUMS I'VE CREATED</h1></div>
 				{createAlbumForm}
 				{!showCreateAlbumForm && currentUser?.id && (
 					<button
-						className='add-Album-button'
+						className='blue-button'
 						onClick={(e) => {
 							setShowCreateAlbumForm(true);
 						}}
@@ -63,18 +63,18 @@ function AlbumsPage() {
 						Create Album
 					</button>
 				)}
-				<GridLayout
+				<GridLayout className='myAlbums'
 					items={myAlbums}
 					onItemClick={navigateToAlbum}
 					renderItemActions={(album, closeActionPopOver) => (
 						<>
-							<AddPinningControls
+							{/* <AddPinningControls
 								photo={album}
 								onPinningDone={closeActionPopOver}
-							/>
+							/> */}
 
 							<button
-								className='regular-button'
+								className='grey-button'
 								onClick={() => {
 									dispatch(deleteAlbum(album.id));
 									closeActionPopOver();

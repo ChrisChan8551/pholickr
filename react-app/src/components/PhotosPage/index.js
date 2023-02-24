@@ -60,18 +60,18 @@ function PhotoPage() {
 	};
 
 	return (
-		<div>
-			<div>
-				<h1>PHOTOS I'VE CREATED</h1>
+		<div className='photo-main-container'>
+			<div className='photo-container'>
+				<div><h1>PHOTOS I'VE CREATED</h1></div>
 				{createPhotoForm}
 				{!showCreatePhotoForm && currentUser?.id && (
 					<button
-						className='add-Photo-button'
+						className='blue-button'
 						onClick={(e) => {
 							setShowCreatePhotoForm(true);
 						}}
 					>
-						Create Photo
+						Add Photo
 					</button>
 				)}
 
@@ -86,7 +86,7 @@ function PhotoPage() {
 							/>
 
 							<button
-								className='regular-button'
+								className='grey-button'
 								onClick={() => {
 									dispatch(deleteAPhoto(photo.id));
 									closeActionPopOver();

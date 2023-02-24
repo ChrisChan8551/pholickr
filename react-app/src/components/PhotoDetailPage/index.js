@@ -96,13 +96,13 @@ function PhotoDetailPage() {
 				<div>
 					{/* <Link to={`/photos/${photo.id}`}> */}
 					<button
-						className='regular-button'
+						className='blue-button'
 						onClick={() => setShowEditPhotoForm(true)}
 					>
 						Edit Photo
 					</button>
 					<button
-						className='create-button'
+						className='grey-button'
 						type='button'
 						onClick={deletePhoto}
 					>

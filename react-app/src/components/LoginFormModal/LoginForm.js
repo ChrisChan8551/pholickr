@@ -56,7 +56,7 @@ const LoginForm = ({ showLoginModal }) => {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<button type='submit'>Login</button>
+						<button className='blue-button'type='submit'>Login</button>
 					</div>
 				</form>
 			</div>

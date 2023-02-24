@@ -56,7 +56,7 @@ function GridItem({ item, buttonLabel, onItemClick, renderItemActions }) {
 						}}
 						button={
 							<button
-								className='regular-button'
+								className='blue-button'
 								onClick={(event) => {
 									event.preventDefault();
 									event.stopPropagation();

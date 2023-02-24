@@ -51,14 +51,14 @@ function HomePage() {
 
 	return (
 		<div className='Splash'>
-			<div className='nav_bar'>
+			<div className='home-main-container'><div className='nav_bar'>
 				<div className='icon'>
-					<img src='/favicon.ico' />
+					<img src='https://icon-library.com/images/2018/4040259_soup-tomato-soup-png-download.png' />
 					Pholickr
 				</div>
 
 				<div className='right_menu'>
-					<button className='demo-button' onClick={demo}>
+					<button className='grey-button' onClick={demo}>
 						Demo User
 					</button>
 
@@ -66,7 +66,7 @@ function HomePage() {
 
 					{!showLoginModal && !currentUser?.id && (
 						<button
-							className='login-button'
+							className='blue-button'
 							onClick={(e) => {
 								setShowLoginModal(true);
 							}}
@@ -79,17 +79,18 @@ function HomePage() {
 
 					{!showSignupModal && !currentUser?.id && (
 						<button
-							className='signup-button'
+							className='grey-button'
 							onClick={(e) => {
 								setShowSignupModal(true);
 							}}
 						>
-							SignUp
+							Sign Up
 						</button>
 					)}
 				</div>
+				</div>
 			</div>
-			<PhotoLayout />
+			<div><PhotoLayout /></div>
 		</div>
 	);
 }

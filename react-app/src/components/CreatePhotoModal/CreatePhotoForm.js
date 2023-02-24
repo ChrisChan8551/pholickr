@@ -78,7 +78,7 @@ function CreatePhotoForm({ album, hideForm }) {
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 				</label>
-				<button className='create-button' type='submit'>
+				<button className='blue-button' type='submit'>
 					Create new Photo!
 				</button>
 

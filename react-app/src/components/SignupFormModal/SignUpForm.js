@@ -118,7 +118,7 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 						placeholder='Enter Your Password Again'
 					></input>
 				</div>
-				<button type='submit'>Sign Up</button>
+				<button className='blue-button'type='submit'>Sign Up</button>
 			</form>
 		</div>
 	);

@@ -1,25 +1,27 @@
 .Splash {
-	max-width: 1512px;
+	/* max-width: 1512px; */
 }
 .icon {
 	display: flex;
 	align-items: center;
 	font-weight: bold;
 	font-size: 50px;
-	color: rgb(12, 0, 230);
+	color: whitesmoke;
 	padding-left: 20px;
 	gap: 10px;
 }
 
 .icon img {
-	width: 20px;
+	width: 70px;
 }
 
 .nav_bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 20px;
+	height:56px;
+	/* margin-bottom: 20px; */
+	gap:30px;
 }
 
 .right_menu {
@@ -39,39 +41,45 @@
 	cursor: pointer;
 }
 
-.login-button {
-	border: 0px;
-	height: 40px;
-	display: inline-block;
-	border-radius: 20px;
-	-webkit-font-smoothing: antialiased;
-	padding: 0px 18px;
-	font-size: 15px;
-	font-weight: bold;
-	cursor: pointer;
-	margin-top: 8px;
-	vertical-align: middle;
-	text-align: center;
-	background-color: rgb(230, 0, 35);
-	color: rgb(255, 255, 255);
-	width: 100%;
+.blue-button {
+	border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Proxima Nova,helvetica neue,helvetica,arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .15s ease-in-out;
+    vertical-align: top;
+	background-color: #128fdc;
+    color: #fff;
+	height: 32px;
+    line-height: 32px;
+    min-width: 80px;
 }
-.signup-button {
-	border: 0px;
-	height: 40px;
-	display: inline-block;
-	border-radius: 20px;
-	-webkit-font-smoothing: antialiased;
-	padding: 0px 18px;
-	font-size: 15px;
-	font-weight: bold;
-	cursor: pointer;
-	margin-top: 8px;
-	vertical-align: middle;
-	text-align: center;
-	background-color: #efefef;
-	color: #111111;
-	width: 100%;
+.grey-button {
+	border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Proxima Nova,helvetica neue,helvetica,arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .15s ease-in-out;
+    vertical-align: top;
+	background-color: #979ea2;
+    color: #fff;
+	height: 32px;
+    line-height: 32px;
+    min-width: 80px;
 }
 .submit-button {
 	border: 0px;
