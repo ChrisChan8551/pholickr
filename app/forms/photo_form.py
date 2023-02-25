@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired, Email, ValidationError, URL
 
 class PhotoForm(FlaskForm):
     title = StringField('Title',validators=[DataRequired()])
-    description = StringField('Description',validators=[DataRequired()])
+    description = StringField('Description')
     imageUrl = StringField('Image Url',validators=[DataRequired(), URL( message='This is not a valid image link, make sure you enter the entire image URL')])

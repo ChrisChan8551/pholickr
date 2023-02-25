@@ -77,7 +77,6 @@ function EditPhotoForm({ photo, hideForm }) {
 						type='text'
 						className='modal-label'
 						value={description}
-						required
 						onChange={(e) => setDescription(e.target.value)}
 					/>
 				</label>
