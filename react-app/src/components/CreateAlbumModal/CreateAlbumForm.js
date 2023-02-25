@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+// import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { createAlbum } from '../../store/album';
 
 function CreateAlbumForm({ album, hideForm }) {

@@ -1,7 +1,7 @@
 import './profilecard.css';
 import React from 'react';
 // import { useEffect, useState } from 'react';
-import { NavLink, Redirect, useParams } from 'react-router-dom';
+// import { NavLink, Redirect, useParams } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { useHistory } from 'react-router-dom';

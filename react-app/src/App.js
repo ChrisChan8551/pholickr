@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+// import {BrowserRouter} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 // import LoginForm from './components/auth/LoginForm';
 // import LoginForm from './components/LoginFormModal';

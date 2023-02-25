@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllAlbums, selectMyAlbums } from '../../store/album';
+import { getAllAlbums } from '../../store/album';
+// import {selectMyAlbums} from '../../store/album';
 import {
 	getAllPhotos,
 	deleteAPhoto,
 	selectMyPhotos,
-	getOnePhoto,
-	getAllPhotosByAUser,
+	// getOnePhoto,
+	// getAllPhotosByAUser,
 } from '../../store/photo';
 import GridLayout from '../GridLayout';
 import { AddPinningControls } from '../PhotoLayout';

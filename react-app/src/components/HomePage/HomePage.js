@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './HomePage.css';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../Modal/Modal';
+// import { Modal } from '../Modal/Modal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { login } from '../../store/session';
 import PhotoLayout from '../PhotoLayout';
 function HomePage() {
 	const dispatch = useDispatch();
-	const history = useHistory();
+	// const history = useHistory();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showSignupModal, setShowSignupModal] = useState(false);
@@ -51,47 +51,50 @@ function HomePage() {
 
 	return (
 		<div className='Splash'>
-			<div className='home-main-container'><div className='nav_bar'>
-				<div className='icon'>
-					<img src='/pho.png' />
-					Pholickr
-				</div>
+			<div className='home-main-container'>
+				<div className='nav_bar'>
+					<div className='icon'>
+						<img src='/pho.png' alt='' />
+						Pholickr
+					</div>
 
-				<div className='right_menu'>
-					<button className='grey-button' onClick={demo}>
-						Demo User
-					</button>
-
-					{LoginForm}
-
-					{!showLoginModal && !currentUser?.id && (
-						<button
-							className='blue-button'
-							onClick={(e) => {
-								setShowLoginModal(true);
-							}}
-						>
-							Login
+					<div className='right_menu'>
+						<button className='grey-button' onClick={demo}>
+							Demo User
 						</button>
-					)}
 
-					{SignupForm}
+						{LoginForm}
 
-					{!showSignupModal && !currentUser?.id && (
-						<button
-							className='grey-button'
-							onClick={(e) => {
-								setShowSignupModal(true);
-							}}
-						>
-							Sign Up
-						</button>
-					)}
-				</div>
+						{!showLoginModal && !currentUser?.id && (
+							<button
+								className='blue-button'
+								onClick={(e) => {
+									setShowLoginModal(true);
+								}}
+							>
+								Login
+							</button>
+						)}
+
+						{SignupForm}
+
+						{!showSignupModal && !currentUser?.id && (
+							<button
+								className='grey-button'
+								onClick={(e) => {
+									setShowSignupModal(true);
+								}}
+							>
+								Sign Up
+							</button>
+						)}
+					</div>
 				</div>
 			</div>
 
-			<div><PhotoLayout /></div>
+			<div>
+				<PhotoLayout />
+			</div>
 		</div>
 	);
 }

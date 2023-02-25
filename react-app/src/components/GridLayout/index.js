@@ -45,6 +45,7 @@ function GridItem({ item, buttonLabel, onItemClick, renderItemActions }) {
 				src={imageUrl}
 				crossOrigin='anonymous'
 				className='GridLayout--Image'
+				alt=''
 			/>
 			{!!renderItemActions && (
 				<div className='GridLayout--Actions'>

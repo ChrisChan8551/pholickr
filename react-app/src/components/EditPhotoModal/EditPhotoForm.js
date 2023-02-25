@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { editPhoto, getOnePhoto } from '../../store/photo';
 
@@ -7,24 +8,24 @@ function EditPhotoForm({ photo, hideForm }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { photoId } = useParams();
-	const allPhotos = useSelector((state) => state.photo);
-    const specificPhoto = allPhotos[photoId];
+	// const allPhotos = useSelector((state) => state.photo);
+	// const specificPhoto = allPhotos[photoId];
 	// const specificPhoto = getOnePhoto[photoId];
 	const [title, setTitle] = useState(photo.title);
 	const [imageUrl, setImageUrl] = useState(photo.imageUrl);
 	const [description, setDescription] = useState(photo.description);
 	const [errors, setErrors] = useState([]);
 
-	const handleClickAway = (e) => {
-		e.preventDefault();
-		hideForm();
-	};
+	// const handleClickAway = (e) => {
+	// 	e.preventDefault();
+	// 	hideForm();
+	// };
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setErrors([]);
 		const payload = { title, description, imageUrl };
-		let data = await dispatch(editPhoto(photoId,payload));
+		let data = await dispatch(editPhoto(photoId, payload));
 
 		if (data.errors) {
 			setErrors([...Object.values(data.errors)]);
@@ -55,11 +56,8 @@ function EditPhotoForm({ photo, hideForm }) {
 		<section className='edit-photo-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
 				{/* <h1 className='edit'>Edit Photo</h1> */}
-				<div className='div-form-icon'><img
-					className='form-icon'
-					src='/pho.png'
-					alt=''
-				/>
+				<div className='div-form-icon'>
+					<img className='form-icon' src='/pho.png' alt='' />
 				</div>
 				<label className='modal-label'>
 					Title

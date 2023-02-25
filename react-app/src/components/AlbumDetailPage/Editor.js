@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EditorInput from './EditorInput';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editAlbum } from '../../store/album';
 // import "./Editor.css";
@@ -15,14 +16,14 @@ function AlbumDetailEditor({ setOpen }) {
 	// const [description, setDescription] = useState("");
 	const [pending, setPending] = useState(false);
 	const [errors, setErrors] = useState([]);
-	const history = useHistory();
+	// const history = useHistory();
 	useEffect(() => {
 		setTitle(album.title);
 		// setDescription(album.description);
 		setImageUrl(album.imageUrl);
 	}, [album]);
 
-	const handleSubmit = async (e) => {};
+	// const handleSubmit = async (e) => {};
 
 	return (
 		<div className='AlbumDetail--Editor--Container'>

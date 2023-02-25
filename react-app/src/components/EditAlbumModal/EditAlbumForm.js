@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+// import {useSelector} from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { editAlbum, getOneAlbum } from '../../store/album';
-import { getAllPhotos } from '../../store/photo';
+// import { getAllPhotos } from '../../store/photo';
 // import './EditAlbumForm.css';
 
 const EditAlbumForm = ({ album, hideForm }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { albumId } = useParams();
-	const allAlbums = useSelector((state) => state.album);
+	// const allAlbums = useSelector((state) => state.album);
 	const [title, setTitle] = useState(album.title);
 	const [imageUrl, setImageUrl] = useState(album.imageUrl);
 	const [errors, setErrors] = useState([]);

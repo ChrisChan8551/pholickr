@@ -3,8 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { deleteAlbum } from '../../store/album';
-import Editor from './Editor';
-import PopOver from '../PopOver';
+// import Editor from './Editor';
+// import PopOver from '../PopOver';
 // import "./Heading.css";
 import EditAlbumModal from '../EditAlbumModal';
 
@@ -38,8 +38,8 @@ function AlbumDetailHeading() {
 		);
 	}
 
-	const [editorOpen, setEditorOpen] = useState(false);
-	const [popOverOpen, setPopOverOpen] = useState(false);
+	// const [editorOpen, setEditorOpen] = useState(false);
+	// const [popOverOpen, setPopOverOpen] = useState(false);
 
 	if (!album) {
 		return null;
