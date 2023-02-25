@@ -47,7 +47,7 @@ function CreatePhotoForm({ album, hideForm }) {
 	return (
 		<section className='create-photo-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
-				<h1 className='create'>Create your photo!</h1>
+				<h1 className='create'>Create Photo</h1>
 				<label>
 					Title
 					<input
@@ -79,7 +79,7 @@ function CreatePhotoForm({ album, hideForm }) {
 					/>
 				</label>
 				<button className='blue-button' type='submit'>
-					Create new Photo!
+					Create Photo
 				</button>
 
 				<ul>

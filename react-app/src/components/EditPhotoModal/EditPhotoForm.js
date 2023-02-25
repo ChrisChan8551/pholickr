@@ -54,7 +54,7 @@ function EditPhotoForm({ photo, hideForm }) {
 	return (
 		<section className='edit-photo-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
-				<h1 className='edit'>Edit your photo!</h1>
+				<h1 className='edit'>Edit Photo</h1>
 				<label>
 					Title
 					<input
@@ -85,7 +85,7 @@ function EditPhotoForm({ photo, hideForm }) {
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 				</label>
-				<button className='edit-button' type='submit'>
+				<button className='blue-button' type='submit'>
 					Edit Photo
 				</button>
 

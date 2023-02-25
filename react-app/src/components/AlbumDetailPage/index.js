@@ -6,6 +6,7 @@ import GridLayout from '../GridLayout';
 import Footing from './Footing';
 import { getAllAlbums } from '../../store/album';
 import { removePinning } from '../../store/pinning';
+import EditAlbumModal from '../EditAlbumModal'
 
 
 function AlbumDetailPage() {
@@ -16,20 +17,23 @@ function AlbumDetailPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+
 	const navigateToPhotoPage = (photo) => {
 		history.push(`/photos/${photo.id}`);
 	};
 
 	useEffect(() => {
 		dispatch(getAllAlbums());
-	}, []);
+	}, [dispatch]);
 
 
 
 	return (
 		<div className='AlbumDetail--Page'>
 			<Heading />
+			{/* {editAlbumForm} */}
 			<div className='album-photo-container'>
+			{/*  */}
 				<GridLayout
 					items={photos}
 					buttonLabel='remove'

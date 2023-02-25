@@ -61,6 +61,8 @@
     line-height: 32px;
     min-width: 80px;
 }
+
+
 .grey-button {
 	border: none;
     border-radius: 3px;
@@ -81,6 +83,9 @@
     line-height: 32px;
     min-width: 80px;
 }
+
+.button:hover {background-color: #3e8e41}
+
 .submit-button {
 	border: 0px;
 	height: 40px;

@@ -41,7 +41,7 @@ function CreateAlbumForm({ album, hideForm }) {
 	return (
 		<section className='create-album-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
-				<h1 className='create'>Create your Album!</h1>
+				<h1 className='create'>Create Album</h1>
 				<ul>
 					{errors.map((error, idx) => (
 						<li className='edit-errors' key={idx}>
@@ -69,8 +69,8 @@ function CreateAlbumForm({ album, hideForm }) {
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 				</label>
-				<button className='create-button' type='submit'>
-					Create new Album!
+				<button className='blue-button' type='submit'>
+					Create Album
 				</button>
 
 

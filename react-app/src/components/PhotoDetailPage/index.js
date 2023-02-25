@@ -7,6 +7,7 @@ import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 // import "./PhotoDetailPage.css";
 import { getOneUser } from '../../store/user';
 import EditPhotoModal from '../EditPhotoModal';
+import ProfileCard from '../ProfileCard';
 
 function PhotoDetailPage() {
 	const { photoId } = useParams();
@@ -79,19 +80,23 @@ function PhotoDetailPage() {
 					></img>
 				</div>
 
-				<li>
-					<strong>Title: </strong> {photo?.title}
-				</li>
+				<div className='profile-container'>
+					<div>
+						<ProfileCard author={photoAuthor} photo={photo} />
+						<div>
+							<strong>Title: </strong> {photo?.title}
+						</div>
 
-				<li>
-					<strong>Author: </strong> {photoAuthor.username}
-				</li>
+						<div>
+							<strong>Author: </strong> {photoAuthor.username}
+						</div>
 
-				<li>
-					<strong>Description: </strong> {photo?.description}
-				</li>
+						<div>
+							<strong>Description: </strong> {photo?.description}
+						</div>
+					</div>
+				</div>
 			</div>
-
 			{!showEditPhotoForm && currentUser?.id === photo?.userId && (
 				<div>
 					{/* <Link to={`/photos/${photo.id}`}> */}

@@ -36,6 +36,7 @@
 .album-photo-container {
 	display: flex;
 	justify-content: center;
+	background-color:#eaeaea;
 }
 
 .album-h1 {

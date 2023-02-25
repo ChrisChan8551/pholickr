@@ -1,5 +1,23 @@
+
 * {
 	font-family: Proxima Nova, helvetica neue, helvetica, arial, sans-serif;
+}
+
+/* html {
+	background-color: #f3f5f6
+} */
+
+.profile-container {
+	display: flex;
+	flex-direction: row;
+	width: 20%
+}
+
+.album-title {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	gap: 0 5px
 }
 
 .PhotoDetail--Image--Container {
@@ -12,8 +30,8 @@
     margin-right: 364px; */
 }
 
-.PhotoDetail--Image {
-}
+/* .PhotoDetail--Image {
+} */
 
 .home-main-container {
 	display: flex;

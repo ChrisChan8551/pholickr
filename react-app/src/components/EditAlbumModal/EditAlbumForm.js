@@ -48,7 +48,7 @@ const EditAlbumForm = ({ album, hideForm }) => {
 	return (
 		<section className='edit-album-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
-            <h1 className='edit'>Edit your album!</h1>
+            <h1 className='modal-title'>Edit Album</h1>
 				<label>
 					Title
 					<input
@@ -71,8 +71,8 @@ const EditAlbumForm = ({ album, hideForm }) => {
 						}}
 					/>
 				</label>
-				<button className='edit-button' type='submit'>
-					Edit Album
+				<button className='blue-button' type='submit'>
+					Update
 				</button>
 				<ul>
 					{errors.map((error, idx) => (
