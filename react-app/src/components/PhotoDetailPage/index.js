@@ -38,7 +38,7 @@ function PhotoDetailPage() {
 		if (photo?.userId && !photoAuthor) {
 			dispatch(getOneUser(photo.userId));
 		}
-	}, [photo, photoAuthor]);
+	}, [photo, photoAuthor,dispatch]);
 
 	const deletePhoto = (e) => {
 		e.preventDefault();

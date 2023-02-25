@@ -65,6 +65,7 @@ function AlbumsPage() {
 				)}
 				<GridLayout className='myAlbums'
 					items={myAlbums}
+					buttonLabel='Remove'
 					onItemClick={navigateToAlbum}
 					renderItemActions={(album, closeActionPopOver) => (
 						<>
@@ -74,13 +75,13 @@ function AlbumsPage() {
 							/> */}
 
 							<button
-								className='grey-button'
+								className='blue-button'
 								onClick={() => {
 									dispatch(deleteAlbum(album.id));
 									closeActionPopOver();
 								}}
 							>
-								Delete
+								Are you sure?
 							</button>
 						</>
 					)}
