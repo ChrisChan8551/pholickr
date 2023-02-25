@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { addPinning } from '../../store/pinning';
 import { selectSearchbarValue } from '../../store/searchbar';
 
-const MAX_PHOTO_COUNT = 30;
+const MAX_PHOTO_COUNT = 20;
 
 function getLimitedPhotosList(photos, searchbarValue = '') {
 	return photos

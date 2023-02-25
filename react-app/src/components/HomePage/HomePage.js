@@ -53,7 +53,7 @@ function HomePage() {
 		<div className='Splash'>
 			<div className='home-main-container'><div className='nav_bar'>
 				<div className='icon'>
-					<img src='https://icon-library.com/images/2018/4040259_soup-tomato-soup-png-download.png' />
+					<img src='/pho.png' />
 					Pholickr
 				</div>
 

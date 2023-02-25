@@ -20,8 +20,9 @@
 
 .GridLayout--Container {
 	/* padding: 0 60px; */
+	margin-top: 10px;
 	column-count: auto;
-	column-width: 400px;
+	column-width: 550px;
 	column-fill: balance;
 	gap: 1rem;
 	width: 1700px;
@@ -31,6 +32,7 @@
 	display: flex;
 	justify-content: center;
 	min-width: 1900px;
+	margin-top: 20px
 }
 
 .album-photo-container {
@@ -49,9 +51,9 @@
     padding: 0 120px;
     column-width: 180px;
   }
-}
+} */
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .GridLayout--Container {
     padding: 0 80px;
     column-width: 240px;

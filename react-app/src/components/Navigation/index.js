@@ -51,7 +51,7 @@ const Navigation = () => {
 						<div className='icon'>
 							<img
 								className='photo-icon'
-								src='https://icon-library.com/images/2018/4040259_soup-tomato-soup-png-download.png'
+								src='/pho.png'
 							 alt=''/>
 						</div>
 						<NavLink to='/' className='icon font-50 font-white font-bold font-decor-none nav-hover'> Pholickr </NavLink>

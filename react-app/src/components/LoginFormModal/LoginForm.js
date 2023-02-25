@@ -30,7 +30,13 @@ const LoginForm = ({ showLoginModal }) => {
 	return (
 		<div className='login_container'>
 			<div className='login_header'>
-				<h1>Login</h1>
+				{/* <h1>Login</h1> */}
+				<div className='div-form-icon'><img
+					className='form-icon'
+					src='/pho.png'
+					alt=''
+				/>
+				</div>
 				<form onSubmit={onLogin}>
 					<div>
 						{errors.map((error, ind) => (
@@ -38,8 +44,8 @@ const LoginForm = ({ showLoginModal }) => {
 						))}
 					</div>
 					<div>
-						<label htmlFor='email'>Email</label>
-						<input
+						<label className='modal-label' htmlFor='email'>Email</label>
+						<input className='modal-label'
 							name='email'
 							type='text'
 							placeholder='Email'
@@ -48,15 +54,15 @@ const LoginForm = ({ showLoginModal }) => {
 						/>
 					</div>
 					<div>
-						<label htmlFor='password'>Password</label>
-						<input
+						<label className='modal-label' htmlFor='password'>Password</label>
+						<input className='modal-label'
 							name='password'
 							type='password'
 							placeholder='Password'
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<button className='blue-button'type='submit'>Login</button>
+						<button className='blue-button modal-label'type='submit'>Login</button>
 					</div>
 				</form>
 			</div>

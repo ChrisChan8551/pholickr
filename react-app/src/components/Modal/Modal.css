@@ -19,13 +19,20 @@
 }
 
 #modal-content {
-	display: flex;
+	display: flex-block;
 	flex-direction: column;
 	word-wrap: break-word;
 	position: absolute;
 	background-color: rgb(235, 230, 230);
 	border-radius: 5px;
 	padding: 15px;
-	/* max-width: 250px; */
-	width: 8.5%;
+	max-width: 250px;
+	/* min-width: 10%; */
+
+}
+
+.modal-label {
+	display:block;
+	margin-bottom: 5px;
+	width:100%
 }

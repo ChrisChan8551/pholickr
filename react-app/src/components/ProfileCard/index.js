@@ -26,7 +26,7 @@ function ProfileCard({ author, photo }) {
 					<p class='title-text'>{photo.title}</p>
 					<p class='info-text'>Author: {author.username}</p>
 					<p class='desc-text'> Description: {photo.description}</p>
-                    {/* <button className='blue-button'>+ Follow</button> */}
+                    {/* <button className='blue-button modal-label'>+ Follow</button> */}
 				</div>
 			</div>
 		</div>

@@ -41,7 +41,7 @@ function CreateAlbumForm({ album, hideForm }) {
 	return (
 		<section className='create-album-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
-				<h1 className='create'>Create Album</h1>
+				{/* <h1 className='create'>Create Album</h1> */}
 				<ul>
 					{errors.map((error, idx) => (
 						<li className='edit-errors' key={idx}>
@@ -49,31 +49,35 @@ function CreateAlbumForm({ album, hideForm }) {
 						</li>
 					))}
 				</ul>
-				<label>
+				<div className='div-form-icon'><img
+					className='form-icon'
+					src='/pho.png'
+					alt=''
+				/>
+				</div>
+				<label className='modal-label'>
 					Title
 					<input
 						type='text'
-						className='album-input'
+						className='modal-label'
 						value={title}
 						required
 						onChange={(e) => setTitle(e.target.value)}
 					/>
 				</label>
-				<label>
+				<label className='modal-label'>
 					Image Url
 					<input
 						type='text'
-						className='album-input'
+						className='modal-label'
 						value={imageUrl}
 						required
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 				</label>
-				<button className='blue-button' type='submit'>
+				<button className='blue-button modal-label' type='submit'>
 					Create Album
 				</button>
-
-
 			</form>
 		</section>
 	);

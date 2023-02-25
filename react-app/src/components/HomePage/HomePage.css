@@ -13,15 +13,16 @@
 
 .icon img {
 	width: 70px;
+	margin-right: -30px;
 }
 
 .nav_bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height:56px;
+	height: 56px;
 	/* margin-bottom: 20px; */
-	gap:30px;
+	gap: 30px;
 }
 
 .right_menu {
@@ -43,48 +44,50 @@
 
 .blue-button {
 	border: none;
-    border-radius: 3px;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Proxima Nova,helvetica neue,helvetica,arial,sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 0 20px;
-    text-align: center;
-    text-decoration: none;
-    transition: all .15s ease-in-out;
-    vertical-align: top;
+	border-radius: 3px;
+	box-sizing: border-box;
+	cursor: pointer;
+	/* display: inline-block; */
+	/* display: grid; */
+	font-family: Proxima Nova, helvetica neue, helvetica, arial, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.15s ease-in-out;
+	vertical-align: top;
 	background-color: #128fdc;
-    color: #fff;
+	color: #fff;
 	height: 32px;
-    line-height: 32px;
-    min-width: 80px;
+	line-height: 32px;
+	/* min-width: 80px; */
 }
-
 
 .grey-button {
 	border: none;
-    border-radius: 3px;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Proxima Nova,helvetica neue,helvetica,arial,sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 0 20px;
-    text-align: center;
-    text-decoration: none;
-    transition: all .15s ease-in-out;
-    vertical-align: top;
+	border-radius: 3px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-block;
+	font-family: Proxima Nova, helvetica neue, helvetica, arial, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.15s ease-in-out;
+	vertical-align: top;
 	background-color: #979ea2;
-    color: #fff;
+	color: #fff;
 	height: 32px;
-    line-height: 32px;
-    min-width: 80px;
+	line-height: 32px;
+	min-width: 80px;
 }
 
-.button:hover {background-color: #3e8e41}
+/* .button:hover {
+	background-color: #3e8e41;
+} */
 
 .submit-button {
 	border: 0px;

@@ -41,7 +41,13 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 	return (
 		<div className='signup_container'>
 			<div className='signup_header'>
-				<h1>Sign Up</h1>
+				{/* <h1>Sign Up</h1> */}
+				<div className='div-form-icon'><img
+					className='form-icon'
+					src='/pho.png'
+					alt=''
+				/>
+				</div>
 			</div>
 
 			<form onSubmit={handleSubmit}>
@@ -53,8 +59,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 					))}
 				</div>
 				<div id='form_detail'>
-					<label>User Name</label>
+					<label className='modal-label'>User Name</label>
 					<input
+						className='modal-label'
 						type='text'
 						name='username'
 						onChange={(e) => setUsername(e.target.value)}
@@ -64,8 +71,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 					></input>
 				</div>
 				<div id='form_detail'>
-					<label>First Name</label>
+					<label className='modal-label'>First Name</label>
 					<input
+						className='modal-label'
 						type='text'
 						name='firstName'
 						onChange={(e) => setFirstName(e.target.value)}
@@ -75,8 +83,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 					></input>
 				</div>
 				<div id='form_detail'>
-					<label>Last Name</label>
+					<label className='modal-label'>Last Name</label>
 					<input
+						className='modal-label'
 						type='text'
 						name='lastname'
 						onChange={(e) => setLastName(e.target.value)}
@@ -86,8 +95,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 					></input>
 				</div>
 				<div id='form_detail'>
-					<label>Email</label>
+					<label className='modal-label'>Email</label>
 					<input
+						className='modal-label'
 						type='text'
 						name='email'
 						onChange={(e) => setEmail(e.target.value)}
@@ -97,8 +107,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 					></input>
 				</div>
 				<div id='form_detail'>
-					<label>Password</label>
+					<label className='modal-label'>Password</label>
 					<input
+						className='modal-label'
 						type='password'
 						name='password'
 						onChange={(e) => setPassword(e.target.value)}
@@ -108,8 +119,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 					></input>
 				</div>
 				<div id='form_detail'>
-					<label>Repeat Password</label>
+					<label className='modal-label'>Repeat Password</label>
 					<input
+						className='modal-label'
 						type='password'
 						name='repeat_password'
 						onChange={(e) => setRepeatPassword(e.target.value)}
@@ -118,7 +130,9 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 						placeholder='Enter Your Password Again'
 					></input>
 				</div>
-				<button className='blue-button'type='submit'>Sign Up</button>
+				<button className='blue-button modal-label' type='submit'>
+					Sign Up
+				</button>
 			</form>
 		</div>
 	);

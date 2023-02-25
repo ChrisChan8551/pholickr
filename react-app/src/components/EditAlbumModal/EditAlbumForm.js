@@ -48,22 +48,28 @@ const EditAlbumForm = ({ album, hideForm }) => {
 	return (
 		<section className='edit-album-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
-            <h1 className='modal-title'>Edit Album</h1>
-				<label>
+            {/* <h1 className='modal-title'>Edit Album</h1> */}
+			<div className='div-form-icon'><img
+					className='form-icon'
+					src='/pho.png'
+					alt=''
+				/>
+				</div>
+				<label className='modal-label'>
 					Title
 					<input
 						type='text'
-						className='album-input'
+						className='modal-label'
 						value={title}
 						required
 						onChange={(e) => setTitle(e.target.value)}
 					/>
 				</label>
 
-				<label className='edit-label-form'>
+				<label className='modal-label'>
 					Image Url:
 					<input
-						className='edit-input-form'
+						className='modal-label'
 						type='text'
 						value={imageUrl}
 						onChange={(e) => {
@@ -71,7 +77,7 @@ const EditAlbumForm = ({ album, hideForm }) => {
 						}}
 					/>
 				</label>
-				<button className='blue-button' type='submit'>
+				<button className='blue-button modal-label' type='submit'>
 					Update
 				</button>
 				<ul>

@@ -47,38 +47,43 @@ function CreatePhotoForm({ album, hideForm }) {
 	return (
 		<section className='create-photo-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
-				<h1 className='create'>Create Photo</h1>
-				<label>
+			<div className='div-form-icon'><img
+					className='form-icon'
+					src='/pho.png'
+					alt=''
+				/></div>
+				{/* <h1 className='create'>Create Photo</h1> */}
+				<label className='modal-label'>
 					Title
 					<input
 						type='text'
-						className='photo-input'
+						className='modal-label'
 						value={title}
 						required
 						onChange={(e) => setTitle(e.target.value)}
 					/>
 				</label>
-				<label>
+				<label className='modal-label'>
 					Description
 					<input
 						type='text'
-						className='photo-input'
+						className='modal-label'
 						value={description}
 						required
 						onChange={(e) => setDescription(e.target.value)}
 					/>
 				</label>
-				<label>
+				<label className='modal-label'>
 					Image Url
 					<input
 						type='text'
-						className='photo-input'
+						className='modal-label'
 						value={imageUrl}
 						required
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 				</label>
-				<button className='blue-button' type='submit'>
+				<button className='blue-button modal-label modal-label' type='submit'>
 					Create Photo
 				</button>
 
