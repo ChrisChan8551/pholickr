@@ -1,14 +1,15 @@
 import './profilecard.css';
-import React, { useEffect, useState } from 'react';
-import { NavLink, Redirect, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getOneUser } from '../../store/user';
+import React from 'react';
+// import { useEffect, useState } from 'react';
+// import { NavLink, Redirect, useParams } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
+// import { getOneUser } from '../../store/user';
 
 function ProfileCard({ author, photo }) {
-	const dispatch = useDispatch();
-	const history = useHistory();
+	// const dispatch = useDispatch();
+	// const history = useHistory();
 
 	return (
 		<div>
@@ -20,7 +21,7 @@ function ProfileCard({ author, photo }) {
 					class='menu-icon'
 					src='https://pngimage.net/wp-content/uploads/2018/06/white-menu-icon-png-8.png'
 				/> */}
-				<img class='profile-img' src={author.image} />
+				<img class='profile-img' src={author.image} alt=''/>
 				<div class='text-container'>
 					<p class='title-text'>{photo.title}</p>
 					<p class='info-text'>Author: {author.username}</p>

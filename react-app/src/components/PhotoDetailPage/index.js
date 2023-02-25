@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Redirect, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
+// import {NavLink} from 'react-router-dom'
+// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
@@ -76,7 +77,7 @@ function PhotoDetailPage() {
 				<div className='PhotoDetail--Image--Container'>
 					<img
 						className='PhotoDetail--Image'
-						src={photo?.imageUrl}
+						src={photo?.imageUrl} alt=''
 					></img>
 				</div>
 

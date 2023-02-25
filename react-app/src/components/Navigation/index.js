@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { useLocation, useHistory, NavLink } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './Navigation.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +11,7 @@ import { setSearchbarValue, selectSearchbarValue } from '../../store/searchbar';
 const Navigation = () => {
 	const [open, setOpen] = useState(false);
 	const menuRef = useRef();
-	const history = useHistory();
+	// const history = useHistory();
 	const location = useLocation();
 
 	const dispatch = useDispatch();
@@ -23,17 +24,17 @@ const Navigation = () => {
 		};
 	});
 
-	const navigateToHomePage = () => {
-		history.push('/');
-	};
+	// const navigateToHomePage = () => {
+	// 	history.push('/');
+	// };
 
-	const navigateToPhotos = () => {
-		history.push('/photos');
-	};
+	// const navigateToPhotos = () => {
+	// 	history.push('/photos');
+	// };
 
-	const navigateToAlbums = () => {
-		history.push('/albums');
-	};
+	// const navigateToAlbums = () => {
+	// 	history.push('/albums');
+	// };
 
 	// const navigateToMyProfile = (event) => {
 	//   event.stopPropagation();
@@ -51,7 +52,7 @@ const Navigation = () => {
 							<img
 								className='photo-icon'
 								src='https://icon-library.com/images/2018/4040259_soup-tomato-soup-png-download.png'
-							/>
+							 alt=''/>
 						</div>
 						<NavLink to='/' className='icon font-50 font-white font-bold font-decor-none nav-hover'> Pholickr </NavLink>
 						{/* <button

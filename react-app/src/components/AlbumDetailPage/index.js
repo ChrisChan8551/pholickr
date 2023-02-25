@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Heading from './Heading';
@@ -6,7 +6,7 @@ import GridLayout from '../GridLayout';
 import Footing from './Footing';
 import { getAllAlbums } from '../../store/album';
 import { removePinning } from '../../store/pinning';
-import EditAlbumModal from '../EditAlbumModal'
+// import EditAlbumModal from '../EditAlbumModal'
 
 
 function AlbumDetailPage() {

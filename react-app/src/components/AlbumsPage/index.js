@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums, deleteAlbum, selectMyAlbums } from '../../store/album';
 import GridLayout from '../GridLayout';
-import { AddPinningControls } from '../PhotoLayout';
+// import { AddPinningControls } from '../PhotoLayout';
 import CreateAlbumModal from '../CreateAlbumModal';
 
 function AlbumsPage() {
