@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 @user_routes.route('/')
 # @login_required
 def users():
-    print('************ GET ALL USERS ****************')
+    # print('************ GET ALL USERS ****************')
 
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
@@ -29,7 +29,7 @@ def users():
 # @login_required
 def user(id):
 
-    print('**************** GET 1 USER ****************')
+    # print('**************** GET 1 USER ****************')
 
     user = User.query.get(id)
     return user.to_dict()

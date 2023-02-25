@@ -80,7 +80,7 @@ def edit_photo(id):
     form = PhotoForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('*********************EDIT PHOTO*******************************')
+        # print('*********************EDIT PHOTO*******************************')
         data = form.data
         photo = Photo.query.get(id)
         # print(photo)
@@ -89,7 +89,7 @@ def edit_photo(id):
         # photo.title = data['title']
         # photo.url = data['url']
         # photo.imageUrl = data['imageUrl']
-        print('*********************UPDATED photo*******************************')
+        # print('*********************UPDATED photo*******************************')
         db.session.commit()
         return photo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400

@@ -23,7 +23,7 @@ def validation_errors_to_error_messages(validation_errors):
 # @login_required
 def get_all_albums():
     albums = Album.query.all()
-    print("**************** GET ALL ALBUMS ****************")
+    # print("**************** GET ALL ALBUMS ****************")
     # print(albums)
     return jsonify ([album.to_dict() for album in albums])
 
@@ -31,7 +31,7 @@ def get_all_albums():
 @album_routes.route('/<int:id>')
 # @login_required
 def get_album(id):
-    print("************GET 1 ALBUM********************")
+    # print("************GET 1 ALBUM********************")
     album = Album.query.get(id)
     return album.to_dict()
 
@@ -47,7 +47,7 @@ def delete_album(id):
 @album_routes.route('/', methods=['GET', 'POST'])
 # @login_required
 def create_album():
-    print("************CREATE NEW ALBUM********************")
+    # print("************CREATE NEW ALBUM********************")
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -58,7 +58,7 @@ def create_album():
         for key, value in data.items():
             setattr(new_album, key, value)
         form.populate_obj(new_album)
-        print('*********************CREATED*******************************')
+        # print('*********************CREATED*******************************')
         # print(new_album)
         db.session.add(new_album)
         db.session.commit()
@@ -81,7 +81,7 @@ def edit_album(id):
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('*********************EDIT ALBUM*******************************')
+        # print('*********************EDIT ALBUM*******************************')
         data = form.data
         album = Album.query.get(id)
         # print(album)
@@ -90,7 +90,7 @@ def edit_album(id):
         # album.title = data['title']
         # album.url = data['url']
         # album.imageUrl = data['imageUrl']
-        print('*********************UPDATED ALBUM*******************************')
+        # print('*********************UPDATED ALBUM*******************************')
         db.session.commit()
         return album.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
