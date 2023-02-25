@@ -35,10 +35,30 @@
 	margin-top: 20px
 }
 
+.PhotoDetail--Page {
+	/* margin-top: 10px; */
+}
+
+.full-width {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* width:100% */
+}
+
 .album-photo-container {
 	display: flex;
 	justify-content: center;
 	background-color:#eaeaea;
+	/* width:100%; */
+}
+
+.photo-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color:#eaeaea;
+	width:100%;
 }
 
 .album-h1 {

@@ -50,6 +50,8 @@ function App() {
 					<User />
 				</ProtectedRoute>
 				<Route exact path='/'>
+
+					{/* <p></p> */}
 					{currentUser ? <PhotoLayout /> : <HomePage />}
 				</Route>
 				<ProtectedRoute exact path='/photos'>

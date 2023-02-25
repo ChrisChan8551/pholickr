@@ -90,6 +90,7 @@ function HomePage() {
 				</div>
 				</div>
 			</div>
+
 			<div><PhotoLayout /></div>
 		</div>
 	);

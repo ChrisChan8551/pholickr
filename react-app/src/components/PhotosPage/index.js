@@ -23,12 +23,12 @@ function PhotoPage() {
 	let createPhotoForm;
 	// const photos = useSelector((state) => state.photo)
 
-	console.log('****************PHOTOS***************', photos);
+	// console.log('****************PHOTOS***************', photos);
 	// console.log('****************CURRENT USER***************',currentUser.id)
-	console.log(
-		'****************PHOTO USER ID***************',
-		photos[currentUser.id]
-	);
+	// console.log(
+	// 	'****************PHOTO USER ID***************',
+	// 	photos[currentUser.id]
+	// );
 
 	useEffect(() => {
 		dispatch(getAllPhotos());
@@ -62,19 +62,22 @@ function PhotoPage() {
 	return (
 		<div className='photo-main-container'>
 			<div className='photo-container'>
-				<div><h1>PHOTOS I'VE CREATED</h1></div>
-				{createPhotoForm}
-				{!showCreatePhotoForm && currentUser?.id && (
-					<button
-						className='blue-button'
-						onClick={(e) => {
-							setShowCreatePhotoForm(true);
-						}}
-					>
-						Add Photo
-					</button>
-				)}
-
+				<div className='full-width'>
+					<div>
+						<h1>My Photos</h1>
+					</div>
+					{createPhotoForm}
+					{!showCreatePhotoForm && currentUser?.id && (
+						<button
+							className='blue-button'
+							onClick={(e) => {
+								setShowCreatePhotoForm(true);
+							}}
+						>
+							Add Photo
+						</button>
+					)}
+				</div>
 				<GridLayout
 					items={photos}
 					onItemClick={navigateToPhotoPage}

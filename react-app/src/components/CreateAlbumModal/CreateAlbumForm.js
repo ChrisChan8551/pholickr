@@ -67,7 +67,7 @@ function CreateAlbumForm({ album, hideForm }) {
 				</label>
 				<label className='modal-label'>
 					Image Url
-					<input
+					<textarea
 						type='text'
 						className='modal-label'
 						value={imageUrl}

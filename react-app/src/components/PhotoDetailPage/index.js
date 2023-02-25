@@ -69,10 +69,10 @@ function PhotoDetailPage() {
 	}
 
 	return (
-		<ul className='PhotoDetail--Page'>
+		<div className='PhotoDetail--Page'>
 			<div>
 				{photoEditForm}
-				<h1>PHOTO DETAIL PAGE</h1>
+				{/* <h1>PHOTO DETAIL PAGE</h1> */}
 
 				<div className='PhotoDetail--Image--Container'>
 					<img
@@ -84,7 +84,7 @@ function PhotoDetailPage() {
 				<div className='profile-container'>
 					<div>
 						<ProfileCard author={photoAuthor} photo={photo} />
-						<div>
+						{/* <div>
 							<strong>Title: </strong> {photo?.title}
 						</div>
 
@@ -94,7 +94,7 @@ function PhotoDetailPage() {
 
 						<div>
 							<strong>Description: </strong> {photo?.description}
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>
@@ -117,7 +117,7 @@ function PhotoDetailPage() {
 					{/* </Link> */}
 				</div>
 			)}
-		</ul>
+		</div>
 	);
 }
 

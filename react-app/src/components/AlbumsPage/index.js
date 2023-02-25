@@ -51,19 +51,22 @@ function AlbumsPage() {
 	return (
 		<div className='photo-main-container'>
 			<div className='photo-container'>
-				<div><h1>ALBUMS I'VE CREATED</h1></div>
-				{createAlbumForm}
-				{!showCreateAlbumForm && currentUser?.id && (
-					<button
-						className='blue-button'
-						onClick={(e) => {
-							setShowCreateAlbumForm(true);
-						}}
-					>
-						Create Album
-					</button>
-				)}
-				<GridLayout className='myAlbums'
+				<div className='full-width'>
+					<h1>My Albums</h1>
+					{createAlbumForm}
+					{!showCreateAlbumForm && currentUser?.id && (
+						<button
+							className='blue-button'
+							onClick={(e) => {
+								setShowCreateAlbumForm(true);
+							}}
+						>
+							Create Album
+						</button>
+					)}
+				</div>
+				<GridLayout
+					className='myAlbums'
 					items={myAlbums}
 					buttonLabel='Remove'
 					onItemClick={navigateToAlbum}

@@ -73,7 +73,7 @@ function EditPhotoForm({ photo, hideForm }) {
 				</label>
 				<label className='modal-label'>
 					Description
-					<input
+					<textarea
 						type='text'
 						className='modal-label'
 						value={description}
@@ -83,7 +83,7 @@ function EditPhotoForm({ photo, hideForm }) {
 				</label>
 				<label className='modal-label'>
 					Image Url
-					<input
+					<textarea
 						type='text'
 						className='modal-label'
 						value={imageUrl}
@@ -92,7 +92,7 @@ function EditPhotoForm({ photo, hideForm }) {
 					/>
 				</label>
 				<button className='blue-button modal-label' type='submit'>
-					Edit Photo
+					Update
 				</button>
 
 				<ul>

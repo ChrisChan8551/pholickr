@@ -64,23 +64,25 @@ function PhotoLayout() {
 	}, [dispatch]);
 
 	return (
-		<div className='photo-main-container'>
-			<div className='photo-container'>
-				<GridLayout
-					items={photos}
-					onItemClick={!!sessionUser && navigateToPhotoPage}
-					// renderItemActions={
-					//   !!sessionUser &&
-					//   ((photo, closeActionPopOver) => (
-					//     <>
-					//       <AddPinningControls
-					//         photo={photo}
-					//         onPinningDone={closeActionPopOver}
-					//       />
-					//     </>
-					//   ))
-					// }
-				/>
+		<div className='album-photo-container'>
+			<div className='photo-main-container'>
+				<div>
+					<GridLayout
+						items={photos}
+						onItemClick={!!sessionUser && navigateToPhotoPage}
+						// renderItemActions={
+						//   !!sessionUser &&
+						//   ((photo, closeActionPopOver) => (
+						//     <>
+						//       <AddPinningControls
+						//         photo={photo}
+						//         onPinningDone={closeActionPopOver}
+						//       />
+						//     </>
+						//   ))
+						// }
+					/>
+				</div>
 			</div>
 		</div>
 	);

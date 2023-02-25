@@ -6,9 +6,9 @@
 // - [] read me
 
 //BACK END
-// - [] album route - create
+// - [x] album route - create
 // - [x] album route - get
-// - [] album route - edit
+// - [x] album route - edit
 // - [x] album route - delete
     //! need to add current user delete
 // - [x] photo route - create
@@ -26,23 +26,24 @@
 // - [x] seeds albums
 
 //FRONT END
-// - [] home page
-// - [] navigation
+// - [x] home page
+// - [x] navigation
 // - [] profile
-// - [] photos
+// - [x] photos
+// - [x] albums
 
 
 // - [x] AlbumsPage
-// - [] AlbumsDetailPage
-// - [] EditAlbumForm
+// - [x] AlbumsDetailPage
+// - [x] EditAlbumForm
 // - [x] PhotoPage
 // - [x] PhotoDetailPage
 // - [x] EditPhotoForm
-// - [] SignupFormPage
-// - []
-// - []
-// - []
-// - []
+// - [x] SignupFormPage
+// - [x] LoginFormPage
+// - [x]
+// - [x]
+// - [x]
 // - []
 // - []
 // - []

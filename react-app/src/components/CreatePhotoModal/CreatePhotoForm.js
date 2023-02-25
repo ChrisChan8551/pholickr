@@ -65,7 +65,7 @@ function CreatePhotoForm({ album, hideForm }) {
 				</label>
 				<label className='modal-label'>
 					Description
-					<input
+					<textarea
 						type='text'
 						className='modal-label'
 						value={description}
@@ -75,7 +75,7 @@ function CreatePhotoForm({ album, hideForm }) {
 				</label>
 				<label className='modal-label'>
 					Image Url
-					<input
+					<textarea
 						type='text'
 						className='modal-label'
 						value={imageUrl}

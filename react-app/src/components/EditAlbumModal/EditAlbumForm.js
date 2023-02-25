@@ -68,7 +68,7 @@ const EditAlbumForm = ({ album, hideForm }) => {
 
 				<label className='modal-label'>
 					Image Url:
-					<input
+					<textarea
 						className='modal-label'
 						type='text'
 						value={imageUrl}

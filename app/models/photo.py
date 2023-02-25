@@ -11,7 +11,7 @@ class Photo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(255))
-    description = db.Column(db.String(1500))
+    description = db.Column(db.String(100))
     imageUrl = db.Column(db.String(1500))
 
     def __repr__(self):
