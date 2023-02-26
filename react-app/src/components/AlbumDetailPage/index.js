@@ -48,7 +48,7 @@ function AlbumDetailPage() {
 									closeActionPopOver();
 								}}
 							>
-								Are you sure?
+								Confirm Delete
 							</button>
 						))
 					}
