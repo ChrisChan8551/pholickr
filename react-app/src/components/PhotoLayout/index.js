@@ -124,7 +124,7 @@ export function AddPinningControls({ photo, onPinningDone }) {
 					onPinningDone();
 				}}
 			>
-				confirm
+				Confirm
 			</button>
 		</>
 	);
