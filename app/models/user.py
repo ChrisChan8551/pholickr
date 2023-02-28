@@ -5,10 +5,11 @@ from flask_login import UserMixin
 followers = db.Table(
     'followers',
     db.Model.metadata,
-    db.Column('follower_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
-    db.Column('followed_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
+    db.Column('follower_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')),primary_key=True),
+    db.Column('followed_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')),primary_key=True),
     schema=SCHEMA
 )
+
 
 
 class User(db.Model, UserMixin):
@@ -45,6 +46,7 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
 
     def follow(self, user):
         self.following.append(user)
