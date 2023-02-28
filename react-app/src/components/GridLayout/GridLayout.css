@@ -1,3 +1,12 @@
+.bg-gradient {
+	/* background: rgb(25, 24, 38); */
+	background: linear-gradient(
+		90deg,
+		rgb(64, 64, 64) 20%,
+		rgb(255, 255, 255) 100%
+	);
+}
+
 .AlbumDetail--Editor--Container {
 	display: flex;
 	justify-content: left;
@@ -32,7 +41,7 @@
 	display: flex;
 	justify-content: center;
 	min-width: 1900px;
-	margin-top: 20px
+	margin-top: 20px;
 }
 
 .PhotoDetail--Page {
@@ -49,7 +58,7 @@
 .album-photo-container {
 	display: flex;
 	justify-content: center;
-	background-color:#eaeaea;
+	background-color: #eaeaea;
 	/* width:100%; */
 }
 
@@ -57,8 +66,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color:#eaeaea;
-	width:100%;
+	background-color: #eaeaea;
+	width: 100%;
 }
 
 .album-h1 {

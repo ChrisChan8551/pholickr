@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import SignUpForm from './components/SignupFormModal/SignUpForm';
 import Navigation from './components/Navigation';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+import UsersList from './components/User/UsersList';
+import User from './components/User/User';
 import PhotoPage from './components/PhotosPage';
 import { authenticate } from './store/session';
 import AlbumsPage from './components/AlbumsPage';
@@ -50,8 +50,10 @@ function App() {
 				<ProtectedRoute exact path='/users/:userId'>
 					<User />
 				</ProtectedRoute>
+				<ProtectedRoute exact path='/users/:userId'>
+					<User />
+				</ProtectedRoute>
 				<Route exact path='/'>
-
 					{/* <p></p> */}
 					{currentUser ? <PhotoLayout /> : <HomePage />}
 				</Route>

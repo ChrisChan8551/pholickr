@@ -66,3 +66,24 @@ def user_albums(id):
 
 #         return user.to_dict_with_related()
 #     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@user_routes.route('/follow/<int:id>', methods=['POST'])
+@login_required
+def follow(id):
+    other_user = User.query.filter_by(id=id).first()
+
+    current_user.follow(other_user)
+    db.session.commit()
+
+    return current_user.to_dict_with_related()
+
+
+@user_routes.route('/unfollow/<int:id>', methods=['POST'])
+@login_required
+def unfollow(id):
+    other_user = User.query.filter_by(id=id).first()
+
+    current_user.unfollow(other_user)
+    db.session.commit()
+
+    return current_user.to_dict_with_related()

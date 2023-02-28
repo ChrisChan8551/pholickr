@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums } from '../../store/album';
 // import {selectMyAlbums} from '../../store/album';
+import { Link } from "react-router-dom";
 import {
 	getAllPhotos,
 	deleteAPhoto,
@@ -18,10 +19,10 @@ function PhotoPage() {
 	const currentUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// const photos = Object.values(useSelector((state) => state.photo))
 	const photos = useSelector(selectMyPhotos);
 	const [showCreatePhotoForm, setShowCreatePhotoForm] = useState(false);
 	let createPhotoForm;
+	// const photos = Object.values(useSelector((state) => state.photo))
 	// const photos = useSelector((state) => state.photo)
 
 	// console.log('****************PHOTOS***************', photos);
@@ -52,9 +53,7 @@ function PhotoPage() {
 		);
 	}
 
-	// const navigateToCreatePhotoForm = async (e) => {
-	//   history.push("/CreatePhoto");
-	// };
+
 
 	const navigateToPhotoPage = (photo) => {
 		history.push(`/photos/${photo.id}`);

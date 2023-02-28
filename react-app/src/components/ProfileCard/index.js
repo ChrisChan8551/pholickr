@@ -1,7 +1,7 @@
 import './profilecard.css';
 import React from 'react';
 // import { useEffect, useState } from 'react';
-// import { NavLink, Redirect, useParams } from 'react-router-dom';
+import { NavLink, Redirect, useParams } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
@@ -24,8 +24,8 @@ function ProfileCard({ author, photo }) {
 				<img class='profile-img' src={author.image} alt=''/>
 				<div class='text-container'>
 					<p class='title-text'>{photo.title}</p>
-					<p class='info-text'>Author: {author.username}</p>
-					{/* <NavLink to={`/users/${author.id}`}>{author.username}</NavLink> */}
+					{/* <p class='info-text'>Author: {author.username}</p> */}
+					<NavLink to={`/users/${author.id}`}>Author: {author.username}</NavLink>
 					<p class='desc-text'> Description: {photo.description}</p>
                     {/* <button className='blue-button modal-label'>+ Follow</button> */}
 				</div>
