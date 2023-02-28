@@ -98,7 +98,7 @@ export const signUp =
 				password,
 			}),
 		});
-		console.log('*************RESPONSE*********', response);
+		// console.log('*************RESPONSE*********', response);
 		if (response.ok) {
 			const data = await response.json();
 			dispatch(setUser(data));
