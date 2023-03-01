@@ -97,7 +97,7 @@ function User() {
 
 	return (
 		<div>
-			<div>
+			<div className='photo-main-container'>
 				<div className='container'>
 					<div className='svg-background'></div>
 					<div className='svg-background2'></div>
