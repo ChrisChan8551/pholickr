@@ -8,7 +8,7 @@ import {
 	unfollowUser,
 } from '../../store/user';
 import GridLayout from '../GridLayout';
-import { AddPinningControls } from '../PhotoLayout';
+// import { AddPinningControls } from '../PhotoLayout';
 
 function User() {
 	const { userId } = useParams();
@@ -25,18 +25,18 @@ function User() {
 
 			let isFollowing = false;
 
-			// if (currentUser && otherUser) {
-			// 	isFollowing = currentUser.following.some(
-			// 		({ id }) => `${id}` === `${otherUser.id}`
-			// 	);
-			// }
+			if (currentUser && otherUser) {
+				isFollowing = currentUser.following.some(
+					({ id }) => `${id}` === `${otherUser.id}`
+				);
+			}
 			// console.log('***********currentUser***************', currentUser);
 			// console.log('***********otherUser***************', otherUser);
 			// console.log('***********isFollowing***************', isFollowing);
-			console.log(
-				'***********currentUser.following***************',
-				currentUser.following
-			);
+			// console.log(
+			// 	'***********currentUser.following***************',
+			// 	currentUser.following
+			// );
 
 			return {
 				otherUser,
@@ -114,7 +114,7 @@ function User() {
 				className={isFollowing ? 'grey-button' : 'blue-button'}
 				onClick={isFollowing ? unfollow : follow}
 			>
-				{isFollowing ? '-Unfollow' : '+Follow'}
+				{isFollowing ? '- Unfollow' : '+ Follow'}
 			</button>
 			<GridLayout
 				items={photos}
