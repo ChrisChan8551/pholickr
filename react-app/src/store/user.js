@@ -49,18 +49,21 @@ export const unfollowUser = (userId) => async (dispatch) => {
 const defaultState = {};
 
 const otherUsersReducer = (state = defaultState, action) => {
-	let newState = { ...state };
+	// let newState = { ...state };
 
 	switch (action.type) {
+
 		case FULL_RESET:
-			return { ...defaultState };
+			{const newState = { ...state };
+			return { ...defaultState };}
 
 		case LOAD_OTHER_USERS:
+			{const newState = { ...state };
 			action.users.forEach((user) => {
 				newState[user.id] = user;
 			});
 
-			return newState;
+			return newState;}
 
 		default:
 			return state;

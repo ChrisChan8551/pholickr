@@ -83,7 +83,7 @@ function PhotoDetailPage() {
 
 				<div className='profile-container'>
 					<div>
-						<ProfileCard author={photoAuthor} photo={photo} />
+						<ProfileCard author={photoAuthor} photo={photo} user={currentUser} />
 						{/* <div>
 							<strong>Title: </strong> {photo?.title}
 						</div>

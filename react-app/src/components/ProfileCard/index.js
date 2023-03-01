@@ -7,7 +7,7 @@ import { NavLink, Redirect, useParams } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
 // import { getOneUser } from '../../store/user';
 
-function ProfileCard({ author, photo }) {
+function ProfileCard({ author, photo, user }) {
 	// const dispatch = useDispatch();
 	// const history = useHistory();
 
@@ -25,7 +25,7 @@ function ProfileCard({ author, photo }) {
 				<div className='text-container'>
 					<p className='title-text'>{photo.title}</p>
 					{/* <p className='info-text'>Author: {author.username}</p> */}
-					<NavLink to={`/users/${author.id}`}>Author: {author.username}</NavLink>
+					Author: <NavLink to={`/users/${author.id}`}> {author.username}</NavLink>
 					<p className='desc-text'> Description: {photo.description}</p>
                     {/* <button className='blue-button modal-label'>+ Follow</button> */}
 				</div>

@@ -1,12 +1,9 @@
+import { faCropSimple } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams, NavLink } from 'react-router-dom';
 import { getAllPhotosByAUser } from '../../store/photo';
-import {
-	getOneUser,
-	followUser,
-	unfollowUser,
-} from '../../store/user';
+import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
 // import { AddPinningControls } from '../PhotoLayout';
 
@@ -14,7 +11,6 @@ function User() {
 	const { userId } = useParams();
 	const [loadingStatus, setLoadingStatus] = useState('uninitialized');
 	const [setLoadingError] = useState(null);
-
 	const { currentUser, otherUser, isFollowing, photos } = useSelector(
 		(state) => {
 			const currentUser = state.session.user;
@@ -54,7 +50,7 @@ function User() {
 		if (userId && !otherUser && loadingStatus === 'uninitialized') {
 			dispatch(getOneUser(userId));
 		}
-	}, [userId, otherUser,dispatch,loadingStatus]);
+	}, [userId, otherUser, dispatch, loadingStatus]);
 
 	useEffect(async () => {
 		if (userId && loadingStatus === 'uninitialized') {
@@ -66,8 +62,10 @@ function User() {
 				setLoadingStatus('failed');
 				setLoadingError(err);
 			}
+		} else if (isFollowing !== null) {
+			dispatch(getOneUser(userId));
 		}
-	}, [dispatch, userId, loadingStatus,setLoadingError]);
+	}, [dispatch, userId, loadingStatus, setLoadingError, isFollowing]);
 
 	if (!userId) {
 		return <Redirect to='/404' />;
@@ -99,28 +97,42 @@ function User() {
 
 	return (
 		<div>
-			<ul>
-				<li>
-					<strong>User Id</strong> {userId}
-				</li>
-				<li>
-					<strong>Username</strong> {otherUser.username}
-				</li>
-				<li>
-					<strong>Email</strong> {otherUser.email}
-				</li>
-			</ul>
-			<button
-				className={isFollowing ? 'grey-button' : 'blue-button'}
-				onClick={isFollowing ? unfollow : follow}
-			>
-				{isFollowing ? '- Unfollow' : '+ Follow'}
-			</button>
-			<GridLayout
-				items={photos}
-				onItemClick={navigateToPinPage}
-
-			/>
+			<div>
+				<div className='container'>
+					<div className='svg-background'></div>
+					<div className='svg-background2'></div>
+					<div className='circle'></div>
+					{/* <img
+					className='menu-icon'
+					src='https://pngimage.net/wp-content/uploads/2018/06/white-menu-icon-png-8.png'
+				/> */}
+					<img className='profile-img' src={otherUser.image} alt='' />
+					<div className='text-container'>
+						<strong> Author:</strong> {otherUser.username}
+						<p>
+							<strong>Followers:</strong>{' '}
+							{otherUser.followers?.length || 0}
+						</p>
+						<p>
+							<strong>Following:</strong>{' '}
+							{otherUser.following?.length || 0}
+						</p>
+						{currentUser.id !== otherUser.id && (
+							<button
+								className={
+									isFollowing ? 'grey-button' : 'blue-button'
+								}
+								onClick={isFollowing ? unfollow : follow}
+							>
+								{isFollowing ? '- Unfollow' : '+ Follow'}
+							</button>
+						)}
+					</div>
+				</div>
+			</div>
+			<div className='photo-container'>
+				<GridLayout items={photos} onItemClick={navigateToPinPage} />
+			</div>
 		</div>
 	);
 }
