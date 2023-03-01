@@ -1,3 +1,6 @@
+import { fullReset, FULL_RESET } from './full-reset';
+import { getAllPhotos } from './photo';
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -60,6 +63,7 @@ export const login = (email, password) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
+		dispatch(getAllPhotos());
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
@@ -80,6 +84,7 @@ export const logout = () => async (dispatch) => {
 
 	if (response.ok) {
 		dispatch(removeUser());
+		dispatch(fullReset());
 	}
 };
 
@@ -118,6 +123,8 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
 	let newState = { ...state };
 	switch (action.type) {
+		case FULL_RESET:
+			return { ...initialState };
 		case LOAD_USERS:
 			action.users.forEach((user) => {
 				newState[user.id] = user;
@@ -126,7 +133,7 @@ export default function reducer(state = initialState, action) {
 		case SET_USER:
 			return { user: action.payload };
 		case REMOVE_USER:
-			return { user: null };
+			return { ...initialState };
 		default:
 			return state;
 	}

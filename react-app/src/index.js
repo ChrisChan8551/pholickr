@@ -9,8 +9,8 @@ import { ModalProvider } from './components/Modal/Modal';
 
 const store = configureStore();
 
-ReactDOM.render(
-	<React.StrictMode>
+function Root() {
+	return (
 		<ModalProvider>
 			<Provider store={store}>
 				<BrowserRouter>
@@ -18,6 +18,12 @@ ReactDOM.render(
 				</BrowserRouter>
 			</Provider>
 		</ModalProvider>
+	);
+}
+
+ReactDOM.render(
+	<React.StrictMode>
+		<Root />
 	</React.StrictMode>,
 	document.getElementById('root')
 );

@@ -8,8 +8,8 @@ import searchbarReducer from './searchbar';
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
-	photo: photosReducer,
 	album: albumReducer,
+	photo: photosReducer,
 	otherUser: userReducer,
 	searchbar: searchbarReducer,
 });

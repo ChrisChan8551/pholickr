@@ -13,20 +13,20 @@ function ProfileCard({ author, photo }) {
 
 	return (
 		<div>
-			<div class='container'>
-				<div class='svg-background'></div>
-				<div class='svg-background2'></div>
-				<div class='circle'></div>
+			<div className='container'>
+				<div className='svg-background'></div>
+				<div className='svg-background2'></div>
+				<div className='circle'></div>
 				{/* <img
-					class='menu-icon'
+					className='menu-icon'
 					src='https://pngimage.net/wp-content/uploads/2018/06/white-menu-icon-png-8.png'
 				/> */}
-				<img class='profile-img' src={author.image} alt=''/>
-				<div class='text-container'>
-					<p class='title-text'>{photo.title}</p>
-					{/* <p class='info-text'>Author: {author.username}</p> */}
+				<img className='profile-img' src={author.image} alt=''/>
+				<div className='text-container'>
+					<p className='title-text'>{photo.title}</p>
+					{/* <p className='info-text'>Author: {author.username}</p> */}
 					<NavLink to={`/users/${author.id}`}>Author: {author.username}</NavLink>
-					<p class='desc-text'> Description: {photo.description}</p>
+					<p className='desc-text'> Description: {photo.description}</p>
                     {/* <button className='blue-button modal-label'>+ Follow</button> */}
 				</div>
 			</div>

@@ -40,7 +40,7 @@ def delete_photo(id):
         return "Photo not found"
 
 @photo_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_photo():
     # print("************CREATE NEW PHOTO********************")
     form = PhotoForm()

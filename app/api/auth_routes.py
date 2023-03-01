@@ -24,7 +24,7 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+        return current_user.to_dict_with_related()
     return {'errors': ['Unauthorized']}
 
 
@@ -43,7 +43,7 @@ def login():
         login_user(user)
         # print('****************LOGGED IN****************')
         redirect('/photos')
-        return user.to_dict()
+        return user.to_dict_with_related()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -79,7 +79,7 @@ def sign_up():
         login_user(user)
         # print('*********USER SIGNUP********', user.to_dict())
         # redirect('/photos')
-        return user.to_dict()
+        return user.to_dict_with_related()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
