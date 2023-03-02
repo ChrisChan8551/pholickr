@@ -23,6 +23,7 @@ function Following({ user, hideForm }) {
 								onClick={() => {
 									history.push(`/users/${following.id}`);
 									hideForm();
+									window.location.reload();
 								}}
 								className='profile-button'
 							>
