@@ -5,6 +5,7 @@ import { Redirect, useHistory, useParams, NavLink } from 'react-router-dom';
 import { getAllPhotosByAUser } from '../../store/photo';
 import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
+import Followers from '../FollowersModal';
 // import { AddPinningControls } from '../PhotoLayout';
 
 function User() {
@@ -75,6 +76,9 @@ function User() {
 		return null;
 	}
 
+	if(!currentUser) {
+		return null;
+	}
 	const follow = () => {
 		dispatch(followUser(otherUser.id));
 	};
@@ -98,6 +102,7 @@ function User() {
 	return (
 		<div>
 			<div className='photo-main-container'>
+
 				<div className='container'>
 					<div className='svg-background'></div>
 					<div className='svg-background2'></div>

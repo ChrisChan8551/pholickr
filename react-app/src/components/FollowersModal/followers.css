@@ -1,0 +1,11 @@
+.follow-container {
+	display: flex;
+	flex-direction: row;
+    /* width: 128px;
+	height: 128px; */
+}
+
+.profile-image{
+	max-width: 128px;
+	max-height: 128px;
+}

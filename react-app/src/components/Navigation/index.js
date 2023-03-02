@@ -49,26 +49,41 @@ const Navigation = () => {
 				<nav id='navigation-bar'>
 					<div className='left_side'>
 						<div className='icon'>
-							<img
-								className='photo-icon'
-								src='/pho.png'
-							 alt=''/>
+							<img className='photo-icon' src='/pho.png' alt='' />
 						</div>
-						<NavLink to='/' className='icon font-50 font-white font-bold font-decor-none nav-hover'> Pholickr </NavLink>
+						<NavLink
+							to='/'
+							className='icon font-50 font-white font-bold font-decor-none nav-hover'
+						>
+							{' '}
+							Pholickr{' '}
+						</NavLink>
 						{/* <button
 							className='regular-button'
 							onClick={navigateToHomePage}
 						>
 							Home
 						</button> */}
-              <NavLink to='/photos' className='font-white font-bold font-decor-none font-16 nav-hover'> My Photos </NavLink>
+						<NavLink
+							to='/photos'
+							className='font-white font-bold font-decor-none font-16 nav-hover'
+						>
+							{' '}
+							My Photos{' '}
+						</NavLink>
 						{/* <button
 							className='blue-button'
 							onClick={navigateToPhotos}
 						>
 							My Photos
 						</button> */}
-            <NavLink to='/albums' className='font-white font-bold font-decor-none font-16 nav-hover'> My Albums </NavLink>
+						<NavLink
+							to='/albums'
+							className='font-white font-bold font-decor-none font-16 nav-hover'
+						>
+							{' '}
+							My Albums{' '}
+						</NavLink>
 						{/* <button
 							className='blue-button'
 							onClick={navigateToAlbums}
@@ -94,12 +109,7 @@ const Navigation = () => {
 
 					<div className='right_side' onClick={() => setOpen(!open)}>
 						<div className='profile-width profile-hover'>
-							<img
-								src={
-									'https://cdn-icons-png.flaticon.com/512/9591/9591054.png'
-								}
-								alt=''
-							/>
+							<img src={currentUser.image} alt='' />
 						</div>
 
 						<div className='dropdown_button'>
@@ -119,9 +129,7 @@ const Navigation = () => {
 											<div className='prof_icon'>
 												{/* <button> */}
 												<img
-													src={
-														'https://cdn-icons-png.flaticon.com/512/9591/9591054.png'
-													}
+													src={currentUser.image}
 													alt=''
 												/>
 												{/* </button> */}

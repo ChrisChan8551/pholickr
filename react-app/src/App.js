@@ -17,6 +17,8 @@ import AlbumDetailPage from './components/AlbumDetailPage';
 import PhotoDetailPage from './components/PhotoDetailPage';
 import PhotoLayout from './components/PhotoLayout';
 import HomePage from './components/HomePage/HomePage';
+import Followers from './components/FollowersModal/Followers';
+import Following from './components/FollowingModal/Following';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -64,6 +66,12 @@ function App() {
 				</Route>
 				<Route exact path='/albums/:albumId'>
 					<AlbumDetailPage />
+				</Route>
+				<Route exact path='/followers'>
+					<Followers />
+				</Route>
+				<Route exact path='/following'>
+					<Following />
 				</Route>
 			</Switch>
 		</div>
