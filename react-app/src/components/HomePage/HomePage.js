@@ -10,7 +10,7 @@ import PhotoLayout from '../PhotoLayout';
 function HomePage() {
 	const dispatch = useDispatch();
 	// const history = useHistory();
-	const [ setModalOpen] = useState(false);
+	// const [ setModalOpen] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showSignupModal, setShowSignupModal] = useState(false);
 	const currentUser = useSelector((state) => state.session.user);
@@ -23,7 +23,7 @@ function HomePage() {
 			email: 'demo@aa.io',
 			password: 'password',
 		};
-		setModalOpen(false);
+		// setModalOpen(false);
 		dispatch(login(user.email, user.password));
 	};
 

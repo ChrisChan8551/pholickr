@@ -14,7 +14,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @photo_routes.route('/', methods=['GET'])
-@login_required
+# @login_required
 def get_all_photos():
     photos = Photo.query.all()
     # print('********GET ALL PHOTOS********')

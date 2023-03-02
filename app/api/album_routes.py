@@ -20,7 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @album_routes.route('/', methods=['GET'])
-@login_required
+# @login_required
 def get_all_albums():
     albums = Album.query.all()
     # print("**************** GET ALL ALBUMS ****************")
