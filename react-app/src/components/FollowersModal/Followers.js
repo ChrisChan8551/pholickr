@@ -3,12 +3,13 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './followers.css';
 
-function Followers() {
+function Followers({ user, hideForm }) {
 	const history = useHistory();
 	const allMyFollowers = useSelector(
-		(state) => state.session.user?.followers || []
+		// (state) => user ? user.followers : state.session.user?.followers
+		(state) => user.followers
 	);
-	console.log('***** FOLLOWERS PAGES ****', allMyFollowers);
+	// console.log('***** FOLLOWERS PAGES ****', allMyFollowers);
 
 	return (
 		<div className='follow-container'>
@@ -18,9 +19,11 @@ function Followers() {
 					{allMyFollowers.map((follower) => {
 						return (
 							<button
-								onClick={() =>
-									history.push(`/users/${follower.id}`)
-								}
+								key={follower.id}
+								onClick={() => {
+									history.push(`/users/${follower.id}`);
+									hideForm();
+								}}
 								className='profile-button'
 							>
 								<div>

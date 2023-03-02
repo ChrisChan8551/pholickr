@@ -5,13 +5,14 @@ import { Redirect, useHistory, useParams, NavLink } from 'react-router-dom';
 import { getAllPhotosByAUser } from '../../store/photo';
 import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
-import Followers from '../FollowersModal';
+import FollowersModal from '../FollowersModal';
 // import { AddPinningControls } from '../PhotoLayout';
 
 function User() {
 	const { userId } = useParams();
 	const [loadingStatus, setLoadingStatus] = useState('uninitialized');
 	const [setLoadingError] = useState(null);
+	const [showFollowersModal, setShowFollowersModal] = useState(false);
 	const { currentUser, otherUser, isFollowing, photos } = useSelector(
 		(state) => {
 			const currentUser = state.session.user;
@@ -43,6 +44,9 @@ function User() {
 			};
 		}
 	);
+	const toggleFollowersModal = () => {
+		setShowFollowersModal(!showFollowersModal);
+	};
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -76,7 +80,7 @@ function User() {
 		return null;
 	}
 
-	if(!currentUser) {
+	if (!currentUser) {
 		return null;
 	}
 	const follow = () => {
@@ -98,11 +102,21 @@ function User() {
 	// 	'***********currentUser.following***************',
 	// 	currentUser.follower_id
 	// );
+	<FollowersModal
+		user={otherUser}
+		hideForm={() => setShowFollowersModal(false)}
+		showForm={showFollowersModal}
+	/>;
 
 	return (
 		<div>
 			<div className='photo-main-container'>
-
+				{showFollowersModal && (
+					<FollowersModal
+						user={otherUser}
+						hideForm={setShowFollowersModal}
+					/>
+				)}
 				<div className='container'>
 					<div className='svg-background'></div>
 					<div className='svg-background2'></div>
@@ -111,11 +125,14 @@ function User() {
 					className='menu-icon'
 					src='https://pngimage.net/wp-content/uploads/2018/06/white-menu-icon-png-8.png'
 				/> */}
+
 					<img className='profile-img' src={otherUser.image} alt='' />
 					<div className='text-container'>
 						<strong> Author:</strong> {otherUser.username}
 						<p>
-							<strong>Followers:</strong>{' '}
+							<button onClick={toggleFollowersModal}>
+								<strong>Followers:</strong>
+							</button>{' '}
 							{otherUser.followers?.length || 0}
 						</p>
 						<p>
