@@ -58,9 +58,12 @@ function PhotoLayout() {
 		};
 	}, [allPhotos, searchbarValue]);
 
-	useEffect(async () => {
-		await dispatch(getAllPhotos());
-		await dispatch(getAllAlbums());
+	useEffect(() => {
+		async function fetchPhotosAndAlbums() {
+			await dispatch(getAllPhotos());
+			await dispatch(getAllAlbums());
+		}
+		fetchPhotosAndAlbums();
 	}, [dispatch]);
 
 	return (

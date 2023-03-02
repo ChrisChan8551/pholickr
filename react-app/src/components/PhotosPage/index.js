@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums } from '../../store/album';
 // import {selectMyAlbums} from '../../store/album';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {
 	getAllPhotos,
 	deleteAPhoto,

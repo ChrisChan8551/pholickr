@@ -20,7 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @album_routes.route('/', methods=['GET'])
-# @login_required
+@login_required
 def get_all_albums():
     albums = Album.query.all()
     # print("**************** GET ALL ALBUMS ****************")
@@ -29,7 +29,7 @@ def get_all_albums():
 
 
 @album_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_album(id):
     # print("************GET 1 ALBUM********************")
     album = Album.query.get(id)
@@ -37,7 +37,7 @@ def get_album(id):
 
 
 @album_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_album(id):
     album = Album.query.get(id)
     db.session.delete(album)
@@ -45,7 +45,7 @@ def delete_album(id):
     return "sucessfully deleted Album"
 
 @album_routes.route('/', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def create_album():
     # print("************CREATE NEW ALBUM********************")
     form = AlbumForm()
@@ -66,7 +66,7 @@ def create_album():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @album_routes.route('/<int:id>', methods=["PATCH", "PUT"])
-# @login_required
+@login_required
 def edit_album(id):
     # data = request.json
     # print('*********************EDIT ALBUM*******************************')
@@ -96,7 +96,7 @@ def edit_album(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @album_routes.route('/<int:album_id>/photo/<int:photo_id>', methods=["POST"])
-# @login_required
+@login_required
 def add_pinning(album_id, photo_id):
     photo = Photo.query.get(photo_id)
     album = Album.query.get(album_id)

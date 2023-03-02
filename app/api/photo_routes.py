@@ -14,7 +14,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @photo_routes.route('/', methods=['GET'])
-# @login_required
+@login_required
 def get_all_photos():
     photos = Photo.query.all()
     # print('********GET ALL PHOTOS********')
@@ -22,14 +22,14 @@ def get_all_photos():
     return jsonify ([photo.to_dict() for photo in photos])
 
 @photo_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_photo(id):
     # print('************GET 1 PHOTO********************')
     photo = Photo.query.get(id)
     return photo.to_dict()
 
 @photo_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_photo(id):
     photo = Photo.query.get(id)
     if photo:
@@ -40,7 +40,7 @@ def delete_photo(id):
         return "Photo not found"
 
 @photo_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def create_photo():
     # print("************CREATE NEW PHOTO********************")
     form = PhotoForm()
@@ -65,7 +65,7 @@ def create_photo():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @photo_routes.route('/<int:id>', methods=["PATCH", "PUT"])
-# @login_required
+@login_required
 def edit_photo(id):
     # data = request.json
     # print('*********************EDIT PHOTO*******************************')

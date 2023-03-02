@@ -52,18 +52,17 @@ const otherUsersReducer = (state = defaultState, action) => {
 	// let newState = { ...state };
 
 	switch (action.type) {
-
 		case FULL_RESET:
-			{const newState = { ...state };
-			return { ...defaultState };}
+			return { ...defaultState };
 
-		case LOAD_OTHER_USERS:
-			{const newState = { ...state };
+		case LOAD_OTHER_USERS: {
+			const newState = { ...state };
 			action.users.forEach((user) => {
 				newState[user.id] = user;
 			});
 
-			return newState;}
+			return newState;
+		}
 
 		default:
 			return state;

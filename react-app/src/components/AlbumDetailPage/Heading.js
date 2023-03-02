@@ -14,7 +14,7 @@ function AlbumDetailHeading() {
 	const history = useHistory();
 	const [showEditAlbumForm, setShowEditAlbumForm] = useState(false);
 	let editAlbumForm;
-	const { album, isMyAlbum } = useSelector((state) => {
+	const { album } = useSelector((state) => {
 		const currentUser = state.session.user;
 		const album = state.album[albumId] || {};
 		return {
@@ -45,7 +45,7 @@ function AlbumDetailHeading() {
 		return null;
 	}
 
-	const { title, imageUrl } = album;
+	const { title } = album;
 
 	const removeAlbum = async (e) => {
 		e.preventDefault();

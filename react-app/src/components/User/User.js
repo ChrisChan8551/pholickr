@@ -1,7 +1,7 @@
-import { faCropSimple } from '@fortawesome/free-solid-svg-icons';
+// import { faCropSimple } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams, NavLink } from 'react-router-dom';
+import { Redirect, useHistory, useParams} from 'react-router-dom';
 import { getAllPhotosByAUser } from '../../store/photo';
 import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
@@ -63,20 +63,25 @@ function User() {
 		}
 	}, [userId, otherUser, dispatch, loadingStatus]);
 
-	useEffect(async () => {
-		if (userId && loadingStatus === 'uninitialized') {
+	useEffect(() => {
+		async function fetchData() {
+		  if (userId && loadingStatus === 'uninitialized') {
 			try {
-				setLoadingStatus('pending');
-				await dispatch(getAllPhotosByAUser(userId));
-				setLoadingStatus('success');
+			  setLoadingStatus('pending');
+			  await dispatch(getAllPhotosByAUser(userId));
+			  setLoadingStatus('success');
 			} catch (err) {
-				setLoadingStatus('failed');
-				setLoadingError(err);
+			  setLoadingStatus('failed');
+			  setLoadingError(err);
 			}
-		} else if (isFollowing !== null) {
+		  } else if (isFollowing !== null) {
 			dispatch(getOneUser(userId));
+		  }
 		}
-	}, [dispatch, userId, loadingStatus, setLoadingError, isFollowing]);
+
+		fetchData();
+	  }, [dispatch, userId, loadingStatus, setLoadingError, isFollowing]);
+
 
 	if (!userId) {
 		return <Redirect to='/404' />;

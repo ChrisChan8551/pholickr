@@ -46,33 +46,33 @@ function App() {
 				<Route exact path='/sign-up'>
 					<SignUpForm />
 				</Route>
-				<Route exact path='/users'>
+				<ProtectedRoute exact path='/users'>
 					<UsersList />
-				</Route>
-				<Route exact path='/users/:userId'>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/users/:userId'>
 					<User />
-				</Route>
+				</ProtectedRoute>
 				<Route exact path='/'>
 					{currentUser ? <PhotoLayout /> : <HomePage />}
 				</Route>
-				<Route exact path='/photos'>
+				<ProtectedRoute exact path='/photos'>
 					<PhotoPage />
-				</Route>
-				<Route exact path='/photos/:photoId'>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/photos/:photoId'>
 					<PhotoDetailPage />
-				</Route>
-				<Route exact path='/albums'>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/albums'>
 					<AlbumsPage />
-				</Route>
-				<Route exact path='/albums/:albumId'>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/albums/:albumId'>
 					<AlbumDetailPage />
-				</Route>
-				<Route exact path='/followers'>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/followers'>
 					<Followers />
-				</Route>
-				<Route exact path='/following'>
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/following'>
 					<Following />
-				</Route>
+				</ProtectedRoute>
 			</Switch>
 		</div>
 	);

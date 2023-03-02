@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @user_routes.route('/')
-# @login_required
+@login_required
 def users():
     """
     Query for all users and returns them in a list of user dictionaries
@@ -31,7 +31,7 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-# @login_required
+@login_required
 def user(id):
     # print("**************** GET 1 USER ****************")
     """
@@ -42,19 +42,19 @@ def user(id):
     return user.to_dict_with_related()
 
 @user_routes.route('/<int:id>/photos')
-# @login_required
+@login_required
 def user_photos(id):
     photos = Photo.query.filter_by(userId=id)
     return jsonify([photo.to_dict() for photo in photos])
 
 @user_routes.route('/<int:id>/albums')
-# @login_required
+@login_required
 def user_albums(id):
     albums = Album.query.filter_by(userId=id)
     return jsonify([album.to_dict() for album in albums])
 
 @user_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
+@login_required
 def edit_user(id):
     # print('*********************EDIT User*******************************')
     form = ProfileForm()
@@ -75,7 +75,7 @@ def edit_user(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @user_routes.route('/follow/<int:id>', methods=['POST'])
-# @login_required
+@login_required
 def follow(id):
     other_user = User.query.filter_by(id=id).first()
 
@@ -86,7 +86,7 @@ def follow(id):
 
 
 @user_routes.route('/unfollow/<int:id>', methods=['POST'])
-# @login_required
+@login_required
 def unfollow(id):
     other_user = User.query.filter_by(id=id).first()
 
