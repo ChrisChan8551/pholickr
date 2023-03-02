@@ -18,30 +18,32 @@ function Followers({ user, hideForm }) {
 				<div className='follow-container'>
 					{allMyFollowers.map((follower) => {
 						return (
-							<button
-								key={follower.id}
-								onClick={() => {
-									history.push(`/users/${follower.id}`);
-									hideForm();
-								}}
-								className='profile-button'
-							>
-								<div>
-									<img
-										className='profile-image'
-										src={follower.image}
-										alt=''
-									/>
-								</div>
+							<div>
+								<button
+									key={follower.id}
+									onClick={() => {
+										history.push(`/users/${follower.id}`);
+										hideForm();
+									}}
+									className='profile-button'
+								>
+									<div>
+										<img
+											className='profile-image'
+											src={follower.image}
+											alt=''
+										/>
+									</div>
 
-								<div className='profile-username'>
-									{/* <h3>
+									<div className='profile-username'>
+										{/* <h3>
 								{' '}
 								{follower.firstName} {follower.lastName}
 							</h3> */}
-									<h4>{follower.username}</h4>
-								</div>
-							</button>
+										<h4>{follower.username}</h4>
+									</div>
+								</button>
+							</div>
 						);
 					})}
 				</div>

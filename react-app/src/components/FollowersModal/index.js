@@ -1,7 +1,7 @@
 import { Modal } from '../Modal/Modal';
-import Followers from './Followers'
+import Followers from './Followers';
 
-function FollowersModal({ user, otherUser, hideForm }) {
+function FollowersModal({ user, hideForm }) {
 	return (
 		<>
 			{hideForm && (

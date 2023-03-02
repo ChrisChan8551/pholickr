@@ -1,11 +1,22 @@
 .follow-container {
 	display: flex;
 	flex-direction: row;
-    /* width: 128px;
-	height: 128px; */
+	max-width: 1300px;
+	max-height: 570px;
+	flex-wrap: wrap;
 }
 
-.profile-image{
+.profile-image {
 	max-width: 128px;
 	max-height: 128px;
+}
+
+.follow-button {
+	border: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.follow-button:hover {
+	color: darkgrey;
 }

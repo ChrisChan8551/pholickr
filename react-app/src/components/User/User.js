@@ -6,6 +6,8 @@ import { getAllPhotosByAUser } from '../../store/photo';
 import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
 import FollowersModal from '../FollowersModal';
+import FollowingModal from '../FollowingModal';
+
 // import { AddPinningControls } from '../PhotoLayout';
 
 function User() {
@@ -13,6 +15,7 @@ function User() {
 	const [loadingStatus, setLoadingStatus] = useState('uninitialized');
 	const [setLoadingError] = useState(null);
 	const [showFollowersModal, setShowFollowersModal] = useState(false);
+	const [showFollowingModal, setShowFollowingModal] = useState(false);
 	const { currentUser, otherUser, isFollowing, photos } = useSelector(
 		(state) => {
 			const currentUser = state.session.user;
@@ -46,6 +49,9 @@ function User() {
 	);
 	const toggleFollowersModal = () => {
 		setShowFollowersModal(!showFollowersModal);
+	};
+	const toggleFollowingModal = () => {
+		setShowFollowingModal(!showFollowingModal);
 	};
 
 	const dispatch = useDispatch();
@@ -107,14 +113,25 @@ function User() {
 		hideForm={() => setShowFollowersModal(false)}
 		showForm={showFollowersModal}
 	/>;
+	<FollowingModal
+		user={otherUser}
+		hideForm={() => setShowFollowingModal(false)}
+		showForm={showFollowingModal}
+	/>;
 
 	return (
 		<div>
 			<div className='photo-main-container'>
-				{showFollowersModal && (
+				{showFollowersModal && otherUser.followers?.length > 0 && (
 					<FollowersModal
 						user={otherUser}
 						hideForm={setShowFollowersModal}
+					/>
+				)}
+				{showFollowingModal && otherUser.following?.length > 0 && (
+					<FollowingModal
+						user={otherUser}
+						hideForm={setShowFollowingModal}
 					/>
 				)}
 				<div className='container'>
@@ -130,13 +147,21 @@ function User() {
 					<div className='text-container'>
 						<strong> Author:</strong> {otherUser.username}
 						<p>
-							<button onClick={toggleFollowersModal}>
+							<button
+								className='follow-button'
+								onClick={toggleFollowersModal}
+							>
 								<strong>Followers:</strong>
 							</button>{' '}
 							{otherUser.followers?.length || 0}
 						</p>
 						<p>
-							<strong>Following:</strong>{' '}
+							<button
+								className='follow-button'
+								onClick={toggleFollowingModal}
+							>
+								<strong>Following:</strong>
+							</button>{' '}
 							{otherUser.following?.length || 0}
 						</p>
 						{currentUser.id !== otherUser.id && (
