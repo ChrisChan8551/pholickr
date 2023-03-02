@@ -8,15 +8,18 @@ import { useHistory } from 'react-router-dom';
 import { addPinning } from '../../store/pinning';
 import { selectSearchbarValue } from '../../store/searchbar';
 
-const MAX_PHOTO_COUNT = 20;
+const MAX_PHOTO_COUNT = 30;
 
 function getLimitedPhotosList(photos, searchbarValue = '') {
-	return photos
-		.filter((photo) =>
-			photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
-		)
-		.slice(0, MAX_PHOTO_COUNT);
-}
+	const shuffledPhotos = photos.sort(() => 0.5 - Math.random());
+	const selectedPhotos = shuffledPhotos
+	  .filter((photo) =>
+		photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
+	  )
+	  .slice(0, MAX_PHOTO_COUNT);
+	return selectedPhotos;
+  }
+
 
 function PhotoLayout() {
 	const sessionUser = useSelector((state) => state.session.user);
