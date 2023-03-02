@@ -65,7 +65,7 @@ const Navigation = () => {
 							Home
 						</button> */}
 						<NavLink
-							to={`/users/${currentUser.id}`}
+							to={`/photos`}
 							className='font-white font-bold font-decor-none font-16 nav-hover'
 						>
 							{' '}
