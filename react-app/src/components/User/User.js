@@ -111,12 +111,12 @@ function User() {
 	<FollowersModal
 		user={otherUser}
 		hideForm={() => setShowFollowersModal(false)}
-		showForm={showFollowersModal}
+		// showForm={showFollowersModal}
 	/>;
 	<FollowingModal
 		user={otherUser}
 		hideForm={() => setShowFollowingModal(false)}
-		showForm={showFollowingModal}
+		// showForm={showFollowingModal}
 	/>;
 
 	return (
