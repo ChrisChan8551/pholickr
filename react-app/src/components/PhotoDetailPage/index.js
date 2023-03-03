@@ -5,7 +5,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
-// import "./PhotoDetailPage.css";
+import './PhotoDetailPage.css';
 import { getOneUser } from '../../store/user';
 import EditPhotoModal from '../EditPhotoModal';
 import ProfileCard from '../ProfileCard';
@@ -39,7 +39,7 @@ function PhotoDetailPage() {
 		if (photo?.userId && !photoAuthor) {
 			dispatch(getOneUser(photo.userId));
 		}
-	}, [photo, photoAuthor,dispatch]);
+	}, [photo, photoAuthor, dispatch]);
 
 	const deletePhoto = (e) => {
 		e.preventDefault();
@@ -77,30 +77,35 @@ function PhotoDetailPage() {
 				<div className='PhotoDetail--Image--Container'>
 					<img
 						className='PhotoDetail--Image'
-						src={photo?.imageUrl} alt=''
+						src={photo?.imageUrl}
+						alt=''
 					></img>
 				</div>
+				<div className='g-container'>
+					<div class='item item1'>
+						{' '}
+						<ProfileCard
+							author={photoAuthor}
+							photo={photo}
+							user={currentUser}
+						/>
+					</div>
+					<div class='item item2'>Details Box
+						<div className='comments g2'> </div>
 
-				<div className='profile-container'>
-					<div>
-						<ProfileCard author={photoAuthor} photo={photo} user={currentUser} />
-						{/* <div>
-							<strong>Title: </strong> {photo?.title}
-						</div>
-
-						<div>
-							<strong>Author: </strong> {photoAuthor.username}
-						</div>
-
-						<div>
-							<strong>Description: </strong> {photo?.description}
-						</div> */}
+					</div>
+					<div class='item item3'>Comments Box
+						<div className='comments g3'></div>
+					</div>
+				</div>
+				<div>
+					<div className='profile-container gcontainer'>
+						<div className='comment-container g1'></div>
 					</div>
 				</div>
 			</div>
-			{!showEditPhotoForm && currentUser?.id === photo?.userId && (
+			{/* {!showEditPhotoForm && currentUser?.id === photo?.userId && (
 				<div>
-					{/* <Link to={`/photos/${photo.id}`}> */}
 					<button
 						className='blue-button'
 						onClick={() => setShowEditPhotoForm(true)}
@@ -114,9 +119,8 @@ function PhotoDetailPage() {
 					>
 						Delete Photo
 					</button>
-					{/* </Link> */}
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }

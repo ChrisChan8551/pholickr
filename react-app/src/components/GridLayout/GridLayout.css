@@ -35,7 +35,7 @@
 	column-count: auto;
 	column-width: 550px;
 	column-fill: balance;
-	gap: 1rem;
+	/* gap: 1rem; */
 	width: 1700px;
 }
 
@@ -43,11 +43,13 @@
 	display: flex;
 	justify-content: center;
 	min-width: 1900px;
-	margin-top: 20px;
+	background-color: #f3f5f6;
+	/* margin-top: 20px; */
+	/* background-color: rgb(223, 220, 220); */
 }
 
 .PhotoDetail--Page {
-	/* margin-top: 10px; */
+	background-color: #f3f5f6;
 }
 
 .full-width {
@@ -70,6 +72,7 @@
 	align-items: center;
 	background-color: #eaeaea;
 	width: 100%;
+	min-width: 1900px;
 }
 
 .album-h1 {

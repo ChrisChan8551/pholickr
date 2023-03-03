@@ -1,7 +1,7 @@
 // import { faCropSimple } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams} from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { getAllPhotosByAUser } from '../../store/photo';
 import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
@@ -65,23 +65,22 @@ function User() {
 
 	useEffect(() => {
 		async function fetchData() {
-		  if (userId && loadingStatus === 'uninitialized') {
-			try {
-			  setLoadingStatus('pending');
-			  await dispatch(getAllPhotosByAUser(userId));
-			  setLoadingStatus('success');
-			} catch (err) {
-			  setLoadingStatus('failed');
-			  setLoadingError(err);
+			if (userId && loadingStatus === 'uninitialized') {
+				try {
+					setLoadingStatus('pending');
+					await dispatch(getAllPhotosByAUser(userId));
+					setLoadingStatus('success');
+				} catch (err) {
+					setLoadingStatus('failed');
+					setLoadingError(err);
+				}
+			} else if (isFollowing !== null) {
+				dispatch(getOneUser(userId));
 			}
-		  } else if (isFollowing !== null) {
-			dispatch(getOneUser(userId));
-		  }
 		}
 
 		fetchData();
-	  }, [dispatch, userId, loadingStatus, setLoadingError, isFollowing]);
-
+	}, [dispatch, userId, loadingStatus, setLoadingError, isFollowing]);
 
 	if (!userId) {
 		return <Redirect to='/404' />;
@@ -139,47 +138,58 @@ function User() {
 						hideForm={setShowFollowingModal}
 					/>
 				)}
-				<div className='container'>
-					<div className='svg-background'></div>
-					<div className='svg-background2'></div>
-					<div className='circle'></div>
-					{/* <img
-					className='menu-icon'
-					src='https://pngimage.net/wp-content/uploads/2018/06/white-menu-icon-png-8.png'
-				/> */}
-
-					<img className='profile-img' src={otherUser.image} alt='' />
-					<div className='text-container'>
-						<strong> Author:</strong> {otherUser.username}
-						<p>
-							<button
-								className='follow-button'
-								onClick={toggleFollowersModal}
-							>
-								<strong>Followers:</strong>
-							</button>{' '}
-							{otherUser.followers?.length || 0}
-						</p>
-						<p>
-							<button
-								className='follow-button'
-								onClick={toggleFollowingModal}
-							>
-								<strong>Following:</strong>
-							</button>{' '}
-							{otherUser.following?.length || 0}
-						</p>
-						{currentUser.id !== otherUser.id && (
-							<button
-								className={
-									isFollowing ? 'grey-button' : 'blue-button'
-								}
-								onClick={isFollowing ? unfollow : follow}
-							>
-								{isFollowing ? '- Unfollow' : '+ Follow'}
-							</button>
-						)}
+				<div className='g2-container'>
+					<div></div>
+					<div>
+						<div className='container'>
+							<div className='svg-background'></div>
+							<div className='svg-background2'></div>
+							<div className='circle'></div>
+							<img
+								className='profile-img'
+								src={otherUser.image}
+								alt=''
+							/>
+							<div className='text-container'>
+								<strong> Author:</strong> {otherUser.username}
+								<p>
+									<button
+										className='follow-button'
+										onClick={toggleFollowersModal}
+									>
+										<strong>Followers:</strong>
+									</button>{' '}
+									{otherUser.followers?.length || 0}
+								</p>
+								<p>
+									<button
+										className='follow-button'
+										onClick={toggleFollowingModal}
+									>
+										<strong>Following:</strong>
+									</button>{' '}
+									{otherUser.following?.length || 0}
+								</p>
+								{currentUser.id !== otherUser.id && (
+									<button
+										className={
+											isFollowing
+												? 'grey-button'
+												: 'blue-button'
+										}
+										onClick={
+											isFollowing ? unfollow : follow
+										}
+									>
+										{isFollowing
+											? '- Unfollow'
+											: '+ Follow'}
+									</button>
+								)}
+							</div>
+						</div>
 					</div>
+					<div></div>
 				</div>
 			</div>
 			<div className='photo-container'>

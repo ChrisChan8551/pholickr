@@ -13,7 +13,7 @@
 	/* top: 77%; */
 	/* left: 13%; */
 	/* transform: translate(-50%, -50%); */
-	background-color: #eceff1;
+	/* background-color: #eceff1; */
 	width: 500px;
 	height: 250px;
 	border-radius: 10px;
@@ -67,6 +67,7 @@
 	height: 161px;
 	left: 0;
 	top: 0;
+	border: solid 1px black;
 	background-color: #eceff1;
 	border-radius: 50%;
 	margin-top: 50.5px;
