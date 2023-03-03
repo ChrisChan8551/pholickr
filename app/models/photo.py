@@ -14,6 +14,9 @@ class Photo(db.Model):
     description = db.Column(db.String(100))
     imageUrl = db.Column(db.String(1500))
 
+    user = db.relationship('User', back_populates='photos')
+    comments = db.relationship('Comment', back_populates='photos')
+
     def __repr__(self):
         return f'<Photo Id: {self.id}, userId: {self.userId}, title: {self.title}, description: {self.description}, imageUrl: {self.imageUrl}>'
 

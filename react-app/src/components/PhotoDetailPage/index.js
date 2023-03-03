@@ -104,7 +104,7 @@ function PhotoDetailPage() {
 					</div>
 				</div>
 			</div>
-			{/* {!showEditPhotoForm && currentUser?.id === photo?.userId && (
+			{!showEditPhotoForm && currentUser?.id === photo?.userId && (
 				<div>
 					<button
 						className='blue-button'
@@ -120,7 +120,7 @@ function PhotoDetailPage() {
 						Delete Photo
 					</button>
 				</div>
-			)} */}
+			)}
 		</div>
 	);
 }
