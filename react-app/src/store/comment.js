@@ -56,7 +56,8 @@ export const getOneComment = (commentId) => async (dispatch) => {
   }
 };
 
-export const addComment = (comments) => async (dispatch) => {
+export const addComment = (photoId,comments) => async (dispatch) => {
+  console.log('*********photoId store*********',photoId)
   const response = await fetch("/api/comments/", {
     method: "POST",
     headers: {

@@ -42,23 +42,24 @@ def delete_comment(id):
 @comment_routes.route('/', methods=['POST'])
 # @login_required
 def create_comment():
-    # print("************CREATE NEW COMMENT********************")
+    print("************CREATE NEW COMMENT********************")
     form = CommentForm()
+    print("************form********************",form)
     #!POSTMAN Testing
     # data = request.json
     # print(data)
-    # new_comment = comment(userId=current_user.get_id(),title=data['title'], url=data['url'], imageUrl=data['imageUrl'])
+    # new_comment = Comment(photoId=data['photoId'],userId=data['userId'],text=data['text'])
     # print(form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        # new_comment = Comment(userId=current_user.get_id(),
-        #               title=data['title'], description=data['description'], imageUrl=data['imageUrl'])
+        print('************DATA****************',form.data['photoId'])
         new_comment = Comment(userId=current_user.get_id())
+        # new_comment = Comment(photoId=data['photoId'],userId=data['userId'],text=data['text'])
         for key, value in data.items():
             setattr(new_comment, key, value)
         form.populate_obj(new_comment)
-        # print('*********************CREATED*******************************')
+        print('*********************CREATED*******************************')
         db.session.add(new_comment)
         db.session.commit()
         return new_comment.to_dict()

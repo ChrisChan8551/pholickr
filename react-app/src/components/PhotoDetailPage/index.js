@@ -32,6 +32,7 @@ function PhotoDetailPage() {
 	let photoEditForm;
 	let commentEditForm;
 	const comments = useSelector(selectMyComments);
+	const [errors, setErrors] = useState([]);
 	const { photo, photoAuthor, currentUser } = useSelector((state) => {
 		const photo = state.photo[photoId];
 		const photoAuthor = state.otherUser[photo?.userId];
@@ -68,6 +69,22 @@ function PhotoDetailPage() {
 		dispatch(deleteAPhoto(photoId));
 
 		history.push(`/photos`);
+	};
+	const createComment = (e) => {
+		if (e.keyCode === 13 && text.trimEnd() !== '') {
+			// Enter key
+			e.preventDefault();
+			console.log('***********photoId*****FRONT END*******', photoId, text);
+			// const payload = { photoId, text };
+			dispatch(addComment({ photoId, text }));
+			setText('');
+			// if (data.errors) {
+			// 	setErrors([...Object.values(data.errors)]);
+			// }
+			//  else {
+			// 	history.push(`/photos/${photoId}`);
+			// }
+		}
 	};
 
 	if (!currentUser) {
@@ -135,8 +152,10 @@ function PhotoDetailPage() {
 														<button
 															className='grey-button'
 															onClick={() =>
-																deleteAComment(
-																	comment.id
+																dispatch(
+																	deleteAComment(
+																		comment.id
+																	)
 																)
 															}
 														>
@@ -162,6 +181,7 @@ function PhotoDetailPage() {
 								<label>
 									{/* Comment */}
 									<textarea
+										onKeyUp={createComment}
 										type='text'
 										placeholder='Comment'
 										className='comment-input'
