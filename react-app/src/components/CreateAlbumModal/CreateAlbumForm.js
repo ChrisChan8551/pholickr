@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // import {useSelector} from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
 import { createAlbum } from '../../store/album';
 
 function CreateAlbumForm({ album, hideForm }) {
 	const dispatch = useDispatch();
-	const history = useHistory();
+	// const history = useHistory();
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	// const [description, setDescription] = useState('');
@@ -22,13 +22,13 @@ function CreateAlbumForm({ album, hideForm }) {
 		if (data.errors) {
 			setErrors([...Object.values(data.errors)]);
 		} else {
-			history.push(`/albums`);
+			hideForm(hideForm)
 		}
 	};
 	useEffect(() => {
 		const handleClick = (e) => {
 			if (!e.target.closest('.create-album-form')) {
-				hideForm();
+				hideForm(hideForm);
 			}
 		};
 

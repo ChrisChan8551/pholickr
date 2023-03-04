@@ -5,7 +5,7 @@ function CreatePhotoModal({ album, hideForm }) {
 	return (
 		<>
 			{hideForm && (
-				<Modal>
+				<Modal onClose={() => hideForm(false)}>
 					<CreatePhotoForm album={album} hideForm={hideForm} />
 				</Modal>
 			)}

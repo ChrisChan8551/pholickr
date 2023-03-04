@@ -5,6 +5,7 @@ import photosReducer from './photo';
 import albumReducer from './album';
 import userReducer from './user';
 import searchbarReducer from './searchbar';
+import commentsReducer from './comment';
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 	photo: photosReducer,
 	otherUser: userReducer,
 	searchbar: searchbarReducer,
+	comment: commentsReducer,
 });
 
 let enhancer;

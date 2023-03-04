@@ -40,6 +40,7 @@ function PhotoPage() {
 	useEffect(() => {
 		setShowCreatePhotoForm(false);
 	}, [dispatch]);
+	
 	if (!photos) {
 		return null;
 	}

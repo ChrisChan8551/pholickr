@@ -7,6 +7,14 @@ import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 import './PhotoDetailPage.css';
 import { getOneUser } from '../../store/user';
+import {
+	getAllComments,
+	getOneComment,
+	addComment,
+	editComment,
+	deleteAComment,
+	selectMyComments,
+} from '../../store/comment';
 import EditPhotoModal from '../EditPhotoModal';
 import ProfileCard from '../ProfileCard';
 
@@ -18,7 +26,12 @@ function PhotoDetailPage() {
 	// const currentUser = useSelector((state) => state.session.user);
 	// const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
 	const [showEditPhotoForm, setShowEditPhotoForm] = useState(false);
+	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
+
+	const [text, setText] = useState('');
 	let photoEditForm;
+	let commentEditForm;
+	const comments = useSelector(selectMyComments);
 	const { photo, photoAuthor, currentUser } = useSelector((state) => {
 		const photo = state.photo[photoId];
 		const photoAuthor = state.otherUser[photo?.userId];
@@ -40,6 +53,14 @@ function PhotoDetailPage() {
 			dispatch(getOneUser(photo.userId));
 		}
 	}, [photo, photoAuthor, dispatch]);
+
+	useEffect(() => {
+		dispatch(getAllComments());
+	}, [dispatch]);
+
+	if (!comments) {
+		return null;
+	}
 
 	const deletePhoto = (e) => {
 		e.preventDefault();
@@ -90,12 +111,69 @@ function PhotoDetailPage() {
 							user={currentUser}
 						/>
 					</div>
-					<div class='item item2'>Details Box
+					<div class='item item2'>
+						Details Box
 						<div className='comments g2'> </div>
-
 					</div>
-					<div class='item item3'>Comments Box
-						<div className='comments g3'></div>
+					<div class='item item3'>
+						Comments Box
+						<div className='comments g3'>
+							<div className='comments-box'>List comments</div>
+							{comments &&
+								comments?.map((comment, idx) => {
+									return (
+										Number(comment.photoId) ===
+											Number(photoId) && (
+											<div
+												className='comment-list'
+												key={`${comment.id}`}
+											>
+												{`${comment.text}`}
+												{comment.userId ===
+													currentUser?.id && (
+													<>
+														<button
+															className='grey-button'
+															onClick={() =>
+																deleteAComment(
+																	comment.id
+																)
+															}
+														>
+															Delete
+														</button>
+
+														{/* <button>EDIT</button> */}
+													</>
+												)}
+											</div>
+										)
+									);
+								})}
+							<form className='comment-form'>
+								{/* <ul>
+									{errors.map((error, idx) => (
+										<li className='edit-errors' key={idx}>
+											{error}
+										</li>
+									))}
+								</ul> */}
+
+								<label>
+									{/* Comment */}
+									<textarea
+										type='text'
+										placeholder='Comment'
+										className='comment-input'
+										value={text}
+										required
+										onChange={(e) =>
+											setText(e.target.value)
+										}
+									/>
+								</label>
+							</form>
+						</div>
 					</div>
 				</div>
 				<div>
