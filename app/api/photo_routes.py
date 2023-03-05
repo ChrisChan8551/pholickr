@@ -1,9 +1,11 @@
 from flask import Blueprint, jsonify, render_template, redirect, request
 from flask_login import login_required, current_user
-from app.models import Photo, db
-from app.forms import PhotoForm
+from app.models import Photo, Comment, db
+from app.forms import PhotoForm, CommentForm
+
 
 photo_routes = Blueprint('photos', __name__)
+
 
 def validation_errors_to_error_messages(validation_errors):
 
@@ -13,13 +15,15 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
+
 @photo_routes.route('/', methods=['GET'])
 # @login_required
 def get_all_photos():
     photos = Photo.query.all()
     # print('********GET ALL PHOTOS********')
     # print([photo.to_dict() for photo in photos])
-    return jsonify ([photo.to_dict() for photo in photos])
+    return jsonify([photo.to_dict() for photo in photos])
+
 
 @photo_routes.route('/<int:id>')
 @login_required
@@ -27,6 +31,28 @@ def get_photo(id):
     # print('************GET 1 PHOTO********************')
     photo = Photo.query.get(id)
     return photo.to_dict()
+
+
+@photo_routes.route('/<int:id>/comments', methods=['POST'])
+def create_comment(id):
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+        new_comment = Comment(
+            userId=current_user.get_id(),
+            photoId=id,
+        )
+        for key, value in data.items():
+            setattr(new_comment, key, value)
+        form.populate_obj(new_comment)
+        db.session.add(new_comment)
+        db.session.commit()
+        return new_comment.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
 
 @photo_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
@@ -38,6 +64,7 @@ def delete_photo(id):
         return "Successfully Deleted Photo"
     else:
         return "Photo not found"
+
 
 @photo_routes.route('/', methods=['POST'])
 @login_required
@@ -63,6 +90,7 @@ def create_photo():
         db.session.commit()
         return new_photo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 @photo_routes.route('/<int:id>', methods=["PATCH", "PUT"])
 @login_required

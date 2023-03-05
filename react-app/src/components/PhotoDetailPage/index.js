@@ -70,20 +70,23 @@ function PhotoDetailPage() {
 
 		history.push(`/photos`);
 	};
-	const createComment = (e) => {
+	const createComment = async (e) => {
 		if (e.keyCode === 13 && text.trimEnd() !== '') {
 			// Enter key
 			e.preventDefault();
-			console.log('***********photoId*****FRONT END*******', photoId, text);
-			// const payload = { photoId, text };
-			dispatch(addComment({ photoId, text }));
+			console.log(
+				'***********photoId*****FRONT END*******',
+				photoId,
+				text
+			);
+			const payload = { text };
+			let data = await dispatch(addComment(photoId, payload));
 			setText('');
-			// if (data.errors) {
-			// 	setErrors([...Object.values(data.errors)]);
-			// }
-			//  else {
-			// 	history.push(`/photos/${photoId}`);
-			// }
+			if (data.errors) {
+				setErrors([...Object.values(data.errors)]);
+			} else {
+				history.push(`/photos/${photoId}`);
+			}
 		}
 	};
 
