@@ -7,11 +7,8 @@ import './PhotoDetailPage.css';
 import { getOneUser } from '../../store/user';
 import {
 	getAllComments,
-	getOneComment,
 	addComment,
-	editComment,
 	deleteAComment,
-	selectMyComments,
 } from '../../store/comment';
 import EditPhotoModal from '../EditPhotoModal';
 import ProfileCard from '../ProfileCard';

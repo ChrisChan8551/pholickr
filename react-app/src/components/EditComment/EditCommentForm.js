@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import {
-	getAllComments,
-	getOneComment,
-	addComment,
-	editComment,
-	deleteAComment,
-	selectMyComments,
-} from '../../store/comment';
+import { useDispatch } from 'react-redux';
+
+import { editComment } from '../../store/comment';
 
 function EditCommentForm({ comment, hideForm }) {
 	const dispatch = useDispatch();
-	const history = useHistory();
+
 	const [text, setText] = useState(comment.text);
 	const [errors, setErrors] = useState([]);
-	console.log(
-		'************* FRONT END EDIT COMMENT ******',
-		comment,
-		hideForm
-	);
 
 	const handleSubmit = async (e) => {
 		// console.log('************* HANDLE SUBMIT ******', comment);
@@ -57,7 +45,11 @@ function EditCommentForm({ comment, hideForm }) {
 				onChange={(e) => setText(e.target.value)}
 			/>
 			<p>
-				<button className='blue-button' type='submit' onClick={handleSubmit}>
+				<button
+					className='blue-button'
+					type='submit'
+					onClick={handleSubmit}
+				>
 					Update
 				</button>
 			</p>
