@@ -54,7 +54,7 @@ function HomePage() {
 			<div className='home-main-container'>
 				<div className='nav_bar'>
 					<div className='icon'>
-						<img className='photo-icon'src='/pho.png' alt='' />
+						<img className='photo-icon' src='/pho.png' alt='' />
 						Pholickr
 					</div>
 

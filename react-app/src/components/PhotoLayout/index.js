@@ -13,13 +13,12 @@ const MAX_PHOTO_COUNT = 30;
 function getLimitedPhotosList(photos, searchbarValue = '') {
 	const shuffledPhotos = photos.sort(() => 0.5 - Math.random());
 	const selectedPhotos = shuffledPhotos
-	  .filter((photo) =>
-		photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
-	  )
-	  .slice(0, MAX_PHOTO_COUNT);
+		.filter((photo) =>
+			photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
+		)
+		.slice(0, MAX_PHOTO_COUNT);
 	return selectedPhotos;
-  }
-
+}
 
 function PhotoLayout() {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -76,17 +75,6 @@ function PhotoLayout() {
 					<GridLayout
 						items={photos}
 						onItemClick={!!sessionUser && navigateToPhotoPage}
-						// renderItemActions={
-						//   !!sessionUser &&
-						//   ((photo, closeActionPopOver) => (
-						//     <>
-						//       <AddPinningControls
-						//         photo={photo}
-						//         onPinningDone={closeActionPopOver}
-						//       />
-						//     </>
-						//   ))
-						// }
 					/>
 				</div>
 			</div>
@@ -102,38 +90,37 @@ export function AddPinningControls({ photo, onPinningDone }) {
 	const myAlbums = useSelector(selectMyAlbums);
 
 	const handleChange = (event) => {
-	  setSaveTo(event.target.value);
+		setSaveTo(event.target.value);
 	};
 
 	const handleSubmit = () => {
-	  dispatch(addPinning(saveTo, photo.id));
-	  onPinningDone();
+		dispatch(addPinning(saveTo, photo.id));
+		onPinningDone();
 	};
 
 	return (
-	  <>
-		<select
-		  style={{
-			width: '180px',
-		  }}
-		  value={saveTo}
-		  onChange={handleChange}
-		>
-		  <option value=''>choose an album</option>
-		  {myAlbums.map((album) => (
-			<option key={album.id} value={album.id}>
-			  {album.title}
-			</option>
-		  ))}
-		</select>
-		<button
-		  className='blue-button'
-		  disabled={!saveTo}
-		  onClick={handleSubmit}
-		>
-		  Confirm
-		</button>
-	  </>
+		<>
+			<select
+				style={{
+					width: '180px',
+				}}
+				value={saveTo}
+				onChange={handleChange}
+			>
+				<option value=''>choose an album</option>
+				{myAlbums.map((album) => (
+					<option key={album.id} value={album.id}>
+						{album.title}
+					</option>
+				))}
+			</select>
+			<button
+				className='blue-button'
+				disabled={!saveTo}
+				onClick={handleSubmit}
+			>
+				Confirm
+			</button>
+		</>
 	);
-  }
-
+}

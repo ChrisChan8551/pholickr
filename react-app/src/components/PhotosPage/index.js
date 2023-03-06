@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums } from '../../store/album';
-// import {selectMyAlbums} from '../../store/album';
-// import { Link } from "react-router-dom";
+
 import {
 	getAllPhotos,
 	deleteAPhoto,
 	selectMyPhotos,
-	// getOnePhoto,
-	// getAllPhotosByAUser,
+
 } from '../../store/photo';
 import GridLayout from '../GridLayout';
 import { AddPinningControls } from '../PhotoLayout';
@@ -22,15 +20,7 @@ function PhotoPage() {
 	const photos = useSelector(selectMyPhotos);
 	const [showCreatePhotoForm, setShowCreatePhotoForm] = useState(false);
 	let createPhotoForm;
-	// const photos = Object.values(useSelector((state) => state.photo))
-	// const photos = useSelector((state) => state.photo)
 
-	// console.log('****************PHOTOS***************', photos);
-	// console.log('****************CURRENT USER***************',currentUser.id)
-	// console.log(
-	// 	'****************PHOTO USER ID***************',
-	// 	photos[currentUser.id]
-	// );
 
 	useEffect(() => {
 		dispatch(getAllPhotos());
@@ -40,7 +30,7 @@ function PhotoPage() {
 	useEffect(() => {
 		setShowCreatePhotoForm(false);
 	}, [dispatch]);
-	
+
 	if (!photos) {
 		return null;
 	}
