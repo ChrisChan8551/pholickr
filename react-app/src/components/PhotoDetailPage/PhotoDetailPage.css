@@ -29,29 +29,28 @@
 }
 .comment-list {
 	display: flex;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	align-items: center;
 	margin-bottom: 2px;
-	min-width: 35%;
+	/* min-width: 35%; */
+	/* max-width: 100%; */
 }
 
-.trash-icon {
-	opacity: 0.5;
-	width: 20px;
-	height: 20px;
-
-}
-.trash-icon:hover,
-.edit-icon:hover {
-	opacity: 0.8;
-	cursor: pointer;
-}
-
+.trash-icon,
 .edit-icon {
 	opacity: 0.5;
 	width: 20px;
 	height: 20px;
+}
 
+/* .icon {
+	display: flex;
+	justify-content: flex-end;
+} */
+
+.trash-icon:hover,
+.edit-icon:hover {
+	opacity: 0.8;
 	cursor: pointer;
 }
 
@@ -61,9 +60,12 @@
 
 .user-comment {
 	display: flex;
-	max-width: 100%;
+	/* max-width: 100%; */
 	min-height: 20px;
 	align-items: center;
+	justify-content: space-between;
+	min-width: 35%;
+
 }
 
 /* .comment-container {

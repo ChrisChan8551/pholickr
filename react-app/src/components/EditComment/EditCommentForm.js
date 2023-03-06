@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import {
 	getAllComments,
 	getOneComment,
@@ -11,14 +12,27 @@ import {
 
 function EditCommentForm({ comment, hideForm }) {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [text, setText] = useState(comment.text);
-	console.log('************* FRONT END EDIT COMMENT ******', comment);
+	const [errors, setErrors] = useState([]);
+	console.log(
+		'************* FRONT END EDIT COMMENT ******',
+		comment,
+		hideForm
+	);
+
 	const handleSubmit = async (e) => {
-		console.log('************* HANDLE SUBMIT ******', comment);
+		// console.log('************* HANDLE SUBMIT ******', comment);
 		e.preventDefault();
+		setErrors([]);
 		const payload = { text };
-		await dispatch(editComment(comment.id, payload));
-		hideForm();
+		let data = await dispatch(editComment(comment.id, payload));
+
+		if (data.errors) {
+			setErrors([...Object.values(data.errors)]);
+		} else {
+			hideForm();
+		}
 	};
 
 	useEffect(() => {
@@ -36,14 +50,14 @@ function EditCommentForm({ comment, hideForm }) {
 	}, [hideForm]);
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form>
 			<textarea
 				className='comment-input'
 				value={text}
 				onChange={(e) => setText(e.target.value)}
 			/>
 			<p>
-				<button className='blue-button' type='submit'>
+				<button className='blue-button' type='submit' onClick={handleSubmit}>
 					Update
 				</button>
 			</p>

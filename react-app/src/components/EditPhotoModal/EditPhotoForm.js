@@ -16,11 +16,7 @@ function EditPhotoForm({ photo, hideForm }) {
 	const [description, setDescription] = useState(photo.description);
 	const [errors, setErrors] = useState([]);
 
-	// const handleClickAway = (e) => {
-	// 	e.preventDefault();
-	// 	hideForm();
-	// };
-
+	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setErrors([]);

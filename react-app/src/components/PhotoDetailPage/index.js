@@ -15,16 +15,18 @@ import {
 } from '../../store/comment';
 import EditPhotoModal from '../EditPhotoModal';
 import ProfileCard from '../ProfileCard';
+import EditCommentForm from '../EditComment/EditCommentForm';
 
 function PhotoDetailPage() {
 	const { photoId } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [showEditPhotoForm, setShowEditPhotoForm] = useState(false);
-
+	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
 	const [text, setText] = useState('');
+	const [currentComment, setCurrentComment] = useState('');
 	let photoEditForm;
-
+	let editComment;
 	const comments = Object.values(useSelector((state) => state.comment));
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
@@ -101,6 +103,15 @@ function PhotoDetailPage() {
 		);
 	}
 
+	if (showEditCommentForm) {
+		editComment = (
+			<EditCommentForm
+				comment={currentComment}
+				hideForm={() => setShowEditCommentForm(false)}
+			/>
+		);
+	}
+
 	return (
 		<div className='PhotoDetail--Page'>
 			<div>
@@ -154,35 +165,56 @@ function PhotoDetailPage() {
 												className='comment-list'
 												key={`${comment.id}`}
 											>
-												<div
-													className='comment-list'
-													key={`${comment.id}`}
-												>
-													<div className='user-comment'>{`${comment.text}`}</div>
+												<div className='user-comment'>
+													{`${comment.text}`}
 													{Number(comment.userId) ===
 														Number(
 															currentUser.id
 														) && (
-														<img
-															className='trash-icon'
-															src='/trash-icon.png'
-															alt=''
-															onClick={() =>
-																dispatch(
-																	deleteAComment(
-																		comment.id
-																	)
-																)
-															}
-														/>
+														<>
+															<div>
+																<img
+																	className='trash-icon'
+																	src='/trash-icon.png'
+																	alt=''
+																	onClick={() =>
+																		dispatch(
+																			deleteAComment(
+																				comment.id
+																			)
+																		)
+																	}
+																/>
+																{!showEditCommentForm &&
+																	Number(
+																		comment.userId
+																	) ===
+																		Number(
+																			currentUser.id
+																		) && (
+																		<img
+																			className='edit-icon'
+																			src='/edit-icon.png'
+																			alt=''
+																			onClick={() => {
+																				setShowEditCommentForm(
+																					true
+																				);
+																				setCurrentComment(
+																					comment
+																				);
+																			}}
+																		/>
+																	)}
+															</div>
+														</>
 													)}
 												</div>
-
-												<></>
 											</div>
 										)
 									);
 								})}
+							{editComment}
 							<form className='comment-form'>
 								<label>
 									<textarea
