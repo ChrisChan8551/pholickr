@@ -35,7 +35,7 @@ function PhotoDetailPage() {
 	const comments = Object.values(useSelector((state) => state.comment));
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
-	  );
+	);
 	const [errors, setErrors] = useState([]);
 	const { photo, photoAuthor, currentUser } = useSelector((state) => {
 		const photo = state.photo[photoId];
@@ -145,14 +145,11 @@ function PhotoDetailPage() {
 						{/* Details Box */}
 						<div className='comments g2'>
 							<p>Comments: {numComments.length}</p>
-
-
-							 </div>
+						</div>
 					</div>
 					<div className='comments-box'>
 						{/* <strong>Comments</strong> */}
 						<div className='list-comments'>
-
 							{comments &&
 								comments.map((comment, idx) => {
 									return (
@@ -208,7 +205,6 @@ function PhotoDetailPage() {
 								<label>
 									{/* Comment */}
 									<textarea
-
 										onKeyUp={createComment}
 										type='text'
 										placeholder='Add a comment'
