@@ -1,7 +1,7 @@
 import './profilecard.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { getOneUser, followUser, unfollowUser } from '../../store/user';
+import { followUser, unfollowUser } from '../../store/user';
 import { useDispatch, useSelector } from 'react-redux';
 
 function ProfileCard({ author, photo, user }) {

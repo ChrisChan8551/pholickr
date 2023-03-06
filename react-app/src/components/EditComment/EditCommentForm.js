@@ -7,6 +7,7 @@ function EditCommentForm({ comment, hideForm }) {
 	const dispatch = useDispatch();
 
 	const [text, setText] = useState(comment.text);
+	//eslint-disable-next-line
 	const [errors, setErrors] = useState([]);
 
 	const handleSubmit = async (e) => {
