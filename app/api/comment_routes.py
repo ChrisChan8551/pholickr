@@ -42,10 +42,10 @@ def delete_comment(id):
 @comment_routes.route('/', methods=['POST'])
 # @login_required
 def create_comment():
-    print("************CREATE NEW COMMENT********************")
+    # print("************CREATE NEW COMMENT********************")
     form = CommentForm()
     # form=request.json
-    print("************form********************",form.data)
+    # print("************form********************",form.data)
     #!POSTMAN Testing
     # data = request.json
     # print(data)

@@ -57,9 +57,9 @@ export const getOneComment = (commentId) => async (dispatch) => {
 };
 
 export const addComment = (photoId, comments) => async (dispatch) => {
-	console.log('*********photoId store*********', photoId, comments);
-	console.log('*****TYPE OF****', typeof photoId, typeof comments);
-  console.log('***********',JSON.stringify(comments))
+	// console.log('*********photoId store*********', photoId, comments);
+	// console.log('*****TYPE OF****', typeof photoId, typeof comments);
+  // console.log('***********',JSON.stringify(comments))
   	const response = await fetch(`/api/photos/${photoId}/comments`, {
 		method: 'POST',
 		headers: {
@@ -161,6 +161,18 @@ const commentsReducer = (state = initialState, action) => {
 export default commentsReducer;
 
 export function selectMyComments(state) {
+	const currentUser = state.session.user;
+
+	if (!currentUser) {
+		return [];
+	}
+
+	return Object.values(state.comment).filter(
+		({ userId: commentAuthorId }) => commentAuthorId === currentUser.id
+	);
+}
+
+export function selectPhotoComments(state) {
 	const currentUser = state.session.user;
 
 	if (!currentUser) {

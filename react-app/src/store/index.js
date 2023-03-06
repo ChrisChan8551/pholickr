@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import photosReducer from './photo';
 import albumReducer from './album';
-import userReducer from './user';
+import otherUsersReducer from './user';
 import searchbarReducer from './searchbar';
 import commentsReducer from './comment';
 
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 	session: sessionReducer,
 	album: albumReducer,
 	photo: photosReducer,
-	otherUser: userReducer,
+	otherUser: otherUsersReducer,
 	searchbar: searchbarReducer,
 	comment: commentsReducer,
 });

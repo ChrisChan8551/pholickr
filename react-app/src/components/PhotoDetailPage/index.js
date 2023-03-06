@@ -31,7 +31,11 @@ function PhotoDetailPage() {
 	const [text, setText] = useState('');
 	let photoEditForm;
 	let commentEditForm;
-	const comments = useSelector(selectMyComments);
+	const myComments = useSelector(selectMyComments);
+	const comments = Object.values(useSelector((state) => state.comment));
+	const numComments = comments.filter(
+		(comment) => comment.photoId === Number(photoId)
+	  );
 	const [errors, setErrors] = useState([]);
 	const { photo, photoAuthor, currentUser } = useSelector((state) => {
 		const photo = state.photo[photoId];
@@ -74,11 +78,11 @@ function PhotoDetailPage() {
 		if (e.keyCode === 13 && text.trimEnd() !== '') {
 			// Enter key
 			e.preventDefault();
-			console.log(
-				'***********photoId*****FRONT END*******',
-				photoId,
-				text
-			);
+			// console.log(
+			// 	'***********photoId*****FRONT END*******',
+			// 	photoId,
+			// 	text
+			// );
 			const payload = { text };
 			let data = await dispatch(addComment(photoId, payload));
 			setText('');
@@ -108,7 +112,13 @@ function PhotoDetailPage() {
 			/>
 		);
 	}
-
+	// console.log('****comments****', comments);
+	// console.log('************CURRENT USER ID****************', currentUser.id);
+	// console.log(
+	// 	'************CURRENT AUTHOR ID****************',
+	// 	photoAuthor.id
+	// );
+	// console.log('************CURRENT PHOTO ID****************', photoId);
 	return (
 		<div className='PhotoDetail--Page'>
 			<div>
@@ -132,28 +142,38 @@ function PhotoDetailPage() {
 						/>
 					</div>
 					<div class='item item2'>
-						Details Box
-						<div className='comments g2'> </div>
+						{/* Details Box */}
+						<div className='comments g2'>
+							<p>Comments: {numComments.length}</p>
+
+
+							 </div>
 					</div>
-					<div class='item item3'>
-						Comments Box
-						<div className='comments g3'>
-							<div className='comments-box'>List comments</div>
+					<div className='comments-box'>
+						{/* <strong>Comments</strong> */}
+						<div className='list-comments'>
+
 							{comments &&
-								comments?.map((comment, idx) => {
+								comments.map((comment, idx) => {
 									return (
-										Number(comment.photoId) ===
-											Number(photoId) && (
+										comment.photoId === Number(photoId) && (
 											<div
 												className='comment-list'
 												key={`${comment.id}`}
 											>
-												{`${comment.text}`}
-												{comment.userId ===
-													currentUser?.id && (
-													<>
-														<button
-															className='grey-button'
+												<div
+													className='comment-list'
+													key={`${comment.id}`}
+												>
+													<div className='user-comment'>{`${comment.text}`}</div>
+													{Number(comment.userId) ===
+														Number(
+															currentUser.id
+														) && (
+														<img
+															className='trash-icon'
+															src='/trash-icon.png'
+															alt=''
 															onClick={() =>
 																dispatch(
 																	deleteAComment(
@@ -161,13 +181,17 @@ function PhotoDetailPage() {
 																	)
 																)
 															}
-														>
-															Delete
-														</button>
-
-														{/* <button>EDIT</button> */}
-													</>
-												)}
+														/>
+													)}
+												</div>
+												{/* comment user ID ={' '}
+												{`${comment.userId}`}
+												Current user id ={' '}
+												{`${currentUser.id}`}
+												comment.photoId ={' '}
+												{`${comment.photoId}`} */}
+												{/* <img className='trash-icon'src='/trash-icon.png' alt=''/> */}
+												<></>
 											</div>
 										)
 									);
@@ -184,9 +208,10 @@ function PhotoDetailPage() {
 								<label>
 									{/* Comment */}
 									<textarea
+
 										onKeyUp={createComment}
 										type='text'
-										placeholder='Comment'
+										placeholder='Add a comment'
 										className='comment-input'
 										value={text}
 										required

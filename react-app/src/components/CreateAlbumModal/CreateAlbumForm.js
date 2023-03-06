@@ -22,13 +22,13 @@ function CreateAlbumForm({ album, hideForm }) {
 		if (data.errors) {
 			setErrors([...Object.values(data.errors)]);
 		} else {
-			hideForm(hideForm)
+			hideForm();
 		}
 	};
 	useEffect(() => {
 		const handleClick = (e) => {
 			if (!e.target.closest('.create-album-form')) {
-				hideForm(hideForm);
+				hideForm();
 			}
 		};
 
@@ -50,11 +50,8 @@ function CreateAlbumForm({ album, hideForm }) {
 						</li>
 					))}
 				</ul>
-				<div className='div-form-icon'><img
-					className='form-icon'
-					src='/pho.png'
-					alt=''
-				/>
+				<div className='div-form-icon'>
+					<img className='form-icon' src='/pho.png' alt='' />
 				</div>
 				<label className='modal-label'>
 					Title
