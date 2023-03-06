@@ -49,12 +49,10 @@ function CreatePhotoForm({ album, hideForm }) {
 	return (
 		<section className='create-photo-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
-			<div className='div-form-icon'><img
-					className='form-icon'
-					src='/pho.png'
-					alt=''
-				/></div>
-				{/* <h1 className='create'>Create Photo</h1> */}
+				<div className='div-form-icon'>
+					<img className='form-icon' src='/pho.png' alt='' />
+				</div>
+
 				<label className='modal-label'>
 					Title
 					<input
@@ -85,7 +83,10 @@ function CreatePhotoForm({ album, hideForm }) {
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 				</label>
-				<button className='blue-button modal-label modal-label' type='submit'>
+				<button
+					className='blue-button modal-label modal-label'
+					type='submit'
+				>
 					Create Photo
 				</button>
 

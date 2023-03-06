@@ -124,7 +124,6 @@ function PhotoDetailPage() {
 			<div>
 				{photoEditForm}
 				{/* <h1>PHOTO DETAIL PAGE</h1> */}
-
 				<div className='PhotoDetail--Image--Container'>
 					<img
 						className='PhotoDetail--Image'
@@ -132,8 +131,25 @@ function PhotoDetailPage() {
 						alt=''
 					></img>
 				</div>
+				{!showEditPhotoForm && currentUser?.id === photo?.userId && (
+					<div>
+						<button
+							className='blue-button'
+							onClick={() => setShowEditPhotoForm(true)}
+						>
+							Edit Photo
+						</button>
+						<button
+							className='grey-button'
+							type='button'
+							onClick={deletePhoto}
+						>
+							Delete Photo
+						</button>
+					</div>
+				)}
 				<div className='g-container'>
-					<div class='item item1'>
+					<div className='item item1'>
 						{' '}
 						<ProfileCard
 							author={photoAuthor}
@@ -141,7 +157,7 @@ function PhotoDetailPage() {
 							user={currentUser}
 						/>
 					</div>
-					<div class='item item2'>
+					<div className='item item2'>
 						{/* Details Box */}
 						<div className='comments g2'>
 							<p>Comments: {numComments.length}</p>
@@ -226,23 +242,6 @@ function PhotoDetailPage() {
 					</div>
 				</div>
 			</div>
-			{!showEditPhotoForm && currentUser?.id === photo?.userId && (
-				<div>
-					<button
-						className='blue-button'
-						onClick={() => setShowEditPhotoForm(true)}
-					>
-						Edit Photo
-					</button>
-					<button
-						className='grey-button'
-						type='button'
-						onClick={deletePhoto}
-					>
-						Delete Photo
-					</button>
-				</div>
-			)}
 		</div>
 	);
 }
