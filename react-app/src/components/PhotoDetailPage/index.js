@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-// import {NavLink} from 'react-router-dom'
-// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 import './PhotoDetailPage.css';
-import { getOneUser } from '../../store/user';
+import { getOneUser,followUser, unfollowUser } from '../../store/user';
 import {
 	getAllComments,
 	getOneComment,
@@ -27,6 +25,7 @@ function PhotoDetailPage() {
 	// const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
 	const [showEditPhotoForm, setShowEditPhotoForm] = useState(false);
 	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
+	const [editComment, setEditComment] = useState(null);
 
 	const [text, setText] = useState('');
 	let photoEditForm;
@@ -46,6 +45,21 @@ function PhotoDetailPage() {
 			photo,
 			photoAuthor,
 			currentUser,
+		};
+	});
+
+	const { isFollowing } = useSelector((state) => {
+
+		let isFollowing = false;
+
+		if (currentUser && photoAuthor) {
+			isFollowing = currentUser.following.some(
+				({ id }) => `${id}` === `${photoAuthor.id}`
+			);
+		}
+
+		return {
+			isFollowing,
 		};
 	});
 
@@ -112,6 +126,13 @@ function PhotoDetailPage() {
 			/>
 		);
 	}
+	const follow = () => {
+		dispatch(followUser(photoAuthor.id));
+	};
+
+	const unfollow = () => {
+		dispatch(unfollowUser(photoAuthor.id));
+	};
 	// console.log('****comments****', comments);
 	// console.log('************CURRENT USER ID****************', currentUser.id);
 	// console.log(
@@ -123,7 +144,6 @@ function PhotoDetailPage() {
 		<div className='PhotoDetail--Page'>
 			<div>
 				{photoEditForm}
-				{/* <h1>PHOTO DETAIL PAGE</h1> */}
 
 				<div className='PhotoDetail--Image--Container'>
 					<img
@@ -140,6 +160,7 @@ function PhotoDetailPage() {
 							photo={photo}
 							user={currentUser}
 						/>
+
 					</div>
 					<div class='item item2'>
 						{/* Details Box */}

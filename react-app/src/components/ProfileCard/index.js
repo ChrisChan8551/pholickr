@@ -1,15 +1,31 @@
 import './profilecard.css';
-import React from 'react';
-// import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
-// import { getOneUser } from '../../store/user';
+import { getOneUser, followUser, unfollowUser } from '../../store/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 function ProfileCard({ author, photo, user }) {
-	// const dispatch = useDispatch();
-	// const history = useHistory();
+	const dispatch = useDispatch();
+	const { isFollowing } = useSelector((state) => {
+		let isFollowing = false;
+
+		if (user && author) {
+			isFollowing = user.following.some(
+				({ id }) => `${id}` === `${author.id}`
+			);
+		}
+
+		return {
+			isFollowing,
+		};
+	});
+	const follow = () => {
+		dispatch(followUser(author.id));
+	};
+
+	const unfollow = () => {
+		dispatch(unfollowUser(author.id));
+	};
 
 	return (
 		<div>
@@ -17,14 +33,19 @@ function ProfileCard({ author, photo, user }) {
 				<div className='svg-background'></div>
 				<div className='svg-background2'></div>
 				<div className='circle'></div>
-				{/* <img
-					className='menu-icon'
-					src='https://pngimage.net/wp-content/uploads/2018/06/white-menu-icon-png-8.png'
-				/> */}
 				<img className='profile-img' src={author.image} alt='' />
 				<div className='text-container'>
 					<p className='title-text'>{photo.title}</p>
-					{/* <p className='info-text'>Author: {author.username}</p> */}
+					<p>{user.id !== author.id && (
+						<button
+							className={
+								isFollowing ? 'grey-button' : 'blue-button'
+							}
+							onClick={isFollowing ? unfollow : follow}
+						>
+							{isFollowing ? '- Unfollow' : '+ Follow'}
+						</button>
+					)}</p>
 					Author:{' '}
 					<NavLink to={`/users/${author.id}`}>
 						{' '}
@@ -34,7 +55,6 @@ function ProfileCard({ author, photo, user }) {
 						{' '}
 						Description: {photo.description}
 					</p>
-					{/* <button className='blue-button modal-label'>+ Follow</button> */}
 				</div>
 			</div>
 		</div>
