@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 import './PhotoDetailPage.css';
-import { getOneUser,followUser, unfollowUser } from '../../store/user';
+import { getOneUser } from '../../store/user';
 import {
 	getAllComments,
 	getOneComment,
@@ -20,17 +20,11 @@ function PhotoDetailPage() {
 	const { photoId } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// const photo = useSelector((state) => state.photo[photoId]);
-	// const currentUser = useSelector((state) => state.session.user);
-	// const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
 	const [showEditPhotoForm, setShowEditPhotoForm] = useState(false);
-	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
-	const [editComment, setEditComment] = useState(null);
 
 	const [text, setText] = useState('');
 	let photoEditForm;
-	let commentEditForm;
-	const myComments = useSelector(selectMyComments);
+
 	const comments = Object.values(useSelector((state) => state.comment));
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
@@ -45,21 +39,6 @@ function PhotoDetailPage() {
 			photo,
 			photoAuthor,
 			currentUser,
-		};
-	});
-
-	const { isFollowing } = useSelector((state) => {
-
-		let isFollowing = false;
-
-		if (currentUser && photoAuthor) {
-			isFollowing = currentUser.following.some(
-				({ id }) => `${id}` === `${photoAuthor.id}`
-			);
-		}
-
-		return {
-			isFollowing,
 		};
 	});
 
@@ -90,13 +69,8 @@ function PhotoDetailPage() {
 	};
 	const createComment = async (e) => {
 		if (e.keyCode === 13 && text.trimEnd() !== '') {
-			// Enter key
 			e.preventDefault();
-			// console.log(
-			// 	'***********photoId*****FRONT END*******',
-			// 	photoId,
-			// 	text
-			// );
+
 			const payload = { text };
 			let data = await dispatch(addComment(photoId, payload));
 			setText('');
@@ -109,7 +83,7 @@ function PhotoDetailPage() {
 	};
 
 	if (!currentUser) {
-		return <Redirect to='/login' />;
+		return <Redirect to='/' />;
 	}
 
 	if (!photoId) {
@@ -126,20 +100,7 @@ function PhotoDetailPage() {
 			/>
 		);
 	}
-	const follow = () => {
-		dispatch(followUser(photoAuthor.id));
-	};
 
-	const unfollow = () => {
-		dispatch(unfollowUser(photoAuthor.id));
-	};
-	// console.log('****comments****', comments);
-	// console.log('************CURRENT USER ID****************', currentUser.id);
-	// console.log(
-	// 	'************CURRENT AUTHOR ID****************',
-	// 	photoAuthor.id
-	// );
-	// console.log('************CURRENT PHOTO ID****************', photoId);
 	return (
 		<div className='PhotoDetail--Page'>
 			<div>
@@ -177,16 +138,13 @@ function PhotoDetailPage() {
 							photo={photo}
 							user={currentUser}
 						/>
-
 					</div>
 					<div className='item item2'>
-						{/* Details Box */}
 						<div className='comments g2'>
 							<p>Comments: {numComments.length}</p>
 						</div>
 					</div>
 					<div className='comments-box'>
-						{/* <strong>Comments</strong> */}
 						<div className='list-comments'>
 							{comments &&
 								comments.map((comment, idx) => {
@@ -219,29 +177,14 @@ function PhotoDetailPage() {
 														/>
 													)}
 												</div>
-												{/* comment user ID ={' '}
-												{`${comment.userId}`}
-												Current user id ={' '}
-												{`${currentUser.id}`}
-												comment.photoId ={' '}
-												{`${comment.photoId}`} */}
-												{/* <img className='trash-icon'src='/trash-icon.png' alt=''/> */}
+
 												<></>
 											</div>
 										)
 									);
 								})}
 							<form className='comment-form'>
-								{/* <ul>
-									{errors.map((error, idx) => (
-										<li className='edit-errors' key={idx}>
-											{error}
-										</li>
-									))}
-								</ul> */}
-
 								<label>
-									{/* Comment */}
 									<textarea
 										onKeyUp={createComment}
 										type='text'

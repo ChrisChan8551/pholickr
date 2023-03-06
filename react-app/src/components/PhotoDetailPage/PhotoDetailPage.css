@@ -3,6 +3,7 @@
 	min-width: 33%;
 	min-height: 50px;
 }
+
 .g-container {
 	display: grid;
 	min-width: 1200px;
@@ -10,7 +11,7 @@
 	min-height: 330px;
 	max-height: 100%;
 	/* grid-template-rows: 250px; */
-	grid-template-columns: .4fr .3fr 1fr;
+	grid-template-columns: 0.4fr 0.3fr 1fr;
 	grid-auto-rows: min-content;
 }
 
@@ -38,7 +39,19 @@
 	opacity: 0.5;
 	width: 20px;
 	height: 20px;
-	/* float: right; */
+
+}
+.trash-icon:hover,
+.edit-icon:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+.edit-icon {
+	opacity: 0.5;
+	width: 20px;
+	height: 20px;
+
 	cursor: pointer;
 }
 

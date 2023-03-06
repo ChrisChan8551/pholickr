@@ -59,8 +59,8 @@ export const getOneComment = (commentId) => async (dispatch) => {
 export const addComment = (photoId, comments) => async (dispatch) => {
 	// console.log('*********photoId store*********', photoId, comments);
 	// console.log('*****TYPE OF****', typeof photoId, typeof comments);
-  // console.log('***********',JSON.stringify(comments))
-  	const response = await fetch(`/api/photos/${photoId}/comments`, {
+	// console.log('***********',JSON.stringify(comments))
+	const response = await fetch(`/api/photos/${photoId}/comments`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -99,24 +99,27 @@ export const addComment = (photoId, comments) => async (dispatch) => {
 //   }
 // };
 
-
-export const editComment = (commentId, commentData) => async (dispatch) => {
-	const response = await fetch(`/api/comments/${commentId}`, {
-		method: 'PATCH',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(commentData),
-	});
-	if (response.ok) {
-		const commentData = await response.json();
-		dispatch(loadOneComment(commentData));
-		return commentData;
-	} else {
-		const error = await response.json();
-		return error;
-	}
-};
+export const editComment =
+	(commentId, commentData) => async (dispatch) => {
+		const response = await fetch(
+			`/api/comments/${commentId}`,
+			{
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(commentData),
+			}
+		);
+		if (response.ok) {
+			const commentData = await response.json();
+			dispatch(loadOneComment(commentData));
+			return commentData;
+		} else {
+			const error = await response.json();
+			return error;
+		}
+	};
 
 export const deleteAComment = (commentId) => async (dispatch) => {
 	const response = await fetch(`/api/comments/${commentId}`, {

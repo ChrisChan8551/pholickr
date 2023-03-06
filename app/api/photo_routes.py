@@ -36,6 +36,7 @@ def get_photo(id):
 @photo_routes.route('/<int:id>/comments', methods=['POST'])
 def create_comment(id):
     form = CommentForm()
+    # print("************CREATE NEW COMMENT********************")
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
@@ -49,6 +50,7 @@ def create_comment(id):
         form.populate_obj(new_comment)
         db.session.add(new_comment)
         db.session.commit()
+        # print('*********************CREATED COMMENT*******************************')
         return new_comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -64,6 +66,7 @@ def delete_photo(id):
         return "Successfully Deleted Photo"
     else:
         return "Photo not found"
+
 
 
 @photo_routes.route('/', methods=['POST'])
@@ -85,7 +88,7 @@ def create_photo():
         for key, value in data.items():
             setattr(new_photo, key, value)
         form.populate_obj(new_photo)
-        # print('*********************CREATED*******************************')
+        # print('*********************CREATED PHOTO*******************************')
         db.session.add(new_photo)
         db.session.commit()
         return new_photo.to_dict()
