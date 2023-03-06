@@ -17,7 +17,7 @@
 // - [x] photo route - delete
     //! need to add current user delete
 
-// - [] user route - create
+// - [x] user route - create
 // - [x] user route - get
 // - [] user route - edit
 // - [] user route - delete
@@ -31,6 +31,7 @@
 // - [] profile
 // - [x] photos
 // - [x] albums
+// - [x] comments
 
 
 // - [x] AlbumsPage
