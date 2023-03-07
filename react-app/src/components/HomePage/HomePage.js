@@ -60,7 +60,7 @@ function HomePage() {
 
 					<div className='right_menu'>
 						<button className='grey-button' onClick={demo}>
-							Demo User
+							Demo
 						</button>
 
 						{LoginForm}
