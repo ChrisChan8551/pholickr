@@ -157,9 +157,12 @@ function PhotoDetailPage() {
 							user={currentUser}
 						/>
 					</div>
-					<div className='item item2'>
-						<div className='comments g2'>
-							<p>Comments: {numComments.length}</p>
+					<div className='item2'>
+						<div className='g2-container'>
+							<div className='num-count'>
+								{numComments.length}
+							</div>
+							<div className='num-label'>comments</div>
 						</div>
 					</div>
 					<div className='comments-box'>
