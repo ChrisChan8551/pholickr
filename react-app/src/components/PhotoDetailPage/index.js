@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams, NavLink } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 import './PhotoDetailPage.css';
-import { getOneUser } from '../../store/user';
+import { getOneUser, getAllUsers } from '../../store/user';
 import {
 	getAllComments,
 	addComment,
@@ -29,6 +30,8 @@ function PhotoDetailPage() {
 		(comment) => comment.photoId === Number(photoId)
 	);
 	//eslint-disable-next-line
+
+	const users = Object.values(useSelector((state) => state.otherUser));
 	const [errors, setErrors] = useState([]);
 	const { photo, photoAuthor, currentUser } = useSelector((state) => {
 		const photo = state.photo[photoId];
@@ -56,9 +59,15 @@ function PhotoDetailPage() {
 		dispatch(getAllComments());
 	}, [dispatch]);
 
+	useEffect(() => {
+		dispatch(getAllUsers());
+	}, [dispatch]);
+
 	if (!comments) {
 		return null;
 	}
+
+	if (!users) return null;
 
 	const deletePhoto = (e) => {
 		e.preventDefault();
@@ -157,6 +166,9 @@ function PhotoDetailPage() {
 						<div className='list-comments'>
 							{comments &&
 								comments.map((comment, idx) => {
+									const user = users.find(
+										(user) => user.id === comment.userId
+									);
 									return (
 										comment.photoId === Number(photoId) && (
 											<div
@@ -164,50 +176,69 @@ function PhotoDetailPage() {
 												key={`${comment.id}`}
 											>
 												<div className='user-comment'>
-													{`${comment.text}`}
-													{Number(comment.userId) ===
-														Number(
-															currentUser.id
-														) && (
-														<>
-															<div>
-																<img
-																	className='trash-icon'
-																	src='/trash-icon.png'
-																	alt=''
-																	onClick={() =>
-																		dispatch(
-																			deleteAComment(
-																				comment.id
-																			)
-																		)
-																	}
-																/>
-																{!showEditCommentForm &&
-																	Number(
-																		comment.userId
-																	) ===
-																		Number(
-																			currentUser.id
-																		) && (
-																		<img
-																			className='edit-icon'
-																			src='/edit-icon.png'
-																			alt=''
-																			onClick={() => {
-																				setShowEditCommentForm(
-																					true
-																				);
-																				setCurrentComment(
-																					comment
-																				);
-																			}}
-																		/>
-																	)}
-															</div>
-														</>
-													)}
+													<div>
+														{user && (
+															<img
+																className='comment-image'
+																src={user.image}
+																alt=''
+															/>
+														)}{' '}
+														<div></div>
+													</div>
+													<div className='user-name'>
+														<div>
+															<NavLink
+																className='comment-author'
+																to={`/users/${user?.id}`}
+																activeClassName='active'
+															>{`${user?.username}`}</NavLink>
+														</div>
+														<div className='comment-font'>
+															{`${comment.text}`}
+														</div>
+													</div>
 												</div>
+												{Number(comment.userId) ===
+													Number(currentUser.id) && (
+													<>
+														<div className='comment-actions'>
+															<img
+																className='trash-icon'
+																src='/trash-icon.png'
+																alt=''
+																onClick={() =>
+																	dispatch(
+																		deleteAComment(
+																			comment.id
+																		)
+																	)
+																}
+															/>
+															{!showEditCommentForm &&
+																Number(
+																	comment.userId
+																) ===
+																	Number(
+																		currentUser.id
+																	) && (
+																	<img
+																		className='edit-icon'
+																		src='/edit-icon.png'
+																		alt=''
+																		onClick={() => {
+																			setShowEditCommentForm(
+																				true
+																			);
+																			setCurrentComment(
+																				comment
+																			);
+																		}}
+																	/>
+																)}
+														</div>
+													</>
+												)}
 											</div>
 										)
 									);

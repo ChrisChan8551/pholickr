@@ -35,26 +35,32 @@ function ProfileCard({ author, photo, user }) {
 				<div className='circle'></div>
 				<img className='profile-img' src={author.image} alt='' />
 				<div className='text-container'>
-					<p className='title-text'>{photo.title}</p>
-					<p>{user.id !== author.id && (
-						<button
-							className={
-								isFollowing ? 'grey-button' : 'blue-button'
-							}
-							onClick={isFollowing ? unfollow : follow}
+					<div className='Author-Name'>
+						<NavLink
+							className='Author'
+							to={`/users/${author.id}`}
+							activeClassName='active'
 						>
-							{isFollowing ? '- Unfollow' : '+ Follow'}
-						</button>
-					)}</p>
-					Author:{' '}
-					<NavLink to={`/users/${author.id}`}>
-						{' '}
-						{author.username}
-					</NavLink>
-					<p className='desc-text'>
-						{' '}
-						Description: {photo.description}
-					</p>
+							{author.username}
+						</NavLink>
+						<div>
+							{user.id !== author.id && (
+								<button
+									className={
+										isFollowing
+											? 'grey-button'
+											: 'blue-button'
+									}
+									onClick={isFollowing ? unfollow : follow}
+								>
+									{isFollowing ? '- Unfollow' : '+ Follow'}
+								</button>
+							)}
+						</div>
+					</div>
+
+					<h1 className='title-text'>{photo.title}</h1>
+					<p className='desc-text'>{photo.description}</p>
 				</div>
 			</div>
 		</div>

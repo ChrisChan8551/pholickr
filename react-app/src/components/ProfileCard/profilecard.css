@@ -8,6 +8,25 @@
     background-color: #212121;
   } */
 
+.Author {
+	display: flex;
+	font-size: 20px;
+	color: black;
+	text-decoration: none;
+	justify-content: space-between;
+	align-items: center;
+	min-width: 125px;
+}
+
+.Author:hover {
+	color: #006dac;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.Author-Name {
+	display: flex;
+}
 .container {
 	position: relative;
 	/* top: 77%; */
@@ -85,7 +104,7 @@
 
 .title-text {
 	color: #263238;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 600;
 	margin-top: 5px;
 }
@@ -96,6 +115,6 @@
 }
 
 .desc-text {
-	font-size: 18px;
+	font-size: 14px;
 	margin-top: 10px;
 }
