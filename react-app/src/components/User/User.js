@@ -138,7 +138,7 @@ function User() {
 						hideForm={setShowFollowingModal}
 					/>
 				)}
-				<div className='g2-container'>
+				<div className='user-container'>
 					<div></div>
 					<div>
 						<div className='container'>
