@@ -61,7 +61,7 @@
 	color: #fff;
 	height: 32px;
 	line-height: 32px;
-	/* min-width: 80px; */
+	min-width: 108px;
 }
 
 .grey-button {
@@ -82,7 +82,7 @@
 	color: #fff;
 	height: 32px;
 	line-height: 32px;
-	min-width: 80px;
+	min-width: 108px;
 }
 
 /* .button:hover {

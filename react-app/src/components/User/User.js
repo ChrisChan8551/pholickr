@@ -182,7 +182,7 @@ function User() {
 										}
 									>
 										{isFollowing
-											? '- Unfollow'
+											? 'Unfollow'
 											: '+ Follow'}
 									</button>
 								)}

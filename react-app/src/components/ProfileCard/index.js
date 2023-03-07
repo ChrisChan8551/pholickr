@@ -53,7 +53,7 @@ function ProfileCard({ author, photo, user }) {
 									}
 									onClick={isFollowing ? unfollow : follow}
 								>
-									{isFollowing ? '- Unfollow' : '+ Follow'}
+									{isFollowing ? 'Unfollow' : '+ Follow '}
 								</button>
 							)}
 						</div>
