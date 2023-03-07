@@ -29,9 +29,9 @@ function PhotoDetailPage() {
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
 	);
-	//eslint-disable-next-line
 
 	const users = Object.values(useSelector((state) => state.otherUser));
+	//eslint-disable-next-line
 	const [errors, setErrors] = useState([]);
 	const { photo, photoAuthor, currentUser } = useSelector((state) => {
 		const photo = state.photo[photoId];
