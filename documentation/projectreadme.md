@@ -31,7 +31,7 @@ and backend and allows for speedy re-rendering handled by React.
 
 *Auth Page*
 
-![Auth Preview](https://github.com/Derek-Emsbach/phototeresting-group-project/blob/main/z.Documentation/homepage%20sample.JPG)
+![Auth Preview](https://github.com/ChrisChan8551/pholickr/blob/main/documentation/homepage%20sample.JPG)
 
 *Normal Authentication*
 
@@ -60,21 +60,21 @@ React components exist for each corresponding action in the app. Information
 needed for all components or user actions performed.
 
 [Backend Routes]
-[Backend Routes]: https://github.com/Derek-Emsbach/phototeresting-group-project/blob/main/z.Documentation/backend_routes.md
+[Backend Routes]: https://github.com/ChrisChan8551/pholickr/blob/main/documentation/backend_routes.md
 
 **Discover Page: Shows recent photos from users**
 
 Pictures of recent photos are displayed once logged in. User can select photos that they are intested in. It will be directed to Photo Detail where
 user can click url link which directs user to the source of the photo.
 
-*Example Discover Page*
-![Discover Page Preview](https://github.com/Derek-Emsbach/phototeresting-group-project/blob/main/z.Documentation/DiscoverPage%20Sample.JPG)
+*Example Home Page*
+![Home Page Preview](https://github.com/ChrisChan8551/pholickr/blob/main/documentation/homepage%20sample.JPG)
 
 The user can...
 1. Select and view photos that they are interested in.
-2. Photo can be saved and added to user's album of their choice.
-3. Photo can be edited if it belongs to the user
-4. follow creator of the photo
+2. Photo can be commented on.
+3. Photos can be edited if it belongs to the user
+4. Follow / Unfollow creator of the photo
 
 
 **Photos**
@@ -84,18 +84,17 @@ Once created, it will be displayed on their my photos page, and added to the hom
 Any user can view, create, edit, and delete comments with associated photo.
 
 **Albums**
-Album is a collection of photos that user adds. They can create their a album of a certain description, and add photos to it.
+Album is a collection of photos that user adds. They can create their a album of a certain title, and add photos to it.
 Albums can be created, edited, and deleted as needed.
 
-**User Profile**
+**User page**
 
-User profile displays general information of the current user such as their username, first name, last name, email.
-Profile can be updated.
+User page displays users' photos with count of followers / following
+
 
 From here, user can view
 1) Followers and people that they follow.
-2) Albums
-3) Photos
+2) Users's Photos
 
 **Following / Follwers**
 User can click and display list of users that they follow or people that follow them.
