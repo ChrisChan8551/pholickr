@@ -67,7 +67,7 @@ function AlbumsPage() {
 				</div>
 				<GridLayout
 					className='myAlbums'
-					items={myAlbums}
+					items={myAlbums} 
 					buttonLabel='Remove'
 					onItemClick={navigateToAlbum}
 					renderItemActions={(album, closeActionPopOver) => (

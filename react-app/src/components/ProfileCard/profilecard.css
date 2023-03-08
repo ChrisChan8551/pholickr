@@ -7,6 +7,19 @@
 /* body {
     background-color: #212121;
   } */
+.profile-container {
+	display: flex;
+	/* justify-content: flex-start; */
+	border: solid 1px lightgrey;
+	max-width: fit-content;
+	min-width: min-content;
+	margin-bottom: 5px;
+}
+.profile-img2 {
+	border-radius: 50%;
+	margin-right: 15px;
+	width: 30px;
+}
 
 .Author {
 	display: flex;

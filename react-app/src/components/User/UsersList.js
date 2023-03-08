@@ -1,31 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllUsers } from '../../store/user';
+import ProfileCard from '../../components/ProfileCard';
+import '../../components/ProfileCard/profilecard.css';
 
 function UsersList() {
-	const [users, setUsers] = useState([]);
+	const dispatch = useDispatch();
+	const users = useSelector((state) => Object.values(state.otherUser));
 
 	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('/api/users/');
-			const responseData = await response.json();
-			setUsers(responseData.users);
-		}
-		fetchData();
-	}, []);
+		dispatch(getAllUsers());
+	}, [dispatch]);
 
-	const userComponents = users.map((user) => {
-		return (
-			<li key={user.id}>
-				<NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
-			</li>
-		);
-	});
+	let userComponents;
+
+	if (!users) return null;
 
 	return (
-		<>
+		<div>
 			<h1>User List: </h1>
-			<ul>{userComponents}</ul>
-		</>
+			{users.map((user) => (
+				<div className='profile-container' key={user.id}>
+					<img
+						className='profile-img2'
+						src={user.image}
+						alt=''
+					/>
+
+					<NavLink
+						className='Author'
+						to={`/users/${user.id}`}
+						activeClassName='active'
+					>
+						{user.username}
+					</NavLink>
+				</div>
+			))}
+		</div>
 	);
 }
 
