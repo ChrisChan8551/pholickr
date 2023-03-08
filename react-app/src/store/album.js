@@ -33,7 +33,6 @@ const removeAlbum = (albums) => {
 	};
 };
 
-
 export const getAllAlbums = () => async (dispatch) => {
 	const res = await fetch('/api/albums/');
 
@@ -116,29 +115,35 @@ export const deleteAlbum = (albumId) => async (dispatch) => {
 const initialState = {};
 
 const albumReducer = (state = initialState, action) => {
-	let newState = { ...state };
 	switch (action.type) {
 		case FULL_RESET:
 			return { ...initialState };
 
-		case REPLACE_ALBUM:
+		case REPLACE_ALBUM: {
+			const newState = { ...state };
 			newState[action.album.id] = action.album;
 			return newState;
+		}
 
 		case LOAD_ALBUMS: {
+			const newState = {};
 			action.albums.forEach((album) => {
 				newState[album.id] = album;
 			});
 			return newState;
 		}
-		
-		case ADD_ALBUM:
+
+		case ADD_ALBUM: {
+			const newState = { ...state };
 			newState[action.albums.id] = action.albums;
 			return newState;
+		}
 
-		case REMOVE_ALBUM:
-			delete newState[action.albums];
+		case REMOVE_ALBUM: {
+			const newState = { ...state };
+			delete newState[action.albumId];
 			return newState;
+		}
 
 		default:
 			return state;

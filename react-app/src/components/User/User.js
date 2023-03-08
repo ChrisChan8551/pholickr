@@ -31,13 +31,6 @@ function User() {
 					({ id }) => `${id}` === `${otherUser.id}`
 				);
 			}
-			// console.log('***********currentUser***************', currentUser);
-			// console.log('***********otherUser***************', otherUser);
-			// console.log('***********isFollowing***************', isFollowing);
-			// console.log(
-			// 	'***********currentUser.following***************',
-			// 	currentUser.following
-			// );
 
 			return {
 				otherUser,
@@ -47,6 +40,13 @@ function User() {
 			};
 		}
 	);
+	// console.log('***********currentUser***************', currentUser);
+	// console.log('***********otherUser***************', otherUser);
+	// console.log('***********isFollowing***************', isFollowing);
+	// console.log(
+	// 	'***********currentUser.following***************',
+	// 	currentUser.following
+	// );
 	const toggleFollowersModal = () => {
 		setShowFollowersModal(!showFollowersModal);
 	};
@@ -181,9 +181,7 @@ function User() {
 											isFollowing ? unfollow : follow
 										}
 									>
-										{isFollowing
-											? 'Unfollow'
-											: '+ Follow'}
+										{isFollowing ? 'Unfollow' : '+ Follow'}
 									</button>
 								)}
 							</div>

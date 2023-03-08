@@ -4,13 +4,15 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 #   (Link to the docs https://docs.sqlalchemy.org/en/14/orm/relationship_api.html#sqlalchemy.orm.relationship.params.secondary )
 #
 # tl;dr hopefully prevent Python from complaining about "can't find table `albums` when trying to create ForeignKeyConstraint"
-pinnings = db.Table (
+pinnings = db.Table(
     'pinnings',
     db.Model.metadata,
-    db.Column('photoId', db.Integer, db.ForeignKey(add_prefix_for_prod('photos.id')), primary_key=True),
-    db.Column('albumId', db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), primary_key=True),
+    db.Column('photoId', db.Integer, db.ForeignKey(
+        add_prefix_for_prod('photos.id')), primary_key=True),
+    db.Column('albumId', db.Integer, db.ForeignKey(
+        add_prefix_for_prod('albums.id')), primary_key=True),
     schema=SCHEMA
-    )
+)
 
 
 class Album(db.Model):
@@ -20,7 +22,8 @@ class Album(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     imageUrl = db.Column(db.String(1500))
 
@@ -28,7 +31,6 @@ class Album(db.Model):
 
     def __repr__(self):
         return f'<AlbumId: {self.id}, userId: {self.userId}, title: {self.title},image:{self.imageUrl}>'
-
 
     def to_dict(self):
         return {

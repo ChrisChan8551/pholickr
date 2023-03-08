@@ -55,7 +55,6 @@ def create_comment(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-
 @photo_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_photo(id):
@@ -66,7 +65,6 @@ def delete_photo(id):
         return "Successfully Deleted Photo"
     else:
         return "Photo not found"
-
 
 
 @photo_routes.route('/', methods=['POST'])

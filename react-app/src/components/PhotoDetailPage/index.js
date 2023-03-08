@@ -33,17 +33,21 @@ function PhotoDetailPage() {
 	const users = Object.values(useSelector((state) => state.otherUser));
 	//eslint-disable-next-line
 	const [errors, setErrors] = useState([]);
-	const { photo, photoAuthor, currentUser } = useSelector((state) => {
-		const photo = state.photo[photoId];
-		const photoAuthor = state.otherUser[photo?.userId];
-		const currentUser = state.session.user;
+	const photo = useSelector((state) => state.photo[photoId]);
+	const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
+	const currentUser = useSelector((state) => state.session.user);
 
-		return {
-			photo,
-			photoAuthor,
-			currentUser,
-		};
-	});
+	// const { photo, photoAuthor, currentUser } = useSelector((state) => {
+	// 	const photo = state.photo[photoId];
+	// 	const photoAuthor = state.otherUser[photo?.userId];
+	// 	const currentUser = state.session.user;
+
+	// 	return {
+	// 		photo,
+	// 		photoAuthor,
+	// 		currentUser,
+	// 	};
+	// });
 
 	useEffect(() => {
 		dispatch(getOnePhoto(photoId));

@@ -16,7 +16,7 @@ export const getAllUsers = () => async (dispatch) => {
 		const users = await res.json();
 		dispatch(loadOtherUsers(users));
 	}
-}
+};
 
 export const getOneUser = (userId) => async (dispatch) => {
 	const res = await fetch(`/api/users/${userId}`);
@@ -64,7 +64,8 @@ const otherUsersReducer = (state = defaultState, action) => {
 			return { ...defaultState };
 
 		case LOAD_OTHER_USERS: {
-			const newState = { ...state };
+			// const newState = { ...state };
+			const newState = {};
 			action.users.forEach((user) => {
 				newState[user.id] = user;
 			});

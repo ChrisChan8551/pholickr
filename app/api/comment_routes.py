@@ -5,6 +5,7 @@ from app.forms import CommentForm
 
 comment_routes = Blueprint('comments', __name__)
 
+
 def validation_errors_to_error_messages(validation_errors):
 
     errorMessages = []
@@ -13,13 +14,15 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
+
 @comment_routes.route('/', methods=['GET'])
 # @login_required
 def get_all_comments():
     comments = Comment.query.all()
     # print('********GET ALL COMMENTS********')
     # print([comment.to_dict() for comment in comments])
-    return jsonify ([comment.to_dict() for comment in comments])
+    return jsonify([comment.to_dict() for comment in comments])
+
 
 @comment_routes.route('/<int:id>')
 # @login_required
@@ -27,6 +30,7 @@ def get_comment(id):
     # print('************GET 1 COMMENT********************')
     comment = Comment.query.get(id)
     return comment.to_dict()
+
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required

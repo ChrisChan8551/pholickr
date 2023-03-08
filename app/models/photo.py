@@ -9,7 +9,8 @@ class Photo(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(255))
     description = db.Column(db.String(100))
     imageUrl = db.Column(db.String(1500))
@@ -21,10 +22,10 @@ class Photo(db.Model):
         return f'<Photo Id: {self.id}, userId: {self.userId}, title: {self.title}, description: {self.description}, imageUrl: {self.imageUrl}>'
 
     def to_dict(self):
-            return {
-                'id': self.id,
-                'userId': self.userId,
-                'title': self.title,
-                'description': self.description,
-                'imageUrl': self.imageUrl,
-            }
+        return {
+            'id': self.id,
+            'userId': self.userId,
+            'title': self.title,
+            'description': self.description,
+            'imageUrl': self.imageUrl,
+        }

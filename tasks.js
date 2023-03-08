@@ -10,12 +10,12 @@
 // - [x] album route - get
 // - [x] album route - edit
 // - [x] album route - delete
-    //! need to add current user delete
+//! need to add current user delete
 // - [x] photo route - create
 // - [x] photo route - get
 // - [x] photo route - edit
 // - [x] photo route - delete
-    //! need to add current user delete
+//! need to add current user delete
 
 // - [x] user route - create
 // - [x] user route - get
@@ -32,7 +32,6 @@
 // - [x] photos
 // - [x] albums
 // - [x] comments
-
 
 // - [x] AlbumsPage
 // - [x] AlbumsDetailPage

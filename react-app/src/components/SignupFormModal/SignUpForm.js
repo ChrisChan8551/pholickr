@@ -42,11 +42,8 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 		<div className='signup_container'>
 			<div className='signup_header'>
 				{/* <h1>Sign Up</h1> */}
-				<div className='div-form-icon'><img
-					className='form-icon'
-					src='/pho.png'
-					alt=''
-				/>
+				<div className='div-form-icon'>
+					<img className='form-icon' src='/pho.png' alt='' />
 				</div>
 			</div>
 

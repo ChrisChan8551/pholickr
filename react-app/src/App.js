@@ -15,7 +15,6 @@ import PhotoDetailPage from './components/PhotoDetailPage';
 import PhotoLayout from './components/PhotoLayout';
 import HomePage from './components/HomePage/HomePage';
 
-
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
@@ -58,7 +57,6 @@ function App() {
 				<ProtectedRoute exact path='/albums/:albumId'>
 					<AlbumDetailPage />
 				</ProtectedRoute>
-				
 			</Switch>
 		</div>
 	);

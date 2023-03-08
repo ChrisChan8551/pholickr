@@ -19,7 +19,7 @@ const EditAlbumForm = ({ album, hideForm }) => {
 		e.preventDefault();
 		setErrors([]);
 		const payload = { title, imageUrl };
-		let data = await dispatch(editAlbum(albumId,payload));
+		let data = await dispatch(editAlbum(albumId, payload));
 
 		if (data.errors) {
 			setErrors([...Object.values(data.errors)]);
@@ -49,12 +49,9 @@ const EditAlbumForm = ({ album, hideForm }) => {
 	return (
 		<section className='edit-album-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
-            {/* <h1 className='modal-title'>Edit Album</h1> */}
-			<div className='div-form-icon'><img
-					className='form-icon'
-					src='/pho.png'
-					alt=''
-				/>
+				{/* <h1 className='modal-title'>Edit Album</h1> */}
+				<div className='div-form-icon'>
+					<img className='form-icon' src='/pho.png' alt='' />
 				</div>
 				<label className='modal-label'>
 					Title

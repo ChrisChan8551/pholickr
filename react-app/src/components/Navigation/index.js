@@ -15,14 +15,17 @@ const Navigation = () => {
 	const location = useLocation();
 
 	const dispatch = useDispatch();
-	const { currentUser, searchbarValue } = useSelector((state) => {
-		const currentUser = state.session.user;
-		const searchbarValue = selectSearchbarValue(state);
-		return {
-			currentUser,
-			searchbarValue,
-		};
-	});
+	const currentUser = useSelector((state) => state.session.user);
+	const searchbarValue = useSelector(selectSearchbarValue);
+
+	// const { currentUser, searchbarValue } = useSelector((state) => {
+	// 	const currentUser = state.session.user;
+	// 	const searchbarValue = selectSearchbarValue(state);
+	// 	return {
+	// 		currentUser,
+	// 		searchbarValue,
+	// 	};
+	// });
 
 	// const navigateToHomePage = () => {
 	// 	history.push('/');

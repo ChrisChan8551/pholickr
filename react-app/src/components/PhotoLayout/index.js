@@ -22,13 +22,13 @@ function getLimitedPhotosList(photos, searchbarValue = '') {
 
 function PhotoLayout() {
 	const sessionUser = useSelector((state) => state.session.user);
-	const { searchbarValue, allPhotos } = useSelector((state) => {
-		const searchbarValue = selectSearchbarValue(state);
-		const allPhotos = Object.values(state.photo);
-
-		return { searchbarValue, allPhotos };
-	});
-
+	// const { searchbarValue, allPhotos } = useSelector((state) => {
+	// 	const searchbarValue = selectSearchbarValue(state);
+	// 	const allPhotos = Object.values(state.photo);
+	// 	return { searchbarValue, allPhotos };
+	// });
+	const searchbarValue = useSelector(selectSearchbarValue);
+	const allPhotos = useSelector((state) => Object.values(state.photo));
 	const [photos, setPhotos] = useState([]);
 	const [hasRenderedPhotos, setHasRenderedPhotos] = useState(false);
 	const lastSearchRef = useRef(searchbarValue);
@@ -62,8 +62,8 @@ function PhotoLayout() {
 
 	useEffect(() => {
 		async function fetchPhotosAndAlbums() {
-			await dispatch(getAllPhotos());
 			await dispatch(getAllAlbums());
+			await dispatch(getAllPhotos());
 		}
 		fetchPhotosAndAlbums();
 	}, [dispatch]);

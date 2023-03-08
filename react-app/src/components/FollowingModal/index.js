@@ -1,5 +1,5 @@
 import { Modal } from '../Modal/Modal';
-import Following from './Following'
+import Following from './Following';
 
 function FollowingModal({ user, hideForm }) {
 	return (

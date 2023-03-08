@@ -99,27 +99,23 @@ export const addComment = (photoId, comments) => async (dispatch) => {
 //   }
 // };
 
-export const editComment =
-	(commentId, commentData) => async (dispatch) => {
-		const response = await fetch(
-			`/api/comments/${commentId}`,
-			{
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(commentData),
-			}
-		);
-		if (response.ok) {
-			const commentData = await response.json();
-			dispatch(loadOneComment(commentData));
-			return commentData;
-		} else {
-			const error = await response.json();
-			return error;
-		}
-	};
+export const editComment = (commentId, commentData) => async (dispatch) => {
+	const response = await fetch(`/api/comments/${commentId}`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(commentData),
+	});
+	if (response.ok) {
+		const commentData = await response.json();
+		dispatch(loadOneComment(commentData));
+		return commentData;
+	} else {
+		const error = await response.json();
+		return error;
+	}
+};
 
 export const deleteAComment = (commentId) => async (dispatch) => {
 	const response = await fetch(`/api/comments/${commentId}`, {

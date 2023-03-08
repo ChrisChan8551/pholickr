@@ -25,7 +25,7 @@ def get_all_albums():
     albums = Album.query.all()
     # print("**************** GET ALL ALBUMS ****************")
     # print(albums)
-    return jsonify ([album.to_dict() for album in albums])
+    return jsonify([album.to_dict() for album in albums])
 
 
 @album_routes.route('/<int:id>')
@@ -44,6 +44,7 @@ def delete_album(id):
     db.session.commit()
     return "sucessfully deleted Album"
 
+
 @album_routes.route('/', methods=['GET', 'POST'])
 @login_required
 def create_album():
@@ -53,8 +54,8 @@ def create_album():
     if form.validate_on_submit():
         data = form.data
         new_album = Album(userId=current_user.get_id())
-                        #   title=data['title'],
-                        #   imageUrl=data['imageUrl'])
+        #   title=data['title'],
+        #   imageUrl=data['imageUrl'])
         for key, value in data.items():
             setattr(new_album, key, value)
         form.populate_obj(new_album)
@@ -64,6 +65,7 @@ def create_album():
         db.session.commit()
         return new_album.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 @album_routes.route('/<int:id>', methods=["PATCH", "PUT"])
 @login_required
@@ -95,6 +97,7 @@ def edit_album(id):
         return album.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+
 @album_routes.route('/<int:album_id>/photo/<int:photo_id>', methods=["POST"])
 @login_required
 def add_pinning(album_id, photo_id):
@@ -108,6 +111,7 @@ def add_pinning(album_id, photo_id):
 
     db.session.commit()
     return album.to_dict()
+
 
 @album_routes.route('/<int:album_id>/photo/<int:photo_id>', methods=['DELETE'])
 @login_required

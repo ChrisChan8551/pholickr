@@ -4,17 +4,17 @@ from flask_login import login_required, current_user
 from app.models import db, User, Photo, Album
 
 
-
-
 user_routes = Blueprint('users', __name__)
 
+
 def validation_errors_to_error_messages(validation_errors):
-   
+
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
 
 @user_routes.route('/')
 @login_required
@@ -35,11 +35,13 @@ def user(id):
 
     return user.to_dict_with_related()
 
+
 @user_routes.route('/<int:id>/photos')
 @login_required
 def user_photos(id):
     photos = Photo.query.filter_by(userId=id)
     return jsonify([photo.to_dict() for photo in photos])
+
 
 @user_routes.route('/<int:id>/albums')
 @login_required
@@ -67,6 +69,7 @@ def user_albums(id):
 
 #         return user.to_dict_with_related()
 #     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 @user_routes.route('/follow/<int:id>', methods=['POST'])
 @login_required
