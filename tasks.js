@@ -2,8 +2,8 @@
 // flask db upgrade
 // flask seed all
 
-// - [] db schema
-// - [] read me
+// - [x] db schema
+// - [x] read me
 
 //BACK END
 // - [x] album route - create
@@ -44,9 +44,9 @@
 // - [x]
 // - [x]
 // - [x]
-// - []
-// - []
-// - []
+// - [] faves
+// - [] fave count
+// - [] 
 // - []
 // - []
 // - []
