@@ -46,7 +46,7 @@ flask seed all
 // - [x]
 // - [] faves
 // - [] fave count
-// - []
+// - [] my photos - change to user photos, and add new photo button
 // - []
 // - []
 // - []
