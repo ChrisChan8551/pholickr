@@ -1,6 +1,6 @@
-// flask db migrate
-// flask db upgrade
-// flask seed all
+flask db migrate
+flask db upgrade
+flask seed all
 
 // - [x] db schema
 // - [x] read me
@@ -46,7 +46,7 @@
 // - [x]
 // - [] faves
 // - [] fave count
-// - [] 
+// - []
 // - []
 // - []
 // - []
