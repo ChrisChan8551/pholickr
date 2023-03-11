@@ -29,24 +29,25 @@ class User(db.Model, UserMixin):
 
     photos = db.relationship('Photo', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
+    faves = db.relationship('Photo', back_populates='faved_by', lazy='dynamic')
 
-    following = db.relationship(
-        'User', secondary=followers,
-        primaryjoin=(followers.c.follower_id == id),
-        secondaryjoin=(followers.c.followed_id == id), lazy='dynamic')
+    following=db.relationship(
+        'User', secondary = followers,
+        primaryjoin = (followers.c.follower_id == id),
+        secondaryjoin = (followers.c.followed_id == id), lazy = 'dynamic')
 
-    followers = db.relationship(
-        'User', secondary=followers,
-        primaryjoin=(followers.c.followed_id == id),
-        secondaryjoin=(followers.c.follower_id == id), lazy='dynamic')
+    followers=db.relationship(
+        'User', secondary = followers,
+        primaryjoin = (followers.c.followed_id == id),
+        secondaryjoin = (followers.c.follower_id == id), lazy = 'dynamic')
 
-    @property
+    @ property
     def password(self):
         return self.hashed_password
 
-    @password.setter
+    @ password.setter
     def password(self, password):
-        self.hashed_password = generate_password_hash(password)
+        self.hashed_password=generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password, password)

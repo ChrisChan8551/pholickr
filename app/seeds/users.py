@@ -21,16 +21,20 @@ def seed_users():
              "Uma", "Victoria", "William", "Xander", "Yara", "Zoe"]
 
     userData = [
-        User(firstName='Demo', lastName='User', username="Demo", image='https://cdn-icons-png.flaticon.com/512/9591/9591054.png', email="demo@aa.io", password="password")
+        User(firstName='Demo', lastName='User', username="Demo",
+             image='https://cdn-icons-png.flaticon.com/512/9591/9591054.png', email="demo@aa.io", password="password")
     ]
+
+    profile_photos = ["/profile1.jpg", "/profile2.jpg", "/profile3.jpg", "/profile4.jpg", "/profile5.jpg", "/profile6.jpg", "/profile7.jpg", "/profile8.jpg", "/profile9.jpg", "/profile10.jpg", "/profile11.jpg", "/profile12.jpg", "/profile13.jpg", "/profile14.jpg", "/profile15.jpg", "/profile16.jpg", "/profile17.jpg", "/profile18.jpg", "/profile19.jpg", "/profile20.jpg"]
 
     for i in range(1, 13):
         name = random.choice(names)
         last_name = random.choice(names)
         username = name.lower() + str(i)
-        image = f"https://randomuser.me/api/portraits/med/{random.choice(['women', 'men'])}/{i}.jpg"
+        image = random.choice(profile_photos)
         email = name.lower() + str(i) + "@aa.io"
-        userData.append(User(firstName=name, lastName=last_name, username=username, image=image, email=email, password="password"))
+        userData.append(User(firstName=name, lastName=last_name,
+                        username=username, image=image, email=email, password="password"))
 
     db.session.add_all(userData)
     db.session.commit()
@@ -66,7 +70,8 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM followers CASCADE")
         db.session.execute("DELETE FROM users CASCADE")

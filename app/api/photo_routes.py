@@ -122,3 +122,25 @@ def edit_photo(id):
         db.session.commit()
         return photo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@photo_routes.route('/fave/<int:id>', methods=['POST'])
+# @login_required
+def fave(id):
+    photo = Photo.query.filter_by(id=id).first()
+    user = current_user.id
+
+    photo.fave(photo)
+    db.session.commit()
+
+    return photo.to_dict_with_related()
+
+
+@photo_routes.route('/unfave/<int:id>', methods=['POST'])
+# @login_required
+def unfave(id):
+    photo = Photo.query.filter_by(id=id).first()
+
+    photo.unfave(photo)
+    db.session.commit()
+
+    return photo.to_dict_with_related()
