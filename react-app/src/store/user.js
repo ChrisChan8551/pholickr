@@ -36,7 +36,7 @@ export const followUser = (userId) => async (dispatch) => {
 	if (res.ok) {
 		const user = await res.json();
 		dispatch(setUser(user));
-		dispatch(loadOtherUsers([...user.following, ...user.followers]));
+		// dispatch(loadOtherUsers([...user.following, ...user.followers]));
 		return user;
 	}
 };
@@ -49,7 +49,7 @@ export const unfollowUser = (userId) => async (dispatch) => {
 	if (res.ok) {
 		const user = await res.json();
 		dispatch(setUser(user));
-		dispatch(loadOtherUsers([...user.following, ...user.followers]));
+		// dispatch(loadOtherUsers([...user.following, ...user.followers]));
 		return user;
 	}
 };
