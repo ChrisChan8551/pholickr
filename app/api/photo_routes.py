@@ -33,6 +33,17 @@ def get_photo(id):
     return photo.to_dict()
 
 
+@photo_routes.route('/<int:id>/comments')
+@login_required
+def get_photo(id):
+    # print('************PHOTO COMMENTS********************')
+    photo = Photo.query.get(id)
+    comments = Comment.query.filter_by(photo_id=id).all()
+
+    return {"photo": photo.to_dict(),
+            "comments": [comment.to_dict() for comment in comments]}
+
+
 @photo_routes.route('/<int:id>/comments', methods=['POST'])
 def create_comment(id):
     form = CommentForm()
@@ -122,6 +133,7 @@ def edit_photo(id):
         db.session.commit()
         return photo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 @photo_routes.route('/fave/<int:id>', methods=['POST'])
 # @login_required
