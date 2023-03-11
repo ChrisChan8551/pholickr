@@ -24,7 +24,7 @@ def seed_users():
         User(firstName='Demo', lastName='User', username="Demo", image='https://cdn-icons-png.flaticon.com/512/9591/9591054.png', email="demo@aa.io", password="password")
     ]
 
-    for i in range(1, 30):
+    for i in range(1, 13):
         name = random.choice(names)
         last_name = random.choice(names)
         username = name.lower() + str(i)
