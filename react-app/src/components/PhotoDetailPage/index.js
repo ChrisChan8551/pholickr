@@ -170,7 +170,7 @@ function PhotoDetailPage() {
 											Number(photoId) && (
 											<div
 												className='comment-list'
-												key={`${comment.id}`}
+												key={`${comment?.id}`}
 											>
 												<div className='user-comment'>
 													<div>

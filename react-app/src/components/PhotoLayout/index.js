@@ -11,56 +11,19 @@ import { selectSearchbarValue } from '../../store/searchbar';
 const MAX_PHOTO_COUNT = 30;
 
 function getLimitedPhotosList(photos, searchbarValue = '') {
-	const numPhotos = photos.length;
-	const selectedIndices = new Set();
-	while (
-		selectedIndices.size < MAX_PHOTO_COUNT &&
-		selectedIndices.size < numPhotos
-	) {
-		const randomIndex = Math.floor(Math.random() * numPhotos);
-		if (
-			!selectedIndices.has(randomIndex) &&
-			photos[randomIndex].title
-				.toLowerCase()
-				.includes(searchbarValue.toLowerCase())
-		) {
-			selectedIndices.add(randomIndex);
-		}
+	const filteredPhotos = photos.filter((photo) =>
+		photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
+	);
+	const photoCount = Math.min(filteredPhotos.length, MAX_PHOTO_COUNT);
+	const selectedPhotos = [];
+
+	while (selectedPhotos.length < photoCount) {
+		const randomIndex = Math.floor(Math.random() * filteredPhotos.length);
+		selectedPhotos.push(filteredPhotos[randomIndex]);
+		filteredPhotos.splice(randomIndex, 1);
 	}
-	const selectedPhotos = Array.from(selectedIndices).map((i) => photos[i]);
+
 	return selectedPhotos;
-}
-
-// function getLimitedPhotosList(photos, searchbarValue = '') {
-// 	const shuffledPhotos = photos.sort(() => 0.5 - Math.random());
-// 	const selectedPhotos = shuffledPhotos
-// 		.filter((photo) =>
-// 			photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
-// 		)
-// 		.slice(0, MAX_PHOTO_COUNT);
-// 	return selectedPhotos;
-// }
-
-// function getLimitedPhotosList(photos, searchbarValue = '') {
-// 	const selectedPhotos = [];
-// 	const shuffledIndexes = shuffleArray([...Array(photos.length).keys()]);
-
-// 	for (let i = 0; i < MAX_PHOTO_COUNT && i < shuffledIndexes.length; i++) {
-// 		const photo = photos[shuffledIndexes[i]];
-// 		if (photo.title.toLowerCase().includes(searchbarValue.toLowerCase())) {
-// 			selectedPhotos.push(photo);
-// 		}
-// 	}
-
-// 	return selectedPhotos;
-// }
-
-function shuffleArray(array) {
-	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
-	}
-	return array;
 }
 
 function PhotoLayout() {
@@ -78,6 +41,16 @@ function PhotoLayout() {
 	const navigateToPhotoPage = (photo) => {
 		history.push(`/photos/${photo.id}`);
 	};
+
+	useEffect(() => {
+		const unlisten = history.listen(() => {
+			if (history.location.pathname === '/') {
+				setHasRenderedPhotos(false);
+				dispatch(getAllPhotos());
+			}
+		});
+		return unlisten;
+	}, [dispatch, history]);
 
 	useEffect(() => {
 		if (!hasRenderedPhotos && allPhotos.length) {
@@ -133,7 +106,7 @@ export function AddPinningControls({ photo, onPinningDone }) {
 	};
 
 	const handleSubmit = () => {
-		dispatch(addPinning(saveTo, photo.id));
+		dispatch(addPinning(saveTo, photo?.id));
 		onPinningDone();
 	};
 
@@ -147,9 +120,9 @@ export function AddPinningControls({ photo, onPinningDone }) {
 				onChange={handleChange}
 			>
 				<option value=''>choose an album</option>
-				{myAlbums.map((album) => (
-					<option key={album.id} value={album.id}>
-						{album.title}
+				{myAlbums?.map((album) => (
+					<option key={album?.id} value={album?.id}>
+						{album?.title}
 					</option>
 				))}
 			</select>
