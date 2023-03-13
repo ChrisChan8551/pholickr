@@ -153,7 +153,7 @@ function PhotoDetailPage() {
 					<div className='item2'>
 						<div className='g2-container'>
 							<div className='num-count'>
-								{numComments?.length}
+								{numComments.length}
 							</div>
 							<div className='num-label'>comments</div>
 						</div>
@@ -161,16 +161,15 @@ function PhotoDetailPage() {
 					<div className='comments-box'>
 						<div className='list-comments'>
 							{comments &&
-								comments?.map((comment, idx) => {
+								comments.map((comment, idx) => {
 									const user = users?.find(
-										(user) => user?.id === comment?.userId
+										(user) => user?.id === comment.userId
 									);
 									return (
-										comment?.photoId ===
-											Number(photoId) && (
+										comment.photoId === Number(photoId) && (
 											<div
 												className='comment-list'
-												key={`${comment?.id}`}
+												key={`${comment.id}`}
 											>
 												<div className='user-comment'>
 													<div>
@@ -194,11 +193,11 @@ function PhotoDetailPage() {
 															>{`${user?.username}`}</NavLink>
 														</div>
 														<div className='comment-font'>
-															{`${comment?.text}`}
+															{`${comment.text}`}
 														</div>
 													</div>
 												</div>
-												{Number(comment?.userId) ===
+												{Number(comment.userId) ===
 													Number(currentUser?.id) && (
 													<>
 														<div className='comment-actions'>
@@ -209,14 +208,14 @@ function PhotoDetailPage() {
 																onClick={() =>
 																	dispatch(
 																		deleteAComment(
-																			comment?.id
+																			comment.id
 																		)
 																	)
 																}
 															/>
 															{!showEditCommentForm &&
 																Number(
-																	comment?.userId
+																	comment.userId
 																) ===
 																	Number(
 																		currentUser?.id
