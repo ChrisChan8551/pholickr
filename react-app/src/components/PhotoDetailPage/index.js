@@ -31,8 +31,8 @@ function PhotoDetailPage() {
 	const comments = Object.values(useSelector((state) => state.comment));
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
-		);
-		const users = Object.values(useSelector((state) => state.otherUser));
+	);
+	const users = Object.values(useSelector((state) => state.otherUser));
 	const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
 
 	useEffect(() => {
@@ -116,11 +116,13 @@ function PhotoDetailPage() {
 				{photoEditForm}
 
 				<div className='PhotoDetail--Image--Container'>
-					<img
-						className='PhotoDetail--Image'
-						src={photo?.imageUrl}
-						alt=''
-					></img>
+					{photo?.imageUrl && (
+						<img
+							className='PhotoDetail--Image'
+							src={photo?.imageUrl}
+							alt=''
+						></img>
+					)}
 				</div>
 				{!showEditPhotoForm && currentUser?.id === photo?.userId && (
 					<div>
