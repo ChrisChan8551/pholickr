@@ -16,11 +16,10 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @comment_routes.route('/', methods=['GET'])
-# @login_required
+@login_required
 def get_all_comments():
     comments = Comment.query.all()
     # print('********GET ALL COMMENTS********')
-    # print([comment.to_dict() for comment in comments])
     return jsonify([comment.to_dict() for comment in comments])
 
 
@@ -33,7 +32,7 @@ def get_comment(id):
 
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_comment(id):
     comment = Comment.query.get(id)
     if comment:
@@ -45,7 +44,7 @@ def delete_comment(id):
 
 
 @comment_routes.route('/<int:id>', methods=["PATCH", "PUT"])
-# @login_required
+@login_required
 def edit_comment(id):
     # data = request.json
     # print('*********************EDIT COMMENT*******************************')

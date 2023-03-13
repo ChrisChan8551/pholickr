@@ -22,27 +22,26 @@ function PhotoDetailPage() {
 	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
 	const [text, setText] = useState('');
 	const [currentComment, setCurrentComment] = useState('');
+	//eslint-disable-next-line
+	const [errors, setErrors] = useState([]);
 	let photoEditForm;
 	let editComment;
+	const currentUser = useSelector((state) => state.session.user);
+	const photo = useSelector((state) => state.photo[photoId]);
 	const comments = Object.values(useSelector((state) => state.comment));
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
-	);
-
-	const users = Object.values(useSelector((state) => state.otherUser));
-	//eslint-disable-next-line
-	const [errors, setErrors] = useState([]);
-	const photo = useSelector((state) => state.photo[photoId]);
+		);
+		const users = Object.values(useSelector((state) => state.otherUser));
 	const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
-	const currentUser = useSelector((state) => state.session.user);
-
-	useEffect(() => {
-		dispatch(selectPhotoComments(photoId));
-	}, [dispatch, photoId]);
 
 	useEffect(() => {
 		dispatch(getOnePhoto(photoId));
 	}, [photoId, dispatch]);
+
+	useEffect(() => {
+		dispatch(selectPhotoComments(photoId));
+	}, [dispatch, photoId]);
 
 	useEffect(() => {
 		if (photo?.userId && !photoAuthor) {

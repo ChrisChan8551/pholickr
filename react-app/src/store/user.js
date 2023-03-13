@@ -57,8 +57,6 @@ export const unfollowUser = (userId) => async (dispatch) => {
 const defaultState = {};
 
 const otherUsersReducer = (state = defaultState, action) => {
-	// let newState = { ...state };
-
 	switch (action.type) {
 		case FULL_RESET:
 			return { ...defaultState };

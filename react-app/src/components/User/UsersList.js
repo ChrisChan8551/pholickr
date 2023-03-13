@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers } from '../../store/user';
-import ProfileCard from '../../components/ProfileCard';
+// import ProfileCard from '../../components/ProfileCard';
 import '../../components/ProfileCard/profilecard.css';
 
 function UsersList() {
@@ -13,7 +13,7 @@ function UsersList() {
 		dispatch(getAllUsers());
 	}, [dispatch]);
 
-	let userComponents;
+	// let userComponents;
 
 	if (!users) return null;
 
@@ -22,11 +22,7 @@ function UsersList() {
 			<h1>User List: </h1>
 			{users.map((user) => (
 				<div className='profile-container' key={user.id}>
-					<img
-						className='profile-img2'
-						src={user.image}
-						alt=''
-					/>
+					<img className='profile-img2' src={user.image} alt='' />
 
 					<NavLink
 						className='Author'

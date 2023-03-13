@@ -22,13 +22,9 @@ function getLimitedPhotosList(photos, searchbarValue = '') {
 
 function PhotoLayout() {
 	const sessionUser = useSelector((state) => state.session.user);
-	// const { searchbarValue, allPhotos } = useSelector((state) => {
-	// 	const searchbarValue = selectSearchbarValue(state);
-	// 	const allPhotos = Object.values(state.photo);
-	// 	return { searchbarValue, allPhotos };
-	// });
-	const searchbarValue = useSelector(selectSearchbarValue);
+	
 	const allPhotos = useSelector((state) => Object.values(state.photo));
+	const searchbarValue = useSelector(selectSearchbarValue);
 	const [photos, setPhotos] = useState([]);
 	const [hasRenderedPhotos, setHasRenderedPhotos] = useState(false);
 	const lastSearchRef = useRef(searchbarValue);
@@ -48,6 +44,16 @@ function PhotoLayout() {
 	}, [hasRenderedPhotos, allPhotos]);
 
 	useEffect(() => {
+		async function fetchPhotosAndAlbums() {
+			await dispatch(getAllAlbums());
+			await dispatch(getAllPhotos());
+		}
+		fetchPhotosAndAlbums();
+	}, [dispatch]);
+
+
+
+	useEffect(() => {
 		const timer = setTimeout(() => {
 			if (lastSearchRef.current !== searchbarValue) {
 				lastSearchRef.current = searchbarValue;
@@ -60,13 +66,6 @@ function PhotoLayout() {
 		};
 	}, [allPhotos, searchbarValue]);
 
-	useEffect(() => {
-		async function fetchPhotosAndAlbums() {
-			await dispatch(getAllAlbums());
-			await dispatch(getAllPhotos());
-		}
-		fetchPhotosAndAlbums();
-	}, [dispatch]);
 
 	return (
 		<div className='album-photo-container'>
