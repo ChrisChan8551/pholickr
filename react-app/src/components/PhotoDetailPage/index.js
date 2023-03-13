@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useParams, NavLink } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 import './PhotoDetailPage.css';
 import { getOneUser, getAllUsers } from '../../store/user';
 import {
-	getAllComments,
+	selectPhotoComments,
 	addComment,
 	deleteAComment,
 } from '../../store/comment';
@@ -16,9 +15,9 @@ import ProfileCard from '../ProfileCard';
 import EditCommentForm from '../EditComment/EditCommentForm';
 
 function PhotoDetailPage() {
-	const { photoId } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { photoId } = useParams();
 	const [showEditPhotoForm, setShowEditPhotoForm] = useState(false);
 	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
 	const [text, setText] = useState('');
@@ -37,17 +36,9 @@ function PhotoDetailPage() {
 	const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
 	const currentUser = useSelector((state) => state.session.user);
 
-	// const { photo, photoAuthor, currentUser } = useSelector((state) => {
-	// 	const photo = state.photo[photoId];
-	// 	const photoAuthor = state.otherUser[photo?.userId];
-	// 	const currentUser = state.session.user;
-
-	// 	return {
-	// 		photo,
-	// 		photoAuthor,
-	// 		currentUser,
-	// 	};
-	// });
+	useEffect(() => {
+		dispatch(selectPhotoComments(photoId));
+	}, [dispatch, photoId]);
 
 	useEffect(() => {
 		dispatch(getOnePhoto(photoId));
@@ -58,10 +49,6 @@ function PhotoDetailPage() {
 			dispatch(getOneUser(photo.userId));
 		}
 	}, [photo, photoAuthor, dispatch]);
-
-	useEffect(() => {
-		dispatch(getAllComments());
-	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
@@ -80,6 +67,7 @@ function PhotoDetailPage() {
 
 		history.push(`/photos`);
 	};
+
 	const createComment = async (e) => {
 		if (e.keyCode === 13 && text.trimEnd() !== '') {
 			e.preventDefault();

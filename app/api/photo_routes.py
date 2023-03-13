@@ -17,7 +17,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @photo_routes.route('/', methods=['GET'])
-# @login_required
+@login_required
 def get_all_photos():
     photos = Photo.query.all()
     # print('********GET ALL PHOTOS********')
@@ -33,7 +33,20 @@ def get_photo(id):
     return photo.to_dict()
 
 
+@photo_routes.route('/<int:id>/comments', methods=['GET'])
+@login_required
+def get_comment_by_photoId(id):
+    # print("************GET COMMENTS BY PHOTO ID********************")
+    comments = Comment.query.filter_by(photoId=id).all()
+    # print('*******GET 1 PHOTO COMMENT****************', photo)
+    # print('*******COMMENTS****************',comments)
+    # comments = Comment.query.filter_by(photo)
+    comment_list = [comment.to_dict() for comment in comments]
+    return jsonify(comment_list)
+
+
 @photo_routes.route('/<int:id>/comments', methods=['POST'])
+@login_required
 def create_comment(id):
     form = CommentForm()
     # print("************CREATE NEW COMMENT********************")
@@ -123,8 +136,9 @@ def edit_photo(id):
         return photo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+
 @photo_routes.route('/fave/<int:id>', methods=['POST'])
-# @login_required
+@login_required
 def fave(id):
     photo = Photo.query.filter_by(id=id).first()
     user = current_user.id
@@ -136,7 +150,7 @@ def fave(id):
 
 
 @photo_routes.route('/unfave/<int:id>', methods=['POST'])
-# @login_required
+@login_required
 def unfave(id):
     photo = Photo.query.filter_by(id=id).first()
 

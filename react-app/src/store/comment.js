@@ -27,6 +27,17 @@ const removeComment = (commentId) => {
 	};
 };
 
+export const selectPhotoComments = (photoId) => async (dispatch) => {
+	const response = await fetch(`/api/photos/${photoId}/comments`);
+	// console.log('*******STORE SELECT PHOTO COMMENTS ****', photoId);
+	// console.log('*******STORE SELECT RESPONSE COMMENTS ****', response);
+	if (response.ok) {
+		const comments = await response.json();
+		// console.log('*******STORE COMMENTS ****', comments);
+		dispatch(loadComments(comments));
+		// return comments;
+	}
+};
 export const getAllComments = () => async (dispatch) => {
 	const response = await fetch('/api/comments/');
 	if (response.ok) {
@@ -77,27 +88,6 @@ export const addComment = (photoId, comments) => async (dispatch) => {
 		return error;
 	}
 };
-
-// export const addComment = (photoId, text) => async (dispatch) => {
-//   const payload = { photoId, text };
-
-//   const response = await fetch(`/api/comments`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(payload),
-//   });
-
-//   if (response.ok) {
-//     const comment = await response.json();
-//     dispatch(loadOneComment(comment));
-//     return comment;
-//   } else {
-//     const error = await response.json();
-//     return error;
-//   }
-// };
 
 export const editComment = (commentId, commentData) => async (dispatch) => {
 	const response = await fetch(`/api/comments/${commentId}`, {
@@ -160,18 +150,6 @@ const commentsReducer = (state = initialState, action) => {
 export default commentsReducer;
 
 export function selectMyComments(state) {
-	const currentUser = state.session.user;
-
-	if (!currentUser) {
-		return [];
-	}
-
-	return Object.values(state.comment).filter(
-		({ userId: commentAuthorId }) => commentAuthorId === currentUser.id
-	);
-}
-
-export function selectPhotoComments(state) {
 	const currentUser = state.session.user;
 
 	if (!currentUser) {
