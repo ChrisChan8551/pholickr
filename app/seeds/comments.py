@@ -6,7 +6,7 @@ def seed_comments():
     user_count = User.query.count()
     commentData = []
     for photoId in range(1, 937):
-        for _ in range(10):
+        for _ in range(5):
             random_user_id = random.randint(1, user_count)
             random_user = User.query.filter_by(id=random_user_id).first()
             commentText = random.choice([

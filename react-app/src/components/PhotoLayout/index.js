@@ -11,24 +11,26 @@ import { selectSearchbarValue } from '../../store/searchbar';
 const MAX_PHOTO_COUNT = 30;
 
 function getLimitedPhotosList(photos, searchbarValue = '') {
-	const shuffledPhotos = photos.sort(() => 0.5 - Math.random());
-	const selectedPhotos = shuffledPhotos
-		.filter((photo) =>
-			photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
-		)
-		.slice(0, MAX_PHOTO_COUNT);
+	const filteredPhotos = photos.filter((photo) =>
+		photo.title.toLowerCase().includes(searchbarValue.toLowerCase())
+	);
+	const photoCount = Math.min(filteredPhotos.length, MAX_PHOTO_COUNT);
+	const selectedPhotos = [];
+
+	while (selectedPhotos.length < photoCount) {
+		const randomIndex = Math.floor(Math.random() * filteredPhotos.length);
+		selectedPhotos.push(filteredPhotos[randomIndex]);
+		filteredPhotos.splice(randomIndex, 1);
+	}
+
 	return selectedPhotos;
 }
 
 function PhotoLayout() {
 	const sessionUser = useSelector((state) => state.session.user);
-	// const { searchbarValue, allPhotos } = useSelector((state) => {
-	// 	const searchbarValue = selectSearchbarValue(state);
-	// 	const allPhotos = Object.values(state.photo);
-	// 	return { searchbarValue, allPhotos };
-	// });
-	const searchbarValue = useSelector(selectSearchbarValue);
+
 	const allPhotos = useSelector((state) => Object.values(state.photo));
+	const searchbarValue = useSelector(selectSearchbarValue);
 	const [photos, setPhotos] = useState([]);
 	const [hasRenderedPhotos, setHasRenderedPhotos] = useState(false);
 	const lastSearchRef = useRef(searchbarValue);
@@ -41,11 +43,29 @@ function PhotoLayout() {
 	};
 
 	useEffect(() => {
+		const unlisten = history.listen(() => {
+			if (history.location.pathname === '/') {
+				setHasRenderedPhotos(false);
+				dispatch(getAllPhotos());
+			}
+		});
+		return unlisten;
+	}, [dispatch, history]);
+
+	useEffect(() => {
 		if (!hasRenderedPhotos && allPhotos.length) {
 			setHasRenderedPhotos(true);
 			setPhotos(getLimitedPhotosList(allPhotos));
 		}
 	}, [hasRenderedPhotos, allPhotos]);
+
+	useEffect(() => {
+		async function fetchPhotosAndAlbums() {
+			await dispatch(getAllAlbums());
+			await dispatch(getAllPhotos());
+		}
+		fetchPhotosAndAlbums();
+	}, [dispatch]);
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -59,14 +79,6 @@ function PhotoLayout() {
 			clearTimeout(timer);
 		};
 	}, [allPhotos, searchbarValue]);
-
-	useEffect(() => {
-		async function fetchPhotosAndAlbums() {
-			await dispatch(getAllAlbums());
-			await dispatch(getAllPhotos());
-		}
-		fetchPhotosAndAlbums();
-	}, [dispatch]);
 
 	return (
 		<div className='album-photo-container'>
@@ -94,7 +106,7 @@ export function AddPinningControls({ photo, onPinningDone }) {
 	};
 
 	const handleSubmit = () => {
-		dispatch(addPinning(saveTo, photo.id));
+		dispatch(addPinning(saveTo, photo?.id));
 		onPinningDone();
 	};
 
@@ -108,9 +120,9 @@ export function AddPinningControls({ photo, onPinningDone }) {
 				onChange={handleChange}
 			>
 				<option value=''>choose an album</option>
-				{myAlbums.map((album) => (
-					<option key={album.id} value={album.id}>
-						{album.title}
+				{myAlbums?.map((album) => (
+					<option key={album?.id} value={album?.id}>
+						{album?.title}
 					</option>
 				))}
 			</select>

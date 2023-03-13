@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useParams, NavLink } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteAPhoto, getOnePhoto } from '../../store/photo';
 import './PhotoDetailPage.css';
 import { getOneUser, getAllUsers } from '../../store/user';
 import {
-	getAllComments,
+	selectPhotoComments,
 	addComment,
 	deleteAComment,
 } from '../../store/comment';
@@ -16,52 +15,39 @@ import ProfileCard from '../ProfileCard';
 import EditCommentForm from '../EditComment/EditCommentForm';
 
 function PhotoDetailPage() {
-	const { photoId } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { photoId } = useParams();
 	const [showEditPhotoForm, setShowEditPhotoForm] = useState(false);
 	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
 	const [text, setText] = useState('');
 	const [currentComment, setCurrentComment] = useState('');
+	//eslint-disable-next-line
+	const [errors, setErrors] = useState([]);
 	let photoEditForm;
 	let editComment;
+	const currentUser = useSelector((state) => state.session.user);
+	const photo = useSelector((state) => state.photo[photoId]);
 	const comments = Object.values(useSelector((state) => state.comment));
 	const numComments = comments.filter(
 		(comment) => comment.photoId === Number(photoId)
 	);
-
 	const users = Object.values(useSelector((state) => state.otherUser));
-	//eslint-disable-next-line
-	const [errors, setErrors] = useState([]);
-	const photo = useSelector((state) => state.photo[photoId]);
 	const photoAuthor = useSelector((state) => state.otherUser[photo?.userId]);
-	const currentUser = useSelector((state) => state.session.user);
-
-	// const { photo, photoAuthor, currentUser } = useSelector((state) => {
-	// 	const photo = state.photo[photoId];
-	// 	const photoAuthor = state.otherUser[photo?.userId];
-	// 	const currentUser = state.session.user;
-
-	// 	return {
-	// 		photo,
-	// 		photoAuthor,
-	// 		currentUser,
-	// 	};
-	// });
 
 	useEffect(() => {
 		dispatch(getOnePhoto(photoId));
 	}, [photoId, dispatch]);
 
 	useEffect(() => {
+		dispatch(selectPhotoComments(photoId));
+	}, [dispatch, photoId]);
+
+	useEffect(() => {
 		if (photo?.userId && !photoAuthor) {
 			dispatch(getOneUser(photo.userId));
 		}
 	}, [photo, photoAuthor, dispatch]);
-
-	useEffect(() => {
-		dispatch(getAllComments());
-	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
@@ -80,6 +66,7 @@ function PhotoDetailPage() {
 
 		history.push(`/photos`);
 	};
+
 	const createComment = async (e) => {
 		if (e.keyCode === 13 && text.trimEnd() !== '') {
 			e.preventDefault();
@@ -129,11 +116,13 @@ function PhotoDetailPage() {
 				{photoEditForm}
 
 				<div className='PhotoDetail--Image--Container'>
-					<img
-						className='PhotoDetail--Image'
-						src={photo?.imageUrl}
-						alt=''
-					></img>
+					{photo?.imageUrl && (
+						<img
+							className='PhotoDetail--Image'
+							src={photo?.imageUrl}
+							alt=''
+						></img>
+					)}
 				</div>
 				{!showEditPhotoForm && currentUser?.id === photo?.userId && (
 					<div>
@@ -173,8 +162,8 @@ function PhotoDetailPage() {
 						<div className='list-comments'>
 							{comments &&
 								comments.map((comment, idx) => {
-									const user = users.find(
-										(user) => user.id === comment.userId
+									const user = users?.find(
+										(user) => user?.id === comment.userId
 									);
 									return (
 										comment.photoId === Number(photoId) && (
@@ -187,7 +176,9 @@ function PhotoDetailPage() {
 														{user && (
 															<img
 																className='comment-image'
-																src={user.image}
+																src={
+																	user?.image
+																}
 																alt=''
 															/>
 														)}{' '}
@@ -207,7 +198,7 @@ function PhotoDetailPage() {
 													</div>
 												</div>
 												{Number(comment.userId) ===
-													Number(currentUser.id) && (
+													Number(currentUser?.id) && (
 													<>
 														<div className='comment-actions'>
 															<img
@@ -227,7 +218,7 @@ function PhotoDetailPage() {
 																	comment.userId
 																) ===
 																	Number(
-																		currentUser.id
+																		currentUser?.id
 																	) && (
 																	<img
 																		className='edit-icon'
