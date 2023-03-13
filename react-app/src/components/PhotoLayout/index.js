@@ -10,6 +10,27 @@ import { selectSearchbarValue } from '../../store/searchbar';
 
 const MAX_PHOTO_COUNT = 30;
 
+function getLimitedPhotosList(photos, searchbarValue = '') {
+	const numPhotos = photos.length;
+	const selectedIndices = new Set();
+	while (
+		selectedIndices.size < MAX_PHOTO_COUNT &&
+		selectedIndices.size < numPhotos
+	) {
+		const randomIndex = Math.floor(Math.random() * numPhotos);
+		if (
+			!selectedIndices.has(randomIndex) &&
+			photos[randomIndex].title
+				.toLowerCase()
+				.includes(searchbarValue.toLowerCase())
+		) {
+			selectedIndices.add(randomIndex);
+		}
+	}
+	const selectedPhotos = Array.from(selectedIndices).map((i) => photos[i]);
+	return selectedPhotos;
+}
+
 // function getLimitedPhotosList(photos, searchbarValue = '') {
 // 	const shuffledPhotos = photos.sort(() => 0.5 - Math.random());
 // 	const selectedPhotos = shuffledPhotos
@@ -20,19 +41,19 @@ const MAX_PHOTO_COUNT = 30;
 // 	return selectedPhotos;
 // }
 
-function getLimitedPhotosList(photos, searchbarValue = '') {
-	const selectedPhotos = [];
-	const shuffledIndexes = shuffleArray([...Array(photos.length).keys()]);
+// function getLimitedPhotosList(photos, searchbarValue = '') {
+// 	const selectedPhotos = [];
+// 	const shuffledIndexes = shuffleArray([...Array(photos.length).keys()]);
 
-	for (let i = 0; i < MAX_PHOTO_COUNT && i < shuffledIndexes.length; i++) {
-		const photo = photos[shuffledIndexes[i]];
-		if (photo.title.toLowerCase().includes(searchbarValue.toLowerCase())) {
-			selectedPhotos.push(photo);
-		}
-	}
+// 	for (let i = 0; i < MAX_PHOTO_COUNT && i < shuffledIndexes.length; i++) {
+// 		const photo = photos[shuffledIndexes[i]];
+// 		if (photo.title.toLowerCase().includes(searchbarValue.toLowerCase())) {
+// 			selectedPhotos.push(photo);
+// 		}
+// 	}
 
-	return selectedPhotos;
-}
+// 	return selectedPhotos;
+// }
 
 function shuffleArray(array) {
 	for (let i = array.length - 1; i > 0; i--) {

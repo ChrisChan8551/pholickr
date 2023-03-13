@@ -10,9 +10,9 @@ function GridLayout({
 }) {
 	return (
 		<div className='GridLayout--Container'>
-			{items.map((item) => (
+			{items?.map((item) => (
 				<GridItem
-					key={item.id}
+					key={item?.id}
 					item={item}
 					buttonLabel={buttonLabel}
 					onItemClick={onItemClick}
