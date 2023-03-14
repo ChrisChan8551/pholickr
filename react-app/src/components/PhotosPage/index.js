@@ -71,7 +71,7 @@ function PhotoPage() {
 								onPinningDone={closeActionPopOver}
 							/>
 
-							<button
+							{/* <button
 								className='grey-button'
 								onClick={() => {
 									dispatch(deleteAPhoto(photo.id));
@@ -79,7 +79,7 @@ function PhotoPage() {
 								}}
 							>
 								Delete
-							</button>
+							</button> */}
 						</>
 					)}
 				/>
