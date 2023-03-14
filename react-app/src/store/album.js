@@ -120,13 +120,13 @@ const albumReducer = (state = initialState, action) => {
 			return { ...initialState };
 
 		case REPLACE_ALBUM: {
-			const newState = { ...state };
+			let newState = { ...state };
 			newState[action.album.id] = action.album;
 			return newState;
 		}
 
 		case LOAD_ALBUMS: {
-			const newState = {};
+			let newState = {};
 			action.albums.forEach((album) => {
 				newState[album.id] = album;
 			});
@@ -134,14 +134,14 @@ const albumReducer = (state = initialState, action) => {
 		}
 
 		case ADD_ALBUM: {
-			const newState = { ...state };
+			let newState = { ...state };
 			newState[action.albums.id] = action.albums;
 			return newState;
 		}
 
 		case REMOVE_ALBUM: {
-			const newState = { ...state };
-			delete newState[action.albumId];
+			let newState = { ...state };
+			delete newState[action.albums];
 			return newState;
 		}
 
