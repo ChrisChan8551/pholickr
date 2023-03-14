@@ -27,7 +27,8 @@ class Album(db.Model):
     title = db.Column(db.String(255), nullable=False)
     imageUrl = db.Column(db.String(1500))
 
-    photos = db.relationship("Photo", secondary=pinnings, lazy="joined")
+    photos = db.relationship("Photo", secondary=pinnings,
+                             lazy="joined", cascade='all, delete, delete-orphan')
 
     def __repr__(self):
         return f'<AlbumId: {self.id}, userId: {self.userId}, title: {self.title},image:{self.imageUrl}>'
