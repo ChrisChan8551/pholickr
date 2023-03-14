@@ -62,8 +62,8 @@ const otherUsersReducer = (state = defaultState, action) => {
 			return { ...defaultState };
 
 		case LOAD_OTHER_USERS: {
-			// const newState = { ...state };
-			const newState = {};
+			let newState = { ...state };
+
 			action.users.forEach((user) => {
 				newState[user.id] = user;
 			});

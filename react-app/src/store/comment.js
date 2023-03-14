@@ -128,7 +128,7 @@ const commentsReducer = (state = initialState, action) => {
 			return { ...initialState };
 
 		case LOAD_ALL_COMMENTS: {
-			const newState = {};
+			let newState = { ...state };
 			action.comments.forEach((comment) => {
 				newState[comment.id] = comment;
 			});
@@ -136,14 +136,14 @@ const commentsReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ONE_COMMENT: {
-			const newState = {};
+			let newState = { ...state };
 			newState[action.comments.id] = action.comments;
 			return newState;
 		}
 
 		case REMOVE_COMMENT: {
-			const newState = { ...state };
-			delete newState[action.comments];
+			let newState = { ...state };
+			delete newState[action.commentId];
 			return newState;
 		}
 

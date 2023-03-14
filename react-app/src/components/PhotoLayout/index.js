@@ -61,7 +61,7 @@ function PhotoLayout() {
 
 	useEffect(() => {
 		async function fetchPhotosAndAlbums() {
-			await dispatch(getAllAlbums());
+			// await dispatch(getAllAlbums());
 			await dispatch(getAllPhotos());
 		}
 		fetchPhotosAndAlbums();

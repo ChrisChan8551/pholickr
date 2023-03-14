@@ -47,7 +47,7 @@
 // - [] faves
 // - [] fave count
 // - [] my photos - change to user photos, and add new photo button
-// - []
+// - [] add photo to albums in album detail page
 // - []
 // - []
 // - []

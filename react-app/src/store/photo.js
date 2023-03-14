@@ -115,7 +115,7 @@ const photosReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ALL_PHOTOS: {
-			const newState = {};
+			let newState = { ...state };
 			action.photos.forEach((photo) => {
 				newState[photo.id] = photo;
 			});
@@ -123,13 +123,13 @@ const photosReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ONE_PHOTO: {
-			const newState = {};
+			let newState = { ...state };
 			newState[action.photos.id] = action.photos;
 			return newState;
 		}
 
 		case REMOVE_PHOTO: {
-			const newState = { ...state };
+			let newState = { ...state };
 			delete newState[action.photos];
 			return newState;
 		}
