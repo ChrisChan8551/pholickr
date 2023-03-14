@@ -42,6 +42,10 @@ function PhotoPage() {
 		history.push(`/photos/${photo.id}`);
 	};
 
+	const deletePhoto = (photo) => {
+		dispatch(deleteAPhoto(photo));
+	};
+
 	return (
 		<div className='photo-main-container'>
 			<div className='photo-container'>
@@ -71,15 +75,15 @@ function PhotoPage() {
 								onPinningDone={closeActionPopOver}
 							/>
 
-							{/* <button
+							<button
 								className='grey-button'
 								onClick={() => {
-									dispatch(deleteAPhoto(photo.id));
+									deletePhoto(photo.id)
 									closeActionPopOver();
 								}}
 							>
 								Delete
-							</button> */}
+							</button>
 						</>
 					)}
 				/>
