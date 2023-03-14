@@ -29,4 +29,5 @@ class Comment(db.Model):
             'photoId': self.photoId,
             'userId': self.userId,
             'text': self.text,
+            'user': self.user.to_dict()
         }
