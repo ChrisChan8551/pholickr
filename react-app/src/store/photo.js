@@ -123,14 +123,14 @@ const photosReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ONE_PHOTO: {
-			const newState = { ...state };
+			const newState = {};
 			newState[action.photos.id] = action.photos;
 			return newState;
 		}
 
 		case REMOVE_PHOTO: {
 			const newState = { ...state };
-			delete newState[action.photoId];
+			delete newState[action.photos];
 			return newState;
 		}
 
