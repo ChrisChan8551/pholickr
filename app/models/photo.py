@@ -27,8 +27,10 @@ class Photo(db.Model):
     imageUrl = db.Column(db.String(1500))
 
     user = db.relationship('User', back_populates='photos')
-    comments = db.relationship('Comment', back_populates='photos')
-    faved_by = db.relationship('User', secondary=faves, back_populates='faves')
+    comments = db.relationship(
+        'Comment', back_populates='photos', cascade='all, delete')
+    faved_by = db.relationship(
+        'User', secondary=faves, back_populates='faves', cascade='all, delete')
 
     def __repr__(self):
         return f'<Photo Id: {self.id}, userId: {self.userId}, title: {self.title}, description: {self.description}, imageUrl: {self.imageUrl}>'
