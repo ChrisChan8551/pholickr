@@ -128,7 +128,7 @@ const commentsReducer = (state = initialState, action) => {
 			return { ...initialState };
 
 		case LOAD_ALL_COMMENTS: {
-			let newState = { ...state };
+			let newState = { };
 			action.comments.forEach((comment) => {
 				newState[comment.id] = comment;
 			});
