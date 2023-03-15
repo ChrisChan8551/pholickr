@@ -40,9 +40,12 @@ def get_album(id):
 @login_required
 def delete_album(id):
     album = Album.query.get(id)
-    db.session.delete(album)
-    db.session.commit()
-    return "sucessfully deleted Album"
+    if album:
+        db.session.delete(album)
+        db.session.commit()
+        return "sucessfully deleted Album"
+    else:
+        return "Album not found"
 
 
 @album_routes.route('/', methods=['GET', 'POST'])
