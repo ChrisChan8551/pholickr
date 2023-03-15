@@ -123,7 +123,7 @@ const photosReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ONE_PHOTO: {
-			let newState = {};
+			let newState = {...state };
 			newState[action.photos.id] = action.photos;
 			return newState;
 		}
