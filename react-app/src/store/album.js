@@ -26,10 +26,10 @@ const addAlbum = (albums) => {
 	};
 };
 
-const removeAlbum = (albums) => {
+const removeAlbum = (albumId) => {
 	return {
 		type: REMOVE_ALBUM,
-		albums,
+		albumId,
 	};
 };
 
@@ -141,7 +141,7 @@ const albumReducer = (state = initialState, action) => {
 
 		case REMOVE_ALBUM: {
 			let newState = { ...state };
-			delete newState[action.albums];
+			delete newState[action.albumId];
 			return newState;
 		}
 

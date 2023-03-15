@@ -28,36 +28,36 @@ const removePhoto = (photoId) => {
 };
 
 export const getAllPhotos = () => async (dispatch) => {
-	const response = await fetch('/api/photos/');
-	if (response.ok) {
+	const res = await fetch('/api/photos/');
+	if (res.ok) {
 		// const photos = photosObj.Photos
-		const photos = await response.json();
+		const photos = await res.json();
 		// console.log(photos)
 		dispatch(loadPhotos(photos));
 	}
 };
 
 export const getAllPhotosByAUser = (userId) => async (dispatch) => {
-	const response = await fetch(`/api/users/${userId}/photos`);
+	const res = await fetch(`/api/users/${userId}/photos`);
 
-	if (response.ok) {
-		const photos = await response.json();
+	if (res.ok) {
+		const photos = await res.json();
 		dispatch(loadPhotos(photos));
 	}
 };
 
 export const getOnePhoto = (photoId) => async (dispatch) => {
-	const response = await fetch(`/api/photos/${photoId}`);
+	const res = await fetch(`/api/photos/${photoId}`);
 
-	if (response.ok) {
-		const photo = await response.json();
+	if (res.ok) {
+		const photo = await res.json();
 		dispatch(loadOnePhoto(photo));
 		return photo;
 	}
 };
 
 export const addPhoto = (photos) => async (dispatch) => {
-	const response = await fetch('/api/photos/', {
+	const res = await fetch('/api/photos/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -65,43 +65,43 @@ export const addPhoto = (photos) => async (dispatch) => {
 		body: JSON.stringify(photos),
 	});
 
-	if (response.ok) {
-		const photo = await response.json();
+	if (res.ok) {
+		const photo = await res.json();
 		dispatch(loadOnePhoto(photo));
 		return photo;
 	} else {
-		const error = await response.json();
+		const error = await res.json();
 		return error;
 	}
 };
 
 export const editPhoto = (photoId, photoData) => async (dispatch) => {
-	const response = await fetch(`/api/photos/${photoId}`, {
+	const res = await fetch(`/api/photos/${photoId}`, {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(photoData),
 	});
-	if (response.ok) {
-		const photoData = await response.json();
+	if (res.ok) {
+		const photoData = await res.json();
 		dispatch(loadOnePhoto(photoData));
 		return photoData;
 	} else {
-		const error = await response.json();
+		const error = await res.json();
 		return error;
 	}
 };
 
 export const deleteAPhoto = (photoId) => async (dispatch) => {
-	const response = await fetch(`/api/photos/${photoId}`, {
+	const res = await fetch(`/api/photos/${photoId}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	});
 
-	if (response.ok) {
+	if (res.ok) {
 		dispatch(removePhoto(photoId));
 	}
 };
