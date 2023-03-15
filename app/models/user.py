@@ -83,5 +83,5 @@ class User(db.Model, UserMixin):
         return self.to_dict() | {
             'following': list(map(lambda u: u.to_dict_with_counts(), self.following)),
             'followers': list(map(lambda u: u.to_dict_with_counts(), self.followers)),
-            'comments': list(map(lambda c: c.to_dict(), self.comments))
+            # 'comments': list(map(lambda c: c.to_dict(), self.comments))
         }
