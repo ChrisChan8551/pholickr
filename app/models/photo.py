@@ -9,8 +9,11 @@ faves = db.Table(
         add_prefix_for_prod('users.id')), primary_key=True),
     db.Column('photoId', db.Integer, db.ForeignKey(
         add_prefix_for_prod('photos.id')), primary_key=True),
-    schema=SCHEMA
+    # schema=SCHEMA
 )
+
+if environment == "production":
+    faves.schema = SCHEMA
 
 
 class Photo(db.Model):

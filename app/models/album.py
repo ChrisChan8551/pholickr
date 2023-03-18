@@ -11,9 +11,11 @@ pinnings = db.Table(
         add_prefix_for_prod('photos.id')), primary_key=True),
     db.Column('albumId', db.Integer, db.ForeignKey(
         add_prefix_for_prod('albums.id')), primary_key=True),
-    schema=SCHEMA
+    # schema=SCHEMA
 )
 
+if environment == "production":
+    pinnings.schema = SCHEMA
 
 class Album(db.Model):
     __tablename__ = 'albums'
