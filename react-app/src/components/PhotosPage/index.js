@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums } from '../../store/album';
 
-import { getAllPhotos, deleteAPhoto, selectMyPhotos } from '../../store/photo';
+import { getAllPhotos, deleteAPhoto, selectMyPhotos,getAllPhotosByAUser } from '../../store/photo';
 import GridLayout from '../GridLayout';
 import { AddPinningControls } from '../PhotoLayout';
 import CreatePhotoModal from '../CreatePhotoModal';
@@ -17,9 +17,11 @@ function PhotoPage() {
 	let createPhotoForm;
 
 	useEffect(() => {
-		dispatch(getAllPhotos());
-		dispatch(getAllAlbums());
-	}, [dispatch]);
+		if (currentUser) {
+		  dispatch(getAllPhotosByAUser(currentUser.id));
+		  dispatch(getAllAlbums());
+		}
+	  }, [dispatch, currentUser]);
 
 	useEffect(() => {
 		setShowCreatePhotoForm(false);
