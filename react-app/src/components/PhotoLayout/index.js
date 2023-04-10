@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getAllPhotos } from '../../store/photo';
-import { getAllAlbums, selectMyAlbums } from '../../store/album';
+import { selectMyAlbums } from '../../store/album';
 import { useDispatch } from 'react-redux';
 import GridLayout from '../GridLayout';
 import { useHistory } from 'react-router-dom';
@@ -60,24 +60,11 @@ function PhotoLayout() {
 
 	useEffect(() => {
 		async function fetchPhotosAndAlbums() {
-			// await dispatch(getAllAlbums());
 			await dispatch(getAllPhotos());
 		}
 		fetchPhotosAndAlbums();
 	}, [dispatch]);
 
-	// useEffect(() => {
-	// 	const timer = setTimeout(() => {
-	// 		if (lastSearchRef.current !== searchbarValue) {
-	// 			lastSearchRef.current = searchbarValue;
-	// 			setPhotos(getLimitedPhotosList(allPhotos, searchbarValue));
-	// 		}
-	// 	}, 300);
-
-	// 	return () => {
-	// 		clearTimeout(timer);
-	// 	};
-	// }, [allPhotos, searchbarValue]);
 
 	useEffect(() => {
 		const handleKeyPress = (event) => {
