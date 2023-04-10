@@ -17,6 +17,7 @@ pinnings = db.Table(
 if environment == "production":
     pinnings.schema = SCHEMA
 
+
 class Album(db.Model):
     __tablename__ = 'albums'
 
@@ -30,7 +31,8 @@ class Album(db.Model):
     imageUrl = db.Column(db.String(1500))
 
     photos = db.relationship("Photo", secondary=pinnings,
-                             lazy="joined", cascade='all, delete')
+                             lazy="joined", back_populates="albums",
+                             cascade="all, delete")
 
     def __repr__(self):
         return f'<AlbumId: {self.id}, userId: {self.userId}, title: {self.title},image:{self.imageUrl}>'

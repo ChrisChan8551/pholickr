@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from app.models.album import pinnings
 
 faves = db.Table(
     'faves',
@@ -34,6 +34,9 @@ class Photo(db.Model):
         'Comment', back_populates='photos', cascade='all, delete')
     faved_by = db.relationship(
         'User', secondary=faves, back_populates='faves', cascade='all, delete')
+
+    albums = db.relationship("Album", secondary=pinnings,
+                             lazy="joined", back_populates="photos")
 
     def __repr__(self):
         return f'<Photo Id: {self.id}, userId: {self.userId}, title: {self.title}, description: {self.description}, imageUrl: {self.imageUrl}>'
