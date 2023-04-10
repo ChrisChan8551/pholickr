@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './HomePage.css';
-// import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Modal } from '../Modal/Modal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { login } from '../../store/session';
 import PhotoLayout from '../PhotoLayout';
 function HomePage() {
 	const dispatch = useDispatch();
-	// const history = useHistory();
-	// const [ setModalOpen] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showSignupModal, setShowSignupModal] = useState(false);
 	const currentUser = useSelector((state) => state.session.user);
@@ -23,7 +19,6 @@ function HomePage() {
 			email: 'demo@aa.io',
 			password: 'password',
 		};
-		// setModalOpen(false);
 		dispatch(login(user.email, user.password));
 	};
 

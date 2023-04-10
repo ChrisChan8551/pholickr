@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { editPhoto, getOnePhoto } from '../../store/photo';
 
@@ -8,9 +7,6 @@ function EditPhotoForm({ photo, hideForm }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { photoId } = useParams();
-	// const allPhotos = useSelector((state) => state.photo);
-	// const specificPhoto = allPhotos[photoId];
-	// const specificPhoto = getOnePhoto[photoId];
 	const [title, setTitle] = useState(photo.title);
 	const [imageUrl, setImageUrl] = useState(photo.imageUrl);
 	const [description, setDescription] = useState(photo.description);
@@ -50,7 +46,6 @@ function EditPhotoForm({ photo, hideForm }) {
 	return (
 		<section className='edit-photo-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
-				{/* <h1 className='edit'>Edit Photo</h1> */}
 				<div className='div-form-icon'>
 					<img className='form-icon' src='/pho.png' alt='' />
 				</div>

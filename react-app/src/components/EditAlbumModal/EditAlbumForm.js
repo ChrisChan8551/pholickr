@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import {useSelector} from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { editAlbum, getOneAlbum } from '../../store/album';
-// import { getAllPhotos } from '../../store/photo';
-// import './EditAlbumForm.css';
 
 const EditAlbumForm = ({ album, hideForm }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { albumId } = useParams();
-	// const allAlbums = useSelector((state) => state.album);
 	const [title, setTitle] = useState(album.title);
 	const [imageUrl, setImageUrl] = useState(album.imageUrl);
 	const [errors, setErrors] = useState([]);
@@ -49,7 +45,6 @@ const EditAlbumForm = ({ album, hideForm }) => {
 	return (
 		<section className='edit-album-form'>
 			<form className='edit-form' onSubmit={handleSubmit}>
-				{/* <h1 className='modal-title'>Edit Album</h1> */}
 				<div className='div-form-icon'>
 					<img className='form-icon' src='/pho.png' alt='' />
 				</div>

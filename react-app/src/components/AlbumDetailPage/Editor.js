@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import EditorInput from './EditorInput';
 import { useParams } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editAlbum } from '../../store/album';
-// import "./Editor.css";
 
 function AlbumDetailEditor({ setOpen }) {
 	const { albumId } = useParams();
 	const album = useSelector((state) => state.album[albumId]);
 	const dispatch = useDispatch();
-
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
-	// const [description, setDescription] = useState("");
 	const [pending, setPending] = useState(false);
 	const [errors, setErrors] = useState([]);
-	// const history = useHistory();
+
 	useEffect(() => {
 		setTitle(album.title);
-		// setDescription(album.description);
 		setImageUrl(album.imageUrl);
 	}, [album]);
-
-	// const handleSubmit = async (e) => {};
 
 	return (
 		<div className='AlbumDetail--Editor--Container'>
@@ -67,14 +60,7 @@ function AlbumDetailEditor({ setOpen }) {
 							setValue={setTitle}
 							disabled={pending}
 						/>
-						{/* <EditorInput
-              name="Description"
-              type="textarea"
-              rows={6}
-              value={description}
-              setValue={setDescription}
-              disabled={pending}
-            /> */}
+					
 						<EditorInput
 							name='ImageUrl'
 							value={imageUrl}

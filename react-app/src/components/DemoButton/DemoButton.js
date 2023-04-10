@@ -1,7 +1,6 @@
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-// import {useState} from "react";
 import { useHistory } from 'react-router-dom';
 
 const DemoButton = ({ email, password }) => {

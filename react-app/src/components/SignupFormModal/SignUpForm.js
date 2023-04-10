@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
-// import "./SignUpForm.css";
 
 const SignUpForm = ({ showSignupModal, onClose }) => {
 	const dispatch = useDispatch();
@@ -27,21 +26,14 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 			if (data) {
 				setErrors(data);
 			}
-			// ).catch(async (res) => {
-			// 	const data = await res.json();
-			// 	console.log(data.errors);
-			// 	if (data && data.errors) setErrors([data.errors]);
-			// });
 		} else {
 			showSignupModal(false);
-			// onClose();
 		}
 	};
 
 	return (
 		<div className='signup_container'>
 			<div className='signup_header'>
-				{/* <h1>Sign Up</h1> */}
 				<div className='div-form-icon'>
 					<img className='form-icon' src='/pho.png' alt='' />
 				</div>

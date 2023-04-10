@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import {useSelector}  from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import {useParams}  from 'react-router-dom';
 import { addPhoto } from '../../store/photo';
 
 function CreatePhotoForm({ album, hideForm }) {
@@ -12,12 +10,6 @@ function CreatePhotoForm({ album, hideForm }) {
 	const [imageUrl, setImageUrl] = useState('');
 	const [description, setDescription] = useState('');
 	const [errors, setErrors] = useState([]);
-	// const { albumId } = useParams();
-
-	// const handleClickAway = (e) => {
-	// 	e.preventDefault();
-	// 	hideForm();
-	// };
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

@@ -1,6 +1,4 @@
-/* .Splash {
-	max-width: 1512px;
-} */
+
 .icon {
 	display: flex;
 	align-items: center;
@@ -85,9 +83,6 @@
 	min-width: 108px;
 }
 
-/* .button:hover {
-	background-color: #3e8e41;
-} */
 
 .submit-button {
 	border: 0px;

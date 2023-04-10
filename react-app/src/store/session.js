@@ -1,7 +1,6 @@
 import { fullReset, FULL_RESET } from './full-reset';
 import { getAllPhotos } from './photo';
 
-// constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const LOAD_USERS = 'user/LOAD_USERS';
@@ -103,7 +102,7 @@ export const signUp =
 				password,
 			}),
 		});
-		// console.log('*************RESPONSE*********', response);
+		
 		if (response.ok) {
 			const data = await response.json();
 			dispatch(setUser(data));

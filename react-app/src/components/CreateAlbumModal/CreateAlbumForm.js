@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import {useSelector} from 'react-redux';
-// import { useHistory } from 'react-router-dom';
-// import { useParams } from 'react-router-dom';
 import { createAlbum } from '../../store/album';
 
 function CreateAlbumForm({ album, hideForm }) {
 	const dispatch = useDispatch();
-	// const history = useHistory();
 	const [title, setTitle] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
-	// const [description, setDescription] = useState('');
 	const [errors, setErrors] = useState([]);
 
 	const handleSubmit = async (e) => {
@@ -18,7 +13,6 @@ function CreateAlbumForm({ album, hideForm }) {
 		setErrors([]);
 		const payload = { title, imageUrl };
 		let data = await dispatch(createAlbum(payload));
-
 		if (data.errors) {
 			setErrors([...Object.values(data.errors)]);
 		} else {
@@ -42,7 +36,6 @@ function CreateAlbumForm({ album, hideForm }) {
 	return (
 		<section className='create-album-form'>
 			<form className='create-form' onSubmit={handleSubmit}>
-				{/* <h1 className='create'>Create Album</h1> */}
 				<ul>
 					{errors.map((error, idx) => (
 						<li className='edit-errors' key={idx}>

@@ -11,7 +11,6 @@ function EditCommentForm({ comment, hideForm }) {
 	const [errors, setErrors] = useState([]);
 
 	const handleSubmit = async (e) => {
-		// console.log('************* HANDLE SUBMIT ******', comment);
 		e.preventDefault();
 		setErrors([]);
 		const payload = { text };

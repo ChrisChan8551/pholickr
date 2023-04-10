@@ -3,21 +3,15 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums, deleteAlbum, selectMyAlbums } from '../../store/album';
 import GridLayout from '../GridLayout';
-// import { AddPinningControls } from '../PhotoLayout';
 import CreateAlbumModal from '../CreateAlbumModal';
 
 function AlbumsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// const albums = Object.values(useSelector((state) => state.album))
 	const myAlbums = useSelector(selectMyAlbums);
-	// const albums = useSelector((state) => state.album)
-	// const album = Object.values(albums)
 	const currentUser = useSelector((state) => state.session.user);
 	const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
 	let createAlbumForm;
-	// console.log('****************ALBUMS***************', albums);
-	// console.log('****************ALBUMS***************',album)
 
 	useEffect(() => {
 		dispatch(getAllAlbums());
@@ -39,10 +33,6 @@ function AlbumsPage() {
 			/>
 		);
 	}
-
-	//   const navigateToCreateAlbumForm = async (e) => {
-	//     history.push("/albumform");
-	//   };
 
 	const navigateToAlbum = (album) => {
 		history.push(`/albums/${album.id}`);
@@ -67,15 +57,11 @@ function AlbumsPage() {
 				</div>
 				<GridLayout
 					className='myAlbums'
-					items={myAlbums} 
+					items={myAlbums}
 					buttonLabel='Remove'
 					onItemClick={navigateToAlbum}
 					renderItemActions={(album, closeActionPopOver) => (
 						<>
-							{/* <AddPinningControls
-								photo={album}
-								onPinningDone={closeActionPopOver}
-							/> */}
 
 							<button
 								className='blue-button'

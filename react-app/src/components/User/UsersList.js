@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers } from '../../store/user';
-// import ProfileCard from '../../components/ProfileCard';
 import '../../components/ProfileCard/profilecard.css';
 
 function UsersList() {
@@ -12,8 +11,6 @@ function UsersList() {
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, [dispatch]);
-
-	// let userComponents;
 
 	if (!users) return null;
 

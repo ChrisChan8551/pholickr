@@ -85,7 +85,6 @@ const Navigation = () => {
 													src={currentUser.image}
 													alt=''
 												/>
-
 											</div>
 											<div className='user_info'>
 												<div>

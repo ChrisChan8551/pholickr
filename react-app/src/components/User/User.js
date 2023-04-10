@@ -1,4 +1,3 @@
-// import { faCropSimple } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
@@ -7,8 +6,6 @@ import { getOneUser, followUser, unfollowUser } from '../../store/user';
 import GridLayout from '../GridLayout';
 import FollowersModal from '../FollowersModal';
 import FollowingModal from '../FollowingModal';
-
-// import { AddPinningControls } from '../PhotoLayout';
 
 function User() {
 	const { userId } = useParams();
@@ -40,13 +37,7 @@ function User() {
 			};
 		}
 	);
-	// console.log('***********currentUser***************', currentUser);
-	// console.log('***********otherUser***************', otherUser);
-	// console.log('***********isFollowing***************', isFollowing);
-	// console.log(
-	// 	'***********currentUser.following***************',
-	// 	currentUser.following
-	// );
+
 	const toggleFollowersModal = () => {
 		setShowFollowersModal(!showFollowersModal);
 	};
@@ -105,22 +96,13 @@ function User() {
 		history.push(`/photos/${photo.id}`);
 	};
 
-	// console.log('***********currentUser***************', currentUser);
-	// console.log('***********otherUser***************', otherUser);
-	// console.log('***********isFollowing***************', isFollowing);
-	// console.log(
-	// 	'***********currentUser.following***************',
-	// 	currentUser.follower_id
-	// );
 	<FollowersModal
 		user={otherUser}
 		hideForm={() => setShowFollowersModal(false)}
-		// showForm={showFollowersModal}
 	/>;
 	<FollowingModal
 		user={otherUser}
 		hideForm={() => setShowFollowingModal(false)}
-		// showForm={showFollowingModal}
 	/>;
 
 	return (
