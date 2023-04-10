@@ -99,7 +99,7 @@
 	height: 161px;
 	left: 0;
 	top: 0;
-	border: solid 1px black;
+	/* border: solid 1px black; */
 	background-color: #eceff1;
 	border-radius: 50%;
 	margin-top: 50.5px;

@@ -28,7 +28,6 @@ function getLimitedPhotosList(photos, searchbarValue = '') {
 
 function PhotoLayout() {
 	const sessionUser = useSelector((state) => state.session.user);
-
 	const allPhotos = useSelector((state) => Object.values(state.photo));
 	const searchbarValue = useSelector(selectSearchbarValue);
 	const [photos, setPhotos] = useState([]);
@@ -67,16 +66,33 @@ function PhotoLayout() {
 		fetchPhotosAndAlbums();
 	}, [dispatch]);
 
+	// useEffect(() => {
+	// 	const timer = setTimeout(() => {
+	// 		if (lastSearchRef.current !== searchbarValue) {
+	// 			lastSearchRef.current = searchbarValue;
+	// 			setPhotos(getLimitedPhotosList(allPhotos, searchbarValue));
+	// 		}
+	// 	}, 300);
+
+	// 	return () => {
+	// 		clearTimeout(timer);
+	// 	};
+	// }, [allPhotos, searchbarValue]);
+
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			if (lastSearchRef.current !== searchbarValue) {
+		const handleKeyPress = (event) => {
+			if (event.key === 'Enter') {
 				lastSearchRef.current = searchbarValue;
 				setPhotos(getLimitedPhotosList(allPhotos, searchbarValue));
 			}
-		}, 300);
+		};
+
+		document.addEventListener('keydown', handleKeyPress);
 
 		return () => {
-			clearTimeout(timer);
+			document.removeEventListener('keydown', handleKeyPress);
+
+
 		};
 	}, [allPhotos, searchbarValue]);
 

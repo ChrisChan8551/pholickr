@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
-// import {useHistory} from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './Navigation.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,40 +10,10 @@ import { setSearchbarValue, selectSearchbarValue } from '../../store/searchbar';
 const Navigation = () => {
 	const [open, setOpen] = useState(false);
 	const menuRef = useRef();
-	// const history = useHistory();
 	const location = useLocation();
-
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
 	const searchbarValue = useSelector(selectSearchbarValue);
-
-	// const { currentUser, searchbarValue } = useSelector((state) => {
-	// 	const currentUser = state.session.user;
-	// 	const searchbarValue = selectSearchbarValue(state);
-	// 	return {
-	// 		currentUser,
-	// 		searchbarValue,
-	// 	};
-	// });
-
-	// const navigateToHomePage = () => {
-	// 	history.push('/');
-	// };
-
-	// const navigateToPhotos = () => {
-	// 	history.push('/photos');
-	// };
-
-	// const navigateToAlbums = () => {
-	// 	history.push('/albums');
-	// };
-
-	// const navigateToMyProfile = (event) => {
-	//   event.stopPropagation();
-	//   event.preventDefault();
-	//   setOpen(false);
-	//   history.push("/my-profile");
-	// };
 
 	return (
 		<div className='main-container'>
@@ -61,12 +30,6 @@ const Navigation = () => {
 							{' '}
 							Pholickr{' '}
 						</NavLink>
-						{/* <button
-							className='regular-button'
-							onClick={navigateToHomePage}
-						>
-							Home
-						</button> */}
 						<NavLink
 							to={`/photos`}
 							className='font-white font-bold font-decor-none font-16 nav-hover'
@@ -74,12 +37,7 @@ const Navigation = () => {
 							{' '}
 							My Photos{' '}
 						</NavLink>
-						{/* <button
-							className='blue-button'
-							onClick={navigateToPhotos}
-						>
-							My Photos
-						</button> */}
+
 						<NavLink
 							to='/albums'
 							className='font-white font-bold font-decor-none font-16 nav-hover'
@@ -87,12 +45,6 @@ const Navigation = () => {
 							{' '}
 							My Albums{' '}
 						</NavLink>
-						{/* <button
-							className='blue-button'
-							onClick={navigateToAlbums}
-						>
-							My Albums
-						</button> */}
 					</div>
 
 					<div
@@ -127,22 +79,19 @@ const Navigation = () => {
 							{currentUser && (
 								<div className='menu_dropdown'>
 									<div>
-										{/* <div className="profile" onClick={navigateToMyProfile}> */}
 										<div className='profile profile-width'>
 											<div className='prof_icon'>
-												{/* <button> */}
 												<img
 													src={currentUser.image}
 													alt=''
 												/>
-												{/* </button> */}
+
 											</div>
 											<div className='user_info'>
 												<div>
 													Username:{' '}
 													{currentUser.username}
 												</div>
-												{/* <h5>Personal</h5> */}
 												<div>
 													Email: {currentUser.email}
 												</div>
