@@ -3,6 +3,8 @@
 	border-color: #9ea4a7;
 	min-width: 33%;
 	min-height: 50px;
+	margin-left: 10px;
+	margin-top: 10px;
 }
 .comment-input:hover {
 	border-color: #006dac;

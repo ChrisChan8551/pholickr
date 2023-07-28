@@ -1,6 +1,6 @@
 import boto3
 import os
-import uuidcd
+import uuid
 
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
