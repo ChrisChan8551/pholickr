@@ -242,21 +242,23 @@ function PhotoDetailPage() {
 									);
 								})}
 							{editComment}
-							<form className='comment-form'>
-								<label>
-									<textarea
-										onKeyUp={createComment}
-										type='text'
-										placeholder='Add a comment'
-										className='comment-input'
-										value={text}
-										required
-										onChange={(e) =>
-											setText(e.target.value)
-										}
-									/>
-								</label>
-							</form>
+							{!showEditCommentForm && (
+								<form className='comment-form'>
+									<label>
+										<textarea
+											onKeyUp={createComment}
+											type='text'
+											placeholder='Add a comment'
+											className='comment-input'
+											value={text}
+											required
+											onChange={(e) =>
+												setText(e.target.value)
+											}
+										/>
+									</label>
+								</form>
+							)}
 						</div>
 					</div>
 				</div>

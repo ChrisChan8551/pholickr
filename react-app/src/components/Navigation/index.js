@@ -18,7 +18,7 @@ const Navigation = () => {
 	return (
 		<div className='main-container'>
 			<div className='Nav-container'>
-				<nav id='navigation-bar'>
+				<nav className='navigation-bar'>
 					<div className='left_side'>
 						<div className='icon'>
 							<img className='photo-icon' src='/pho.png' alt='' />
