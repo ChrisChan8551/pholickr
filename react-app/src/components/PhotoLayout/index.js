@@ -7,6 +7,7 @@ import GridLayout from '../GridLayout';
 import { useHistory } from 'react-router-dom';
 import { addPinning } from '../../store/pinning';
 import { selectSearchbarValue } from '../../store/searchbar';
+import Footer from '../Footer';
 
 const MAX_PHOTO_COUNT = 30;
 
@@ -93,6 +94,7 @@ function PhotoLayout() {
 					/>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }

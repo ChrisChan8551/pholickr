@@ -1,5 +1,4 @@
 .comment-input {
-	/* border-color: #006dac; */
 	border-color: #9ea4a7;
 	min-width: 33%;
 	min-height: 50px;
@@ -47,6 +46,7 @@
 	min-height: 330px;
 	max-height: 100%;
 	grid-template-columns: 0.4fr 0.3fr 1fr;
+	/* grid-template-columns: 1fr 1fr 1fr 1fr; */
 	grid-auto-rows: min-content;
 }
 

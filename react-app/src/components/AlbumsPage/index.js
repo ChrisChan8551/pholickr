@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums, deleteAlbum, selectMyAlbums } from '../../store/album';
 import GridLayout from '../GridLayout';
 import CreateAlbumModal from '../CreateAlbumModal';
+import Footer from '../Footer';
 
 function AlbumsPage() {
 	const dispatch = useDispatch();
@@ -62,7 +63,6 @@ function AlbumsPage() {
 					onItemClick={navigateToAlbum}
 					renderItemActions={(album, closeActionPopOver) => (
 						<>
-
 							<button
 								className='blue-button'
 								onClick={() => {
@@ -76,6 +76,7 @@ function AlbumsPage() {
 					)}
 				/>
 			</div>
+			<Footer />
 		</div>
 	);
 }

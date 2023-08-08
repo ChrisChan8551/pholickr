@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Heading from './Heading';
 import GridLayout from '../GridLayout';
-import Footing from './Footing';
+import Footer from '../Footer';
 import { getAllAlbums } from '../../store/album';
 import { removePinning } from '../../store/pinning';
 // import EditAlbumModal from '../EditAlbumModal'
@@ -50,7 +50,7 @@ function AlbumDetailPage() {
 					}
 				/>
 			</div>
-			<Footing />
+			<Footer />
 		</div>
 	);
 }

@@ -5,6 +5,8 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { login } from '../../store/session';
 import PhotoLayout from '../PhotoLayout';
+import Footer from '../Footer';
+
 function HomePage() {
 	const dispatch = useDispatch();
 	const [showLoginModal, setShowLoginModal] = useState(false);
@@ -90,6 +92,7 @@ function HomePage() {
 			<div>
 				<PhotoLayout />
 			</div>
+			<Footer />
 		</div>
 	);
 }

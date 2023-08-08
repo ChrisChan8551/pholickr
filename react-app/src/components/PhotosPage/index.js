@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums } from '../../store/album';
-
-import { getAllPhotos, deleteAPhoto, selectMyPhotos,getAllPhotosByAUser } from '../../store/photo';
+import Footer from '../Footer';
+import {
+	getAllPhotos,
+	deleteAPhoto,
+	selectMyPhotos,
+	getAllPhotosByAUser,
+} from '../../store/photo';
 import GridLayout from '../GridLayout';
 import { AddPinningControls } from '../PhotoLayout';
 import CreatePhotoModal from '../CreatePhotoModal';
@@ -18,10 +23,10 @@ function PhotoPage() {
 
 	useEffect(() => {
 		if (currentUser) {
-		  dispatch(getAllPhotosByAUser(currentUser.id));
-		  dispatch(getAllAlbums());
+			dispatch(getAllPhotosByAUser(currentUser.id));
+			dispatch(getAllAlbums());
 		}
-	  }, [dispatch, currentUser]);
+	}, [dispatch, currentUser]);
 
 	useEffect(() => {
 		setShowCreatePhotoForm(false);
@@ -80,7 +85,7 @@ function PhotoPage() {
 							<button
 								className='grey-button'
 								onClick={() => {
-									deletePhoto(photo.id)
+									deletePhoto(photo.id);
 									closeActionPopOver();
 								}}
 							>
@@ -90,6 +95,7 @@ function PhotoPage() {
 					)}
 				/>
 			</div>
+			<Footer />
 		</div>
 	);
 }

@@ -13,6 +13,7 @@ import {
 import EditPhotoModal from '../EditPhotoModal';
 import ProfileCard from '../ProfileCard';
 import EditCommentForm from '../EditComment/EditCommentForm';
+import Footer from '../Footer';
 
 function PhotoDetailPage() {
 	const dispatch = useDispatch();
@@ -268,6 +269,7 @@ function PhotoDetailPage() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }
