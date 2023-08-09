@@ -1,4 +1,4 @@
-from app.models import db, Comment, User
+from app.models import db, Comment, User, Photo
 import random
 
 
