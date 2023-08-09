@@ -24,7 +24,7 @@ def seed_comments():
                 "Speechless!",
                 "Wow, just wow!",
                 "Impressive work!",
-                "This belongs in a gallery!",
+                # "This belongs in a gallery!",
                 "I'm blown away!",
                 "This is breathtaking!",
                 "You have a great eye!",
