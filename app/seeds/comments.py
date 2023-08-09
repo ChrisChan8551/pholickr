@@ -6,7 +6,7 @@ def seed_comments():
     user_count = User.query.count()
     commentData = []
     for photoId in range(1, 937):
-        for _ in range(3):
+        for _ in range(2):
             random_user_id = random.randint(1, user_count)
             random_user = User.query.filter_by(id=random_user_id).first()
             commentText = random.choice([
@@ -24,7 +24,7 @@ def seed_comments():
                 "Speechless!",
                 "Wow, just wow!",
                 "Impressive work!",
-                # "This belongs in a gallery!",
+                "This belongs in a gallery!",
                 "I'm blown away!",
                 "This is breathtaking!",
                 "You have a great eye!",
@@ -35,67 +35,6 @@ def seed_comments():
 
     db.session.add_all(commentData)
     db.session.commit()
-
-
-
-# def seed_comments():
-#     commentData = [
-#         Comment(photoId=1, userId=1, text='DEMO comment'),
-#         Comment(photoId=1, userId=2, text='CHERRY comment'),
-#         Comment(photoId=1, userId=3, text='JIMMY comment'),
-#         Comment(photoId=1, userId=1, text='DEMO comment'),
-#         Comment(photoId=1, userId=2, text='CHERRY comment'),
-#         Comment(photoId=1, userId=3, text='JIMMY comment'),
-#         Comment(photoId=1, userId=1, text='DEMO comment'),
-#         Comment(photoId=1, userId=2, text='CHERRY comment'),
-#         Comment(photoId=1, userId=3, text='JIMMY comment'),
-#         Comment(photoId=1, userId=1, text='DEMO comment'),
-#         Comment(photoId=2, userId=1, text='DEMO comment'),
-#         Comment(photoId=2, userId=2, text='CHERRY comment'),
-#         Comment(photoId=2, userId=3, text='JIMMY comment'),
-#         Comment(photoId=2, userId=1, text='DEMO comment'),
-#         Comment(photoId=2, userId=2, text='CHERRY comment'),
-#         Comment(photoId=2, userId=3, text='JIMMY comment'),
-#         Comment(photoId=2, userId=1, text='DEMO comment'),
-#         Comment(photoId=2, userId=2, text='CHERRY comment'),
-#         Comment(photoId=2, userId=3, text='JIMMY comment'),
-#         Comment(photoId=2, userId=1, text='DEMO comment'),
-#         Comment(photoId=3, userId=1, text='DEMO comment'),
-#         Comment(photoId=3, userId=2, text='CHERRY comment'),
-#         Comment(photoId=3, userId=3, text='JIMMY comment'),
-#         Comment(photoId=3, userId=1, text='DEMO comment'),
-#         Comment(photoId=3, userId=2, text='CHERRY comment'),
-#         Comment(photoId=3, userId=3, text='JIMMY comment'),
-#         Comment(photoId=3, userId=1, text='DEMO comment'),
-#         Comment(photoId=3, userId=2, text='CHERRY comment'),
-#         Comment(photoId=3, userId=3, text='JIMMY comment'),
-#         Comment(photoId=3, userId=1, text='DEMO comment'),
-#         Comment(photoId=4, userId=1, text='DEMO comment'),
-#         Comment(photoId=4, userId=2, text='CHERRY comment'),
-#         Comment(photoId=4, userId=3, text='JIMMY comment'),
-#         Comment(photoId=4, userId=1, text='DEMO comment'),
-#         Comment(photoId=4, userId=2, text='CHERRY comment'),
-#         Comment(photoId=4, userId=3, text='JIMMY comment'),
-#         Comment(photoId=4, userId=1, text='DEMO comment'),
-#         Comment(photoId=4, userId=2, text='CHERRY comment'),
-#         Comment(photoId=4, userId=3, text='JIMMY comment'),
-#         Comment(photoId=4, userId=1, text='DEMO comment'),
-#         Comment(photoId=5, userId=1, text='DEMO comment'),
-#         Comment(photoId=5, userId=2, text='CHERRY comment'),
-#         Comment(photoId=5, userId=3, text='JIMMY comment'),
-#         Comment(photoId=5, userId=1, text='DEMO comment'),
-#         Comment(photoId=5, userId=2, text='CHERRY comment'),
-#         Comment(photoId=5, userId=3, text='JIMMY comment'),
-#         Comment(photoId=5, userId=1, text='DEMO comment'),
-#         Comment(photoId=5, userId=2, text='CHERRY comment'),
-#         Comment(photoId=5, userId=3, text='JIMMY comment'),
-#         Comment(photoId=5, userId=1, text='DEMO comment'),
-
-#     ]
-
-#     db.session.add_all(commentData)
-#     db.session.commit()
-
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE
