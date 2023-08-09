@@ -1,13 +1,13 @@
-from app.models import db, Comment, User, environment, SCHEMA
+from app.models import db, Comment, User, environment, Photo, SCHEMA
 
 import random
 
 
 def seed_comments():
     user_count = User.query.count()
-    batch_size = 937
+    batch_size = Photo.query.count()
 
-    for photoId in range(batch_size):
+    for photoId in range(0, batch_size):
         commentData = []
         for _ in range(5):
             random_user_id = random.randint(1, user_count)
@@ -34,11 +34,11 @@ def seed_comments():
                 "I feel like I'm there!",
                 "This is art!"
             ])
-            commentData.append(Comment(photoId=photoId, user=random_user, text=commentText))
+            commentData.append(
+                Comment(photoId=photoId, user=random_user, text=commentText))
 
     db.session.bulk_insert_mappings(Comment, commentData)
     db.session.commit()
-
 
 
 # def seed_comments():
