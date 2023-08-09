@@ -3,7 +3,7 @@ from app.models import db, Comment,User, environment, SCHEMA
 import random
 
 def seed_comments():
-    user_count = 13
+    user_count = 5
     commentData = []
     for photoId in range(1, 937):
         for _ in range(5):
