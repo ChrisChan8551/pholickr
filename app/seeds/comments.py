@@ -1,5 +1,4 @@
-from app.models import db, Comment, User, environment, Photo, SCHEMA
-
+from app.models import db, Comment, User
 import random
 
 
@@ -37,6 +36,8 @@ def seed_comments():
 
     db.session.add_all(commentData)
     db.session.commit()
+
+
 
 
 # def seed_comments():
