@@ -1,36 +1,41 @@
 from app.models import db, Comment, User
 import random
 
+
+from app.models import db, Comment, User, Photo
+import random
+
 def seed_comments():
     user_ids = User.query.with_entities(User.id).all()
     user_count = len(user_ids)
-    commentData = []
+    comment_texts = [
+        "Awesome photo!", "Great shot!", "Beautiful scenery!",
+        "I love this picture!", "Incredible!", "Fantastic job!",
+        "So cool!", "You're a talented photographer!",
+        "This is amazing!", "Stunning!", "I can't stop looking at this!",
+        "Speechless!", "Wow, just wow!", "Impressive work!",
+        "This belongs in a gallery!", "I'm blown away!",
+        "This is breathtaking!", "You have a great eye!",
+        "I feel like I'm there!", "This is art!"
+    ]
 
-    comments_per_photo = 5
-    max_photo_id = 937
+    batch_size = Photo.query.count()
 
-    for photoId in range(1, max_photo_id + 1):
-        random_user_id_indices = random.sample(range(user_count), comments_per_photo)
+    comment_data = []
+
+    for photo_id in range(1, batch_size):
+        random.shuffle(comment_texts)  # Shuffle the commentTexts list
+        random_user_id_indices = random.sample(range(user_count), 5)
         random_users = [User.query.get(user_ids[idx][0]) for idx in random_user_id_indices]
 
-        commentTexts = [
-            "Awesome photo!", "Great shot!", "Beautiful scenery!",
-            "I love this picture!", "Incredible!", "Fantastic job!",
-            "So cool!", "You're a talented photographer!",
-            "This is amazing!", "Stunning!", "I can't stop looking at this!",
-            "Speechless!", "Wow, just wow!", "Impressive work!",
-            "This belongs in a gallery!", "I'm blown away!",
-            "This is breathtaking!", "You have a great eye!",
-            "I feel like I'm there!", "This is art!"
-        ]
-
-        random.shuffle(commentTexts)  # Shuffle the commentTexts list
-        commentTexts = commentTexts[:comments_per_photo]  # Take only the required number of comments
-
         for idx, user in enumerate(random_users):
-            commentData.append(Comment(photoId=photoId, user=user, text=commentTexts[idx]))
+            comment_data.append({
+                "photoId": photo_id,
+                "user": user,
+                "text": comment_texts[idx]
+            })
 
-    db.session.bulk_save_objects(commentData)  # Use bulk_save_objects for efficient insertion
+    db.session.bulk_insert_mappings(Comment, comment_data)
     db.session.commit()
 
 
