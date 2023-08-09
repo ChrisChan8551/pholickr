@@ -3,10 +3,10 @@ from app.models import db, Comment,User, environment, SCHEMA
 import random
 
 def seed_comments():
-    user_count = User.query.count()
+    user_count = 13
     commentData = []
     for photoId in range(1, 937):
-        for _ in range(1):
+        for _ in range(5):
             random_user_id = random.randint(1, user_count)
             random_user = User.query.filter_by(id=random_user_id).first()
             commentText = random.choice([
