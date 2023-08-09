@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums } from '../../store/album';
 import Footer from '../Footer';
 import {
-	getAllPhotos,
 	deleteAPhoto,
 	selectMyPhotos,
 	getAllPhotosByAUser,
