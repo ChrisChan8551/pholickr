@@ -263,6 +263,7 @@ function PhotoDetailPage() {
 						</div>
 					</div>
 				</div>
+
 				<div>
 					<div className='profile-container gcontainer'>
 						<div className='comment-container g1'></div>
