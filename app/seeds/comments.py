@@ -4,7 +4,7 @@ import random
 
 def seed_comments():
     user_count = 13
-    photo_count = 935
+    photo_count = 937
     commentData = []
     for photoId in range(1, photo_count):
         for _ in range(5):
