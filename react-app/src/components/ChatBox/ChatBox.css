@@ -2,6 +2,13 @@
 {box-sizing: border-box;} */
 
 /* Button used to open the chat form - fixed at the bottom of the page */
+
+.chat-box-container {
+    border: solid 1px darkgray;
+    background: #f1f1f1;
+    min-height: 30px
+}
+
 .open-button {
     background-color: #128fdc;
     color: white;
@@ -46,7 +53,7 @@
     border: none;
     background: #f1f1f1;
     resize: none;
-    min-height: 200px;
+    height: 15px;
     z-index: 9999;
   }
 

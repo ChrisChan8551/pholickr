@@ -3,7 +3,7 @@ import os
 
 
 # configure cors_allowed_origins
-if os.environ.get('FLASK_ENV') == 'development':
+if os.environ.get('FLASK_ENV') == 'production':
     origins = [
         'http://pholickr.onrender.com',
         'https://pholickr.onrender.com'

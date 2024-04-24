@@ -1,4 +1,4 @@
-// flask db migrate
+// flask db migrate && flask db upgrade && flask seed all
 // flask db upgrade
 // flask seed all
 

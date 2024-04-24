@@ -55,10 +55,19 @@ const ChatBox = () => {
         <>
             {isFormOpen && (
                 <div className="chat-popup" id="myForm">
-                    <form className="form-container">
+                    <form className="form-container" onSubmit={sendChat}>
                         {/* <form action="/action_page.php" className="form-container"> */}
                         <h1>Chat</h1>
-
+                        <div>
+                            <ul className="chat-box-container">
+                                {messages.map((message, ind) => (
+                                    // console.log(message, " <---- message"),
+                                    <li className="each-message" key={ind}>
+                                        {`${message.user}: ${message.msg}`}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                         <label htmlFor="msg"><b>Message</b></label>
                         <textarea
                             type="text"
@@ -66,7 +75,6 @@ const ChatBox = () => {
                             name="msg"
                             value={chatInput}
                             onChange={(e) => setChatInput(e.target.value)}
-                            required
                         >
                         </textarea>
 
