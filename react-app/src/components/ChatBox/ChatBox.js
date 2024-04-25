@@ -27,7 +27,7 @@ const ChatBox = () => {
     };
 
     useEffect(() => {
-        socketRef.current = io();
+        socketRef.current = io('http://pholickr.onrender.com');
         socketRef.current.on("chat", (chat) => {
             setMessages((prevMessages) => [...prevMessages, chat]);
         });
