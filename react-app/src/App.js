@@ -35,7 +35,7 @@ function App() {
     return (
         <div>
             {!!currentUser && <Navigation loaded={loaded} />}
-            <ChatBox />
+            {currentUser && <ChatBox />}
             <Switch>
                 <Route exact path='/'>
                     {currentUser ? <PhotoLayout /> : <HomePage />}
