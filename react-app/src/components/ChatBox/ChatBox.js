@@ -26,6 +26,16 @@ const ChatBox = () => {
         }
     };
 
+    useEffect(() => {
+        socketRef.current = io();
+        socketRef.current.on("chat", (chat) => {
+            setMessages((prevMessages) => [...prevMessages, chat]);
+        });
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, []);
+
     const sendChat = (e) => {
         e.preventDefault();
         if (!chatInput) {
@@ -44,15 +54,7 @@ const ChatBox = () => {
         setChatInput("");
     };
 
-    useEffect(() => {
-        socketRef.current = io();
-        socketRef.current.on("chat", (chat) => {
-            setMessages((prevMessages) => [...prevMessages, chat]);
-        });
-        return () => {
-            socketRef.current.disconnect();
-        };
-    }, []);
+
 
     useEffect(() => {
         scrollToBottom();
