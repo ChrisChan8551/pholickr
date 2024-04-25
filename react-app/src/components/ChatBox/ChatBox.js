@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import './ChatBox.css';
 
+let socket
+
 const ChatBox = () => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [chatInput, setChatInput] = useState("");
