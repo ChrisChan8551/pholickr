@@ -23,6 +23,7 @@ function PhotoDetailPage() {
     const [showEditCommentForm, setShowEditCommentForm] = useState(false);
     const [text, setText] = useState('');
     const [currentComment, setCurrentComment] = useState('');
+    // eslint-disable-next-line
     const [errors, setErrors] = useState([]);
     const commentsContainerRef = useRef(null); // Ref for comments container
     const latestCommentRef = useRef(null); // Ref for latest comment element
