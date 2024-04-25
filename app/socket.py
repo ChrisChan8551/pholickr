@@ -1,21 +1,22 @@
 from flask_socketio import SocketIO, emit
 import os
 
-
-# configure cors_allowed_origins
+# Configure CORS origins
 if os.environ.get('FLASK_ENV') == 'production':
     origins = [
         'http://pholickr.onrender.com',
         'https://pholickr.onrender.com'
     ]
 else:
-    origins = "*"
+    origins = [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000'
+    ]
 
-# initialize your socket instance
+
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
-# handle chat messages
 @socketio.on("chat")
 def handle_chat(data):
-    emit("chat", data, broadcast=True)
+    emit("chat", data)
