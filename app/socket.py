@@ -4,14 +4,13 @@ import os
 # Configure CORS origins
 if os.environ.get('FLASK_ENV') == 'production':
     origins = [
-        'http://pholickr.onrender.com/',
-        'https://pholickr.onrender.com/'
+        'http://pholickr.onrender.com',
+        'https://pholickr.onrender.com'
     ]
 else:
     origins = "*"
 
-
-socketio = SocketIO(cors_allowed_origins=origins)
+socketio = SocketIO(app, cors_allowed_origins=origins)
 
 
 @socketio.on("chat")
