@@ -10,7 +10,7 @@ if os.environ.get('FLASK_ENV') == 'production':
 else:
     origins = "*"
 
-socketio = SocketIO(app, cors_allowed_origins=origins)
+socketio = SocketIO(cors_allowed_origins=origins)
 
 
 @socketio.on("chat")
