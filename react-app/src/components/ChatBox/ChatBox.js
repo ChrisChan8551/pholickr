@@ -27,12 +27,12 @@ const ChatBox = () => {
     };
 
     useEffect(() => {
-        socketRef.current = io();
-        socketRef.current.on("chat", (chat) => {
+        socketRef = io();
+        socketRef.on("chat", (chat) => {
             setMessages((prevMessages) => [...prevMessages, chat]);
         });
         return () => {
-            socketRef.current.disconnect();
+            socketRef.disconnect();
         };
     }, []);
 
@@ -46,7 +46,7 @@ const ChatBox = () => {
             alert("Message is too long");
             return;
         }
-        socketRef.current.emit("chat", {
+        socketRef.emit("chat", {
             user: user.username,
             msg: chatInput,
             time: getLocaleTimeString(),
