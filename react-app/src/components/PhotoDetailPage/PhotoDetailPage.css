@@ -103,6 +103,8 @@
 }
 .comments-box {
 	grid-auto-rows: min-content;
+	overflow-y: auto;
+    height: 650px;
 }
 
 .user-name {
