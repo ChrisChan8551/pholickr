@@ -52,9 +52,7 @@ def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
         if request.headers.get('X-Forwarded-Proto') == 'http':
             url = request.url.replace('http://', 'https://', 1)
-            code = 301
-            return redirect(url, code=code)
-
+            return redirect(url, code=301)
 
 @app.after_request
 def inject_csrf_token(response):
@@ -96,6 +94,7 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
 
 if __name__ == '__main__':
     socketio.run(app)

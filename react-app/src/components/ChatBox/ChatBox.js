@@ -54,8 +54,6 @@ const ChatBox = () => {
         setChatInput("");
     };
 
-
-
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
