@@ -114,29 +114,30 @@ function PhotoDetailPage() {
             <div className='PhotoDetail--Image--Container'>
                 {photo?.imageUrl && (
                     <img
-                    className='PhotoDetail--Image'
-                    src={photo?.imageUrl}
-                    alt=''
+                        className='PhotoDetail--Image'
+                        src={photo?.imageUrl}
+                        alt=''
                     ></img>
                 )}
             </div>
-                {!showEditPhotoForm && currentUser?.id === photo?.userId && (
-                    <div className='photo-detail-button-container'>
-                        <button
-                            className='blue-button'
-                            onClick={() => setShowEditPhotoForm(true)}
-                        >
-                            Edit Photo
-                        </button>
-                        <button
-                            className='grey-button'
-                            type='button'
-                            onClick={deletePhoto}
-                        >
-                            Delete Photo
-                        </button>
-                    </div>
-                )}
+            {!showEditPhotoForm && currentUser?.id === photo?.userId && (
+                <div className='photo-detail-button-container'>
+                    <button
+                        className='blue-button'
+                        onClick={() => setShowEditPhotoForm(true)}
+                    >
+                        Edit Photo
+                    </button>
+                    <button
+                        className='grey-button'
+                        type='button'
+                        onClick={deletePhoto}
+                    >
+                        Delete Photo
+                    </button>
+                    {/* <img src='/gold-star-icon.png' className='star-button' alt='' /> */}
+                </div>
+            )}
             <div className='g-flex-container'>
                 <div className='g-container'>
                     <div className='item item1'>

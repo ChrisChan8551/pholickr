@@ -32,6 +32,10 @@
 	margin-top: 40px;
 }
 
+.star-button {
+	width: 40px;
+	margin-left: 5px;
+}
 .num-label {
 	font-size: 14px;
 	color: #898989;
@@ -48,7 +52,7 @@
 	justify-content: center;
 	margin-right: 340px;
 	gap: 5px;
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .g-flex-container {
