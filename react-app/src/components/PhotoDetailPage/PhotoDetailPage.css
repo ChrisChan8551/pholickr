@@ -39,6 +39,20 @@
 	color: #212124;
 }
 
+.photo-detail-button-container {
+    /* border: solid orange 1px; */
+    display: flex;
+    justify-content: center;
+    margin-right: 340px;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.g-flex-container {
+	display: flex;
+	justify-content: space-around;
+}
+
 .g-container {
 	display: grid;
 	min-width: 1200px;
@@ -104,7 +118,7 @@
 .comments-box {
 	grid-auto-rows: min-content;
 	overflow-y: auto;
-    height: 650px;
+	height: 650px;
 }
 
 .user-name {

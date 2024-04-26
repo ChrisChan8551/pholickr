@@ -114,150 +114,152 @@ function PhotoDetailPage() {
             <div className='PhotoDetail--Image--Container'>
                 {photo?.imageUrl && (
                     <img
-                        className='PhotoDetail--Image'
-                        src={photo?.imageUrl}
-                        alt=''
+                    className='PhotoDetail--Image'
+                    src={photo?.imageUrl}
+                    alt=''
                     ></img>
                 )}
             </div>
-            {!showEditPhotoForm && currentUser?.id === photo?.userId && (
-                <div>
-                    <button
-                        className='blue-button'
-                        onClick={() => setShowEditPhotoForm(true)}
-                    >
-                        Edit Photo
-                    </button>
-                    <button
-                        className='grey-button'
-                        type='button'
-                        onClick={deletePhoto}
-                    >
-                        Delete Photo
-                    </button>
-                </div>
-            )}
-            <div className='g-container'>
-                <div className='item item1'>
-                    <ProfileCard
-                        author={photoAuthor}
-                        photo={photo}
-                        user={currentUser}
-                    />
-                </div>
-                <div className='item2'>
-                    <div className='g2-container'>
-                        <div className='num-count'>
-                            {numComments.length}
-                        </div>
-                        <div className='num-label'>comments</div>
+                {!showEditPhotoForm && currentUser?.id === photo?.userId && (
+                    <div className='photo-detail-button-container'>
+                        <button
+                            className='blue-button'
+                            onClick={() => setShowEditPhotoForm(true)}
+                        >
+                            Edit Photo
+                        </button>
+                        <button
+                            className='grey-button'
+                            type='button'
+                            onClick={deletePhoto}
+                        >
+                            Delete Photo
+                        </button>
                     </div>
-                </div>
-                <div className='comments-box' ref={commentsContainerRef}>
-                    <div className='list-comments'>
-                        {comments &&
-                            comments.map((comment, idx) => {
-                                const user = users?.find(
-                                    (user) => user?.id === comment.userId
-                                );
-                                const isLastComment = idx === comments.length - 1;
-                                const commentRef = isLastComment ? latestCommentRef : null;
+                )}
+            <div className='g-flex-container'>
+                <div className='g-container'>
+                    <div className='item item1'>
+                        <ProfileCard
+                            author={photoAuthor}
+                            photo={photo}
+                            user={currentUser}
+                        />
+                    </div>
+                    <div className='item2'>
+                        <div className='g2-container'>
+                            <div className='num-count'>
+                                {numComments.length}
+                            </div>
+                            <div className='num-label'>comments</div>
+                        </div>
+                    </div>
+                    <div className='comments-box' ref={commentsContainerRef}>
+                        <div className='list-comments'>
+                            {comments &&
+                                comments.map((comment, idx) => {
+                                    const user = users?.find(
+                                        (user) => user?.id === comment.userId
+                                    );
+                                    const isLastComment = idx === comments.length - 1;
+                                    const commentRef = isLastComment ? latestCommentRef : null;
 
-                                return (
-                                    comment.photoId === Number(photoId) && (
-                                        <div
-                                            className='comment-list'
-                                            key={`${comment.id}`}
-                                            ref={commentRef}
-                                        >
-                                            <div className='user-comment'>
-                                                <div>
-                                                    {user && (
-                                                        <img
-                                                            className='comment-image'
-                                                            src={
-                                                                user?.image
-                                                            }
-                                                            alt=''
-                                                        />
-                                                    )}{' '}
-                                                    <div></div>
-                                                </div>
-                                                <div className='user-name'>
+                                    return (
+                                        comment.photoId === Number(photoId) && (
+                                            <div
+                                                className='comment-list'
+                                                key={`${comment.id}`}
+                                                ref={commentRef}
+                                            >
+                                                <div className='user-comment'>
                                                     <div>
-                                                        <NavLink
-                                                            className='comment-author'
-                                                            to={`/users/${user?.id}`}
-                                                            activeClassName='active'
-                                                        >{`${user?.username}`}</NavLink>
+                                                        {user && (
+                                                            <img
+                                                                className='comment-image'
+                                                                src={
+                                                                    user?.image
+                                                                }
+                                                                alt=''
+                                                            />
+                                                        )}{' '}
+                                                        <div></div>
                                                     </div>
-                                                    <div className='comment-font'>
-                                                        {`${comment.text}`}
+                                                    <div className='user-name'>
+                                                        <div>
+                                                            <NavLink
+                                                                className='comment-author'
+                                                                to={`/users/${user?.id}`}
+                                                                activeClassName='active'
+                                                            >{`${user?.username}`}</NavLink>
+                                                        </div>
+                                                        <div className='comment-font'>
+                                                            {`${comment.text}`}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            {Number(comment.userId) ===
-                                                Number(currentUser?.id) && (
-                                                    <>
-                                                        <div className='comment-actions'>
-                                                            <img
-                                                                className='trash-icon'
-                                                                src='/trash-icon.png'
-                                                                alt=''
-                                                                onClick={() =>
-                                                                    dispatch(
-                                                                        deleteAComment(
-                                                                            comment.id
+                                                {Number(comment.userId) ===
+                                                    Number(currentUser?.id) && (
+                                                        <>
+                                                            <div className='comment-actions'>
+                                                                <img
+                                                                    className='trash-icon'
+                                                                    src='/trash-icon.png'
+                                                                    alt=''
+                                                                    onClick={() =>
+                                                                        dispatch(
+                                                                            deleteAComment(
+                                                                                comment.id
+                                                                            )
                                                                         )
-                                                                    )
-                                                                }
-                                                            />
-                                                            {!showEditCommentForm &&
-                                                                Number(
-                                                                    comment.userId
-                                                                ) ===
-                                                                Number(
-                                                                    currentUser?.id
-                                                                ) && (
-                                                                    <img
-                                                                        className='edit-icon'
-                                                                        src='/edit-icon.png'
-                                                                        alt=''
-                                                                        onClick={() => {
-                                                                            setShowEditCommentForm(
-                                                                                true
-                                                                            );
-                                                                            setCurrentComment(
-                                                                                comment
-                                                                            );
-                                                                        }}
-                                                                    />
-                                                                )}
-                                                        </div>
-                                                    </>
-                                                )}
-                                        </div>
-                                    )
-                                );
-                            })}
-                        {editComment}
-                        {!showEditCommentForm && (
-                            <form className='comment-form'>
-                                <label>
-                                    <textarea
-                                        onKeyUp={createComment}
-                                        type='text'
-                                        placeholder='Add a comment'
-                                        className='comment-input'
-                                        value={text}
-                                        required
-                                        onChange={(e) =>
-                                            setText(e.target.value)
-                                        }
-                                    />
-                                </label>
-                            </form>
-                        )}
+                                                                    }
+                                                                />
+                                                                {!showEditCommentForm &&
+                                                                    Number(
+                                                                        comment.userId
+                                                                    ) ===
+                                                                    Number(
+                                                                        currentUser?.id
+                                                                    ) && (
+                                                                        <img
+                                                                            className='edit-icon'
+                                                                            src='/edit-icon.png'
+                                                                            alt=''
+                                                                            onClick={() => {
+                                                                                setShowEditCommentForm(
+                                                                                    true
+                                                                                );
+                                                                                setCurrentComment(
+                                                                                    comment
+                                                                                );
+                                                                            }}
+                                                                        />
+                                                                    )}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                            </div>
+                                        )
+                                    );
+                                })}
+                            {editComment}
+                            {!showEditCommentForm && (
+                                <form className='comment-form'>
+                                    <label>
+                                        <textarea
+                                            onKeyUp={createComment}
+                                            type='text'
+                                            placeholder='Add a comment'
+                                            className='comment-input'
+                                            value={text}
+                                            required
+                                            onChange={(e) =>
+                                                setText(e.target.value)
+                                            }
+                                        />
+                                    </label>
+                                </form>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
