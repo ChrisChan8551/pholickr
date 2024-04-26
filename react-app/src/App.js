@@ -14,7 +14,7 @@ import AlbumDetailPage from './components/AlbumDetailPage';
 import PhotoDetailPage from './components/PhotoDetailPage';
 import PhotoLayout from './components/PhotoLayout';
 import HomePage from './components/HomePage/HomePage';
-import ChatBox from './components/ChatBox/ChatBox.js'
+
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -35,7 +35,7 @@ function App() {
     return (
         <div>
             {!!currentUser && <Navigation loaded={loaded} />}
-            {currentUser && <ChatBox />}
+
             <Switch>
                 <Route exact path='/'>
                     {currentUser ? <PhotoLayout /> : <HomePage />}
