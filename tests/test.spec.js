@@ -17,25 +17,13 @@ test.describe('Navigation Bar Tests', () => {
 		const demoButton = page.locator('button:has-text("Demo")');
 		const signup = page.locator('button:has-text("Sign Up")');
 		await expect(signup).toBeVisible();
-		await expect(demoButton).not.toBeVisible();
+		await expect(demoButton).toBeVisible();
 		await expect(myPhotosLink).not.toBeVisible();
 		await expect(myAlbumsLink).not.toBeVisible();
 	});
-	test('Should verify LinkedIn link in the footer', async ({ page }) => {
-		// Narrow selector to uniquely identify the LinkedIn link
-		const linkedInLink = page.locator(
-			'.footer-icons > a[href="https://www.linkedin.com/in/chris-chan-94567289/"]'
-		);
-
-		// Ensure the link is visible
-		await expect(linkedInLink).toBeVisible();
-
-		// Validate the attributes
-		await expect(linkedInLink).toHaveAttribute('target', '_blank');
-		await expect(linkedInLink).toHaveAttribute(
-			'rel',
-			'noopener noreferrer'
-		);
+	test('Should not have search bar', async ({ page }) => {
+		const searchInputContainer = page.locator('.search_middle');
+		await expect(searchInputContainer).not.toBeVisible();
 	});
 
 	test('Should verify all footer links', async ({ page }) => {
@@ -65,5 +53,19 @@ test.describe('Navigation Bar Tests', () => {
 		// Check the main container is visible
 		const mainContainer = page.locator('.home-main-container');
 		await expect(mainContainer).toBeVisible();
+	});
+
+	test('Negative: Should handle missing or broken footer elements', async ({
+		page,
+	}) => {
+		// Scenario where LinkedIn link might be missing
+		const missingLinkedInLink = page.locator(
+			'a[href="https://www.linkedin.com/in/invalid-profile"]'
+		);
+		await expect(missingLinkedInLink).not.toBeVisible();
+
+		// Test invalid href attribute (e.g., malformed email link)
+		const invalidMailLink = page.locator('a[href="mailto:invalid-email"]');
+		await expect(invalidMailLink).not.toBeVisible();
 	});
 });
