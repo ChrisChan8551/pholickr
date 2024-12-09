@@ -264,7 +264,7 @@ function PhotoDetailPage() {
                     </div>
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

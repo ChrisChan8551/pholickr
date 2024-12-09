@@ -94,7 +94,7 @@ function PhotoPage() {
 					)}
 				/>
 			</div>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

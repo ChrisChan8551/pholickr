@@ -94,7 +94,7 @@ function PhotoLayout() {
 					/>
 				</div>
 			</div>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

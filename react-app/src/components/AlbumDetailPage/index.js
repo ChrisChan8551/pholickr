@@ -50,7 +50,7 @@ function AlbumDetailPage() {
 					}
 				/>
 			</div>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

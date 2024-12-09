@@ -76,7 +76,7 @@ function AlbumsPage() {
 					)}
 				/>
 			</div>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

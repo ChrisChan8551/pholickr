@@ -92,7 +92,7 @@ function HomePage() {
 			<div>
 				<PhotoLayout />
 			</div>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

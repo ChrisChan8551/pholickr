@@ -14,54 +14,55 @@ import AlbumDetailPage from './components/AlbumDetailPage';
 import PhotoDetailPage from './components/PhotoDetailPage';
 import PhotoLayout from './components/PhotoLayout';
 import HomePage from './components/HomePage/HomePage';
-
+import Footer from './components/Footer';
 
 function App() {
-    const [loaded, setLoaded] = useState(false);
-    const dispatch = useDispatch();
-    const currentUser = useSelector((state) => state.session.user);
+	const [loaded, setLoaded] = useState(false);
+	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.session.user);
 
-    useEffect(() => {
-        (async () => {
-            await dispatch(authenticate());
-            setLoaded(true);
-        })();
-    }, [dispatch]);
+	useEffect(() => {
+		(async () => {
+			await dispatch(authenticate());
+			setLoaded(true);
+		})();
+	}, [dispatch]);
 
-    if (!loaded) {
-        return null;
-    }
+	if (!loaded) {
+		return null;
+	}
 
-    return (
-        <div>
-            {!!currentUser && <Navigation loaded={loaded} />}
+	return (
+		<div>
+			{!!currentUser && <Navigation loaded={loaded} />}
 
-            <Switch>
-                <Route exact path='/'>
-                    {currentUser ? <PhotoLayout /> : <HomePage />}
-                </Route>
+			<Switch>
+				<Route exact path='/'>
+					{currentUser ? <PhotoLayout /> : <HomePage />}
+				</Route>
 
-                <ProtectedRoute exact path='/users'>
-                    <UsersList />
-                </ProtectedRoute>
-                <ProtectedRoute exact path='/users/:userId'>
-                    <User />
-                </ProtectedRoute>
-                <ProtectedRoute exact path='/photos'>
-                    <PhotoPage />
-                </ProtectedRoute>
-                <ProtectedRoute exact path='/photos/:photoId'>
-                    <PhotoDetailPage />
-                </ProtectedRoute>
-                <ProtectedRoute exact path='/albums'>
-                    <AlbumsPage />
-                </ProtectedRoute>
-                <ProtectedRoute exact path='/albums/:albumId'>
-                    <AlbumDetailPage />
-                </ProtectedRoute>
-            </Switch>
-        </div>
-    );
+				<ProtectedRoute exact path='/users'>
+					<UsersList />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/users/:userId'>
+					<User />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/photos'>
+					<PhotoPage />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/photos/:photoId'>
+					<PhotoDetailPage />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/albums'>
+					<AlbumsPage />
+				</ProtectedRoute>
+				<ProtectedRoute exact path='/albums/:albumId'>
+					<AlbumDetailPage />
+				</ProtectedRoute>
+			</Switch>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
