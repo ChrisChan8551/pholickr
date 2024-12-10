@@ -64,7 +64,7 @@ const Navigation = () => {
 
 					<div className='right_side' onClick={() => setOpen(!open)}>
 						<div className='profile-width profile-hover'>
-							<img src={currentUser.image} alt='' />
+							<img src={currentUser.image} alt='profile button'/>
 						</div>
 
 						<div className='dropdown_button'>

@@ -5,6 +5,17 @@ test.describe('Navigation Bar Tests', () => {
 		// Navigate to the base URL before each test
 		await page.goto('https://pholickr.onrender.com/');
 	});
+
+    test('profile button is not visible before logging in', async ({ page }) => {
+
+
+        // Define the selector for the image
+        const profileButton = page.locator('img[alt="profile button"]');
+
+        // Assert that the profile button is visible
+        await expect(profileButton).not.toBeVisible();
+    });
+
 	test('Should verify that "My Photos" and "My Albums" links are not visible', async ({
 		page,
 	}) => {
