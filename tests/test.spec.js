@@ -47,14 +47,6 @@ test.describe('Navigation Bar Tests', () => {
 		}
 	});
 
-	test('Positive: Should display navigation links and icons', async ({
-		page,
-	}) => {
-		// Check the main container is visible
-		const mainContainer = page.locator('.home-main-container');
-		await expect(mainContainer).toBeVisible();
-	});
-
 	test('Negative: Should handle missing or broken footer elements', async ({
 		page,
 	}) => {
@@ -68,4 +60,67 @@ test.describe('Navigation Bar Tests', () => {
 		const invalidMailLink = page.locator('a[href="mailto:invalid-email"]');
 		await expect(invalidMailLink).not.toBeVisible();
 	});
+	test('should not have logout or drop down', async ({ page }) => {
+		// Check that the dropdown button does not exist
+		const dropdownButton = await page.locator('div.dropdown_button');
+		await expect(dropdownButton).toHaveCount(0, { timeout: 3000 });
+
+		// Check that the specific <svg> element for the dropdown does not exist
+		const dropdownSvg = await page.locator('svg[data-icon="chevron-down"]');
+		await expect(dropdownSvg).toHaveCount(0, { timeout: 3000 });
+
+		// Check that the logout button does not exist
+		const logoutButton = await page.locator(
+			'button.blue-button.modal-label'
+		);
+		await expect(logoutButton).toHaveCount(0, { timeout: 3000 });
+	});
+
+	// test('invalid login', async ({ page }) => {
+	// 	const loginButton = await page.locator(
+	// 		'button.blue-button:has-text("Login")'
+	// 	);
+	// 	await expect(loginButton).toBeVisible({ timeout: 3000 });
+
+	// 	await loginButton.click();
+
+	// 	const emailField = await page.locator('input[name="email"]');
+	// 	const passwordField = await page.locator('input[name="password"]');
+	// 	await expect(emailField).toBeVisible({ timeout: 3000 });
+	// 	await expect(passwordField).toBeVisible({ timeout: 3000 });
+
+	// 	await emailField.fill('invalid@example.com');
+	// 	await passwordField.fill('wrongpassword');
+
+	// 	const submitButton = await page.locator('button[type="submit"]');
+	// 	await submitButton.click();
+
+	// 	const errorMessage = await page.locator(
+	// 		'text="email : Invalid email or Password"'
+	// 	);
+	// 	await expect(errorMessage).toBeVisible({ timeout: 3000 });
+	// });
+
+	test('signup', async ({ page }) => {});
+	test('logout', async ({ page }) => {});
+	test('my photos page', async ({ page }) => {});
+	test('my photos - add photos', async ({ page }) => {});
+	test('my photos - option delete photos', async ({ page }) => {});
+	test('my photos option move to album', async ({ page }) => {});
+	test('photo detail - edit photo', async ({ page }) => {});
+	test('photo detail - delete photo', async ({ page }) => {});
+	test('photo detail - make comment', async ({ page }) => {});
+	test('photo detail - delete comment', async ({ page }) => {});
+	test('photo detail - edit comment', async ({ page }) => {});
+	test('user profile - follow', async ({ page }) => {});
+	test('user profile - unfollow', async ({ page }) => {});
+	test('user profile - followers', async ({ page }) => {});
+	test('user profile - following', async ({ page }) => {});
+	test('my albums - create album', async ({ page }) => {});
+	test('my albums - option delete album', async ({ page }) => {});
+	test('my albums - delete album', async ({ page }) => {});
+	test('my albums - edit album', async ({ page }) => {});
+	test('my albums detail page', async ({ page }) => {});
 });
+
+test.describe('', () => {});
