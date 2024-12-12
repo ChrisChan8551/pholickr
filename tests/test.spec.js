@@ -51,13 +51,18 @@ test.describe('Navigation Bar Tests', () => {
 			],
 			false
 		);
+	});
+	test('verify buttons before login', async ({ page }) => {
 		await verifyVisibility(
 			page,
-			['button:has-text("Demo")', 'button:has-text("Sign Up")'],
+			[
+				'button:has-text("Demo")',
+				'button:has-text("Sign Up")',
+				'button:has-text("Login")',
+			],
 			true
 		);
 	});
-
 	test('Should not have searchbar', async ({ page }) => {
 		await verifyVisibility(page, ['.search_middle'], false);
 	});
@@ -97,6 +102,13 @@ test.describe('Navigation Bar Tests', () => {
 		);
 	});
 
+});
+
+test.describe('Logging in tests', () => {
+	test.beforeEach(async ({ page }) => {
+		await page.goto('https://pholickr.onrender.com/');
+	});
+
 	const performLogin = async (page, email, password) => {
 		const loginButton = page.locator(
 			'button.blue-button:has-text("Login")'
@@ -121,11 +133,33 @@ test.describe('Navigation Bar Tests', () => {
 		await expect(errorMessage).toBeVisible({ timeout: 3000 });
 	};
 
-	// Example test using the reusable functions
 	test('invalid login', async ({ page }) => {
 		await performLogin(page, 'invalid@example.com', 'wrongpassword');
 		await verifyErrorMessage(page, 'Invalid email or Password');
 	});
+
+	test('Valid login', async ({ page }) => {
+		await performLogin(page, 'david1@aa.io', 'password');
+		await verifyVisibility(
+			page,
+			[
+				'a[href="/photos"]:has-text("My Photos")',
+				'a[href="/albums"]:has-text("My Albums")',
+			],
+			true
+		);
+		await verifyVisibility(
+			page,
+			[
+				'button:has-text("Demo")',
+				'button:has-text("Sign Up")',
+				'button:has-text("Login")',
+			],
+			false
+		);
+	});
+});
+
 
 	// 	test('signup', async ({ page }) => {});
 	// 	test('logout', async ({ page }) => {});
@@ -147,6 +181,3 @@ test.describe('Navigation Bar Tests', () => {
 	// 	test('my albums - delete album', async ({ page }) => {});
 	// 	test('my albums - edit album', async ({ page }) => {});
 	// 	test('my albums detail page', async ({ page }) => {});
-});
-
-// test.describe('', () => {});
