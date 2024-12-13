@@ -51,9 +51,27 @@ const verifyErrorMessage = async (page, errorMessageText) => {
 	});
 };
 
+const navigateTo = async (page, url = 'https://pholickr.onrender.com/') => {
+	await page.goto(url);
+};
+
+const fillSignUpForm = async (
+	page,
+	{ username, firstName, lastName, email, password, repeatPassword }
+) => {
+	await page.fill('input[name="username"]', username);
+	await page.fill('input[name="firstName"]', firstName);
+	await page.fill('input[name="lastname"]', lastName);
+	await page.fill('input[name="email"]', email);
+	await page.fill('input[name="password"]', password);
+	await page.fill('input[name="repeat_password"]', repeatPassword);
+	await page.click('button[type="submit"]');
+	await page.waitForTimeout(3000);
+};
+
 test.describe('Navigation Bar Tests', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('https://pholickr.onrender.com/');
+		await navigateTo(page);
 	});
 
 	test('Verify that "My Photos" and "My Albums" links are not visible', async ({
@@ -121,7 +139,7 @@ test.describe('Navigation Bar Tests', () => {
 
 test.describe('Login Tests', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('https://pholickr.onrender.com/');
+		await navigateTo(page);
 	});
 
 	test('Invalid login', async ({ page }) => {
@@ -153,7 +171,7 @@ test.describe('Login Tests', () => {
 
 test.describe('sign up tests', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('https://pholickr.onrender.com/');
+		await navigateTo(page);
 	});
 	test('signup with valid inputs', async ({ page }) => {
 		const signupButton = page.locator(
@@ -161,13 +179,15 @@ test.describe('sign up tests', () => {
 		);
 		await expect(signupButton).toBeVisible({ timeout: 3000 });
 		await signupButton.click();
-		await page.fill('input[name="username"]', 'testuser');
-		await page.fill('input[name="firstName"]', 'Test');
-		await page.fill('input[name="lastname"]', 'User');
-		await page.fill('input[name="email"]', 'testuser@example.com');
-		await page.fill('input[name="password"]', 'Password123');
-		await page.fill('input[name="repeat_password"]', 'Password123');
-		await page.click('button[type="submit"]');
+		await fillSignUpForm(page, {
+			username: 'validuser1234',
+			firstName: 'valid4',
+			lastName: 'User4',
+			email: 'validuser1234@example.com',
+			password: 'Password123',
+			repeatPassword: 'Password123',
+		});
+
 		await verifyVisibility(
 			page,
 			[
@@ -188,19 +208,64 @@ test.describe('sign up tests', () => {
 		await verifyVisibility(page, ['.search_middle'], true);
 	});
 
-	//     test('sign up with invalid inputs',async({page})=>{
+	test('sign up with passwords that do not match', async ({ page }) => {
+		const signupButton = page.locator(
+			'button.grey-button:has-text("Sign Up")'
+		);
+		await expect(signupButton).toBeVisible({ timeout: 3000 });
+		await signupButton.click();
+		await fillSignUpForm(page, {
+			username: 'anothertestuser',
+			firstName: 'another',
+			lastName: 'test',
+			email: 'another@example.com',
+			password: 'Password123',
+			repeatPassword: 'dontmatch',
+		});
+		await page.click('button[type="submit"]');
+		await verifyErrorMessage(page, 'Passwords do not match');
+	});
+	test('sign up with existing user', async ({ page }) => {
+		const signupButton = page.locator(
+			'button.grey-button:has-text("Sign Up")'
+		);
+		await expect(signupButton).toBeVisible({ timeout: 3000 });
+		await signupButton.click();
+		await fillSignUpForm(page, {
+			username: 'demotest',
+			firstName: 'demo',
+			lastName: 'User',
+			email: 'demo@aa.io',
+			password: 'password',
+			repeatPassword: 'password',
+		});
 
-	//             await page.fill('input[name="username"]', 'testuser');
-	//             await page.fill('input[name="firstName"]', 'Test');
-	//             await page.fill('input[name="lastname"]', 'User');
-	//             await page.fill('input[name="email"]', 'testuser@example.com');
-	//             await page.fill('input[name="password"]', 'Password123');
-	//             await page.fill('input[name="repeat_password"]', 'DifferentPassword');
-	//             await page.click('button[type="submit"]');
-	//             const errorMessage = await page.locator('.errors').first();
-	//             await expect(errorMessage).toHaveText(/Passwords do not match/i);
-	//           });
+		await page.click('button[type="submit"]');
+		const errorMessage = await page.locator('.errors').first();
+		await expect(errorMessage).toHaveText(/Username is already in use./i);
+	});
+	test('sign up with existing email', async ({ page }) => {
+		const signupButton = page.locator(
+			'button.grey-button:has-text("Sign Up")'
+		);
+		await expect(signupButton).toBeVisible({ timeout: 3000 });
+		await signupButton.click();
+		await fillSignUpForm(page, {
+			username: 'testanother',
+			firstName: 'bob',
+			lastName: 'smith',
+			email: 'demo@aa.io',
+			password: 'password',
+			repeatPassword: 'password',
+		});
+		await page.click('button[type="submit"]');
+		const errorMessage = await page.locator('.errors').first();
+		await expect(errorMessage).toHaveText(
+			/Email address is already in use./i
+		);
+	});
 });
+
 // 	test('logout', async ({ page }) => {});
 // 	test('my photos page', async ({ page }) => {});
 // 	test('my photos - add photos', async ({ page }) => {});
