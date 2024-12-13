@@ -192,10 +192,58 @@ test.describe('Sign Up Tests', () => {
 	});
 });
 
-// 	test('my photos page', async ({ page }) => {});
-// 	test('my photos - add photos', async ({ page }) => {});
-// 	test('my photos - option delete photos', async ({ page }) => {});
-// 	test('my photos option move to album', async ({ page }) => {});
+test.describe('My Photo Page Tests', () => {
+	test.beforeEach(async ({ page }) => {
+		await navigateTo(page);
+		await verifyVisibility(page, selectors.navLinks, false);
+		await verifyVisibility(page, Object.values(selectors.buttons), true);
+		await page.locator(selectors.buttons.demo).click();
+		await verifyVisibility(page, selectors.navLinks, true);
+	});
+	test('Go to Photos page', async ({ page }) => {
+		await page.locator(selectors.navLinks[0]).click();
+		const addPhotoButton = page.locator('button:has-text("Add Photo")');
+		await expect(addPhotoButton).toBeVisible();
+		await expect(page).toHaveURL('https://pholickr.onrender.com/photos');
+		const footerLinks = page.locator(selectors.footerLinks);
+		await expect(footerLinks).toHaveCount(expectedFooterLinks.length);
+		for (let i = 0; i < expectedFooterLinks.length; i++) {
+			await expect(footerLinks.nth(i)).toHaveAttribute(
+				'href',
+				expectedFooterLinks[i]
+			);
+		}
+	});
+	// 	test('my photos - add photos', async ({ page }) => {});
+	// 	test('my photos - option delete photos', async ({ page }) => {});
+	// 	test('my photos option move to album', async ({ page }) => {});
+});
+test.describe('My Albums Tests', () => {
+	test.beforeEach(async ({ page }) => {
+		await navigateTo(page);
+		await verifyVisibility(page, selectors.navLinks, false);
+		await verifyVisibility(page, Object.values(selectors.buttons), true);
+		await page.locator(selectors.buttons.demo).click();
+		await verifyVisibility(page, selectors.navLinks, true);
+		await verifyVisibility(page, Object.values(selectors.buttons), false);
+	});
+	test('Go to Albums Page', async ({ page }) => {
+		await page.locator(selectors.navLinks[1]).click();
+		const addAlbumButton = page.locator('button:has-text("Create Album")');
+		await expect(addAlbumButton).toBeVisible();
+		await expect(page).toHaveURL('https://pholickr.onrender.com/albums');
+		const footerLinks = page.locator(selectors.footerLinks);
+		await expect(footerLinks).toHaveCount(expectedFooterLinks.length);
+		for (let i = 0; i < expectedFooterLinks.length; i++) {
+			await expect(footerLinks.nth(i)).toHaveAttribute(
+				'href',
+				expectedFooterLinks[i]
+			);
+		}
+	});
+	// 	test('my albums - create album', async ({ page }) => {});
+	// 	test('my albums - option delete album', async ({ page }) => {});
+});
 // 	test('photo detail - edit photo', async ({ page }) => {});
 // 	test('photo detail - delete photo', async ({ page }) => {});
 // 	test('photo detail - make comment', async ({ page }) => {});
@@ -205,8 +253,6 @@ test.describe('Sign Up Tests', () => {
 // 	test('user profile - unfollow', async ({ page }) => {});
 // 	test('user profile - followers', async ({ page }) => {});
 // 	test('user profile - following', async ({ page }) => {});
-// 	test('my albums - create album', async ({ page }) => {});
-// 	test('my albums - option delete album', async ({ page }) => {});
 // 	test('my albums - delete album', async ({ page }) => {});
 // 	test('my albums - edit album', async ({ page }) => {});
 // 	test('my albums detail page', async ({ page }) => {});
