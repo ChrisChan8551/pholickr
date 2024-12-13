@@ -40,7 +40,9 @@ const LoginForm = ({ showLoginModal }) => {
 				<form onSubmit={onLogin}>
 					<div>
 						{errors.map((error, ind) => (
-							<div key={ind} className="error-message">{error}</div>
+							<div key={ind} className='error-message'>
+								{error}
+							</div>
 						))}
 					</div>
 					<div>
@@ -54,9 +56,13 @@ const LoginForm = ({ showLoginModal }) => {
 							placeholder='Email'
 							onChange={(e) => setEmail(e.target.value)}
 							value={email}
-                            required
-                            onInvalid={(e) => e.target.setCustomValidity('Please enter your email.')}
-    onInput={(e) => e.target.setCustomValidity('')}
+							required
+							onInvalid={(e) =>
+								e.target.setCustomValidity(
+									'Please enter your email.'
+								)
+							}
+							onInput={(e) => e.target.setCustomValidity('')}
 						/>
 					</div>
 					<div>
@@ -70,9 +76,13 @@ const LoginForm = ({ showLoginModal }) => {
 							placeholder='Password'
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-                            required
-                            onInvalid={(e) => e.target.setCustomValidity('Please enter your password.')}
-    onInput={(e) => e.target.setCustomValidity('')}
+							required
+							onInvalid={(e) =>
+								e.target.setCustomValidity(
+									'Please enter your password.'
+								)
+							}
+							onInput={(e) => e.target.setCustomValidity('')}
 						/>
 						<button
 							className='blue-button modal-label'
