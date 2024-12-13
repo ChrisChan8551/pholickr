@@ -87,11 +87,11 @@ const Navigation = () => {
 												/>
 											</div>
 											<div className='user_info'>
-												<div>
+												<div class='username'>
 													Username:{' '}
 													{currentUser.username}
 												</div>
-												<div>
+												<div class='email'>
 													Email: {currentUser.email}
 												</div>
 											</div>

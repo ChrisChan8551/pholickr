@@ -19,13 +19,16 @@ const SignUpForm = ({ showSignupModal, onClose }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === repeatPassword) {
-			const data = await dispatch(
-				signUp(firstName, lastName, username, email, password)
-			);
-			if (data) {
-				setErrors(data);
-			}
+
+		if (password !== repeatPassword) {
+			setErrors(['Passwords do not match']);
+			return;
+		}
+		const data = await dispatch(
+			signUp(firstName, lastName, username, email, password)
+		);
+		if (data) {
+			setErrors(data);
 		} else {
 			showSignupModal(false);
 		}

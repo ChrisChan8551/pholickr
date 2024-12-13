@@ -150,3 +150,79 @@ test.describe('Login Tests', () => {
 		);
 	});
 });
+
+test.describe('sign up tests', () => {
+	test.beforeEach(async ({ page }) => {
+		await page.goto('https://pholickr.onrender.com/');
+	});
+	test('signup with valid inputs', async ({ page }) => {
+		const signupButton = page.locator(
+			'button.grey-button:has-text("Sign Up")'
+		);
+		await expect(signupButton).toBeVisible({ timeout: 3000 });
+		await signupButton.click();
+		await page.fill('input[name="username"]', 'testuser');
+		await page.fill('input[name="firstName"]', 'Test');
+		await page.fill('input[name="lastname"]', 'User');
+		await page.fill('input[name="email"]', 'testuser@example.com');
+		await page.fill('input[name="password"]', 'Password123');
+		await page.fill('input[name="repeat_password"]', 'Password123');
+		await page.click('button[type="submit"]');
+		await verifyVisibility(
+			page,
+			[
+				'a[href="/photos"]:has-text("My Photos")',
+				'a[href="/albums"]:has-text("My Albums")',
+			],
+			true
+		);
+		await verifyVisibility(
+			page,
+			[
+				'button:has-text("Demo")',
+				'button:has-text("Sign Up")',
+				'button:has-text("Login")',
+			],
+			false
+		);
+		await verifyVisibility(page, ['.search_middle'], true);
+	});
+
+	//     test('sign up with invalid inputs',async({page})=>{
+
+	//             await page.fill('input[name="username"]', 'testuser');
+	//             await page.fill('input[name="firstName"]', 'Test');
+	//             await page.fill('input[name="lastname"]', 'User');
+	//             await page.fill('input[name="email"]', 'testuser@example.com');
+	//             await page.fill('input[name="password"]', 'Password123');
+	//             await page.fill('input[name="repeat_password"]', 'DifferentPassword');
+	//             await page.click('button[type="submit"]');
+	//             const errorMessage = await page.locator('.errors').first();
+	//             await expect(errorMessage).toHaveText(/Passwords do not match/i);
+	//           });
+});
+// 	test('logout', async ({ page }) => {});
+// 	test('my photos page', async ({ page }) => {});
+// 	test('my photos - add photos', async ({ page }) => {});
+// 	test('my photos - option delete photos', async ({ page }) => {});
+// 	test('my photos option move to album', async ({ page }) => {});
+// 	test('photo detail - edit photo', async ({ page }) => {});
+// 	test('photo detail - delete photo', async ({ page }) => {});
+// 	test('photo detail - make comment', async ({ page }) => {});
+// 	test('photo detail - delete comment', async ({ page }) => {});
+// 	test('photo detail - edit comment', async ({ page }) => {});
+// 	test('user profile - follow', async ({ page }) => {});
+// 	test('user profile - unfollow', async ({ page }) => {});
+// 	test('user profile - followers', async ({ page }) => {});
+// 	test('user profile - following', async ({ page }) => {});
+// 	test('my albums - create album', async ({ page }) => {});
+// 	test('my albums - option delete album', async ({ page }) => {});
+// 	test('my albums - delete album', async ({ page }) => {});
+// 	test('my albums - edit album', async ({ page }) => {});
+// 	test('my albums detail page', async ({ page }) => {});
+
+// test.describe('', () => {
+// 	test.beforeEach(async ({ page }) => {
+// 		await page.goto('https://pholickr.onrender.com/');
+// 	});
+// });
