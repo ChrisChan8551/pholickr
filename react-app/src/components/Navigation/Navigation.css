@@ -1,6 +1,10 @@
 * {
 	font-family: Proxima Nova, helvetica neue, helvetica, arial, sans-serif;
 }
+.wrapper {
+    position: fixed;
+    width: 100vw;
+}
 
 /* html {
 	background-color: #f3f5f6
