@@ -9,13 +9,17 @@ const performActionOnElements = async (page, selectors, action) => {
 
 const fillFormFields = async (page, fields) => {
 	for (const [selector, value] of Object.entries(fields)) {
-		await page.fill(selector, value);
+		const field = await page.locator(selector);
+		await field.fill(value);
 	}
 };
 
-const navigateTo = async (page, url = 'https://pholickr.onrender.com/') => {
+const navigateTo = async (page, url = 'http://localhost:3000/') => {
 	await page.goto(url);
 };
+
+//https://pholickr.onrender.com/
+//http://localhost:3000/
 
 const verifyVisibility = async (page, selectors, shouldBeVisible = true) => {
 	await performActionOnElements(page, selectors, async (element) =>
@@ -86,13 +90,31 @@ const expectedFooterLinks = [
 ];
 
 const fillCreatePhotoForm = async (page, data) => {
-	await fillFormfields(page, {
-		'input[name="pnoto-title"]': data.title,
-		'input[name="photo-description"]': data.description,
-		'input[name="photo-imageUrl"]': data.imageUrl,
-	});
-	await page.click('button[type="submit"]');
-};
+    await fillFormFields(page, {
+      'input[name="photo-title"]': data.title,
+      'textarea[name="photo-description"]': data.description,
+      'textarea[name="photo-imageUrl"]': data.imageUrl,
+    });
+    await page.click('button[type="submit"]');
+  };
+
+
+// const fillCreatePhotoForm = async (page, data) => {
+//     await page.fill('input[name="photo-title"]', data.title);
+//     const titleField = await page.locator('input[name="photo-title"]');
+//     expect(await titleField.inputValue()).toBe(data.title);
+
+//     await page.fill('textarea[name="photo-description"]', data.description);
+//     const descriptionField = await page.locator('textarea[name="photo-description"]');
+//     expect(await descriptionField.inputValue()).toBe(data.description);
+
+//     await page.fill('textarea[name="photo-imageUrl"]', data.imageUrl);
+//     const imageUrlField = await page.locator('textarea[name="photo-imageUrl"]');
+//     expect(await imageUrlField.inputValue()).toBe(data.imageUrl);
+
+//     await page.click('button[type="submit"]');
+//   };
+
 
 const verifyFooterLinks = async (page) => {
 	const footerLinks = page.locator(selectors.footerLinks);
@@ -220,6 +242,7 @@ test.describe('My Photo Page Tests', () => {
 		await page.locator(selectors.navLinks[0]).click(); // My Photos
 		const addPhotoButton = page.locator('button:has-text("Add Photo")');
 		await expect(addPhotoButton).toBeVisible();
+		await addPhotoButton.click();
 		await fillCreatePhotoForm(page, {
 			title: 'Siracha',
 			description: 'Siracha slaps game',

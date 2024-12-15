@@ -49,7 +49,7 @@ function CreatePhotoForm({ album, hideForm }) {
 					Title
 					<input
 						type='text'
-                        name='pnoto-title'
+                        name='photo-title'
 						className='create-photo-title modal-label'
 						value={title}
 						required
