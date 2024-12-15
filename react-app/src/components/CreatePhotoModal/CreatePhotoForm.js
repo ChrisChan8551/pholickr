@@ -49,7 +49,8 @@ function CreatePhotoForm({ album, hideForm }) {
 					Title
 					<input
 						type='text'
-						className='modal-label'
+                        name='pnoto-title'
+						className='create-photo-title modal-label'
 						value={title}
 						required
 						onChange={(e) => setTitle(e.target.value)}
@@ -59,7 +60,8 @@ function CreatePhotoForm({ album, hideForm }) {
 					Description
 					<textarea
 						type='text'
-						className='modal-label'
+                        name='photo-description'
+						className='create-photo-description modal-label'
 						value={description}
 						required
 						onChange={(e) => setDescription(e.target.value)}
@@ -69,7 +71,8 @@ function CreatePhotoForm({ album, hideForm }) {
 					Image Url
 					<textarea
 						type='text'
-						className='modal-label'
+                        name='photo-imageUrl'
+						className='create-photo-link modal-label'
 						value={imageUrl}
 						required
 						onChange={(e) => setImageUrl(e.target.value)}

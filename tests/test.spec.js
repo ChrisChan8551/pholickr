@@ -40,6 +40,7 @@ const fillSignUpForm = async (page, data) => {
 	});
 	await page.click('button[type="submit"]');
 };
+
 const performLogin = async (page, email, password) => {
 	await verifyVisibility(page, selectors.navLinks, false);
 	await verifyVisibility(page, Object.values(selectors.buttons), true);
@@ -84,6 +85,26 @@ const expectedFooterLinks = [
 	'https://chrischan8551.github.io/',
 ];
 
+const fillCreatePhotoForm = async (page, data) => {
+	await fillFormfields(page, {
+		'input[name="pnoto-title"]': data.title,
+		'input[name="photo-description"]': data.description,
+		'input[name="imageUrl"]': data.imageUrl,
+	});
+	await page.click('button[type="submit"]');
+};
+
+const verifyFooterLinks = async (page) => {
+	const footerLinks = page.locator(selectors.footerLinks);
+	await expect(footerLinks).toHaveCount(expectedFooterLinks.length);
+	for (let i = 0; i < expectedFooterLinks.length; i++) {
+		await expect(footerLinks.nth(i)).toHaveAttribute(
+			'href',
+			expectedFooterLinks[i]
+		);
+	}
+};
+
 test.describe('Navigation Bar Tests', () => {
 	test.beforeEach(async ({ page }) => {
 		await navigateTo(page);
@@ -95,14 +116,7 @@ test.describe('Navigation Bar Tests', () => {
 	});
 
 	test('Verify footer links', async ({ page }) => {
-		const footerLinks = page.locator(selectors.footerLinks);
-		await expect(footerLinks).toHaveCount(expectedFooterLinks.length);
-		for (let i = 0; i < expectedFooterLinks.length; i++) {
-			await expect(footerLinks.nth(i)).toHaveAttribute(
-				'href',
-				expectedFooterLinks[i]
-			);
-		}
+		await verifyFooterLinks(page);
 	});
 });
 
@@ -199,25 +213,26 @@ test.describe('My Photo Page Tests', () => {
 		await verifyVisibility(page, Object.values(selectors.buttons), true);
 		await page.locator(selectors.buttons.demo).click();
 		await verifyVisibility(page, selectors.navLinks, true);
+		await verifyFooterLinks(page);
 	});
+
 	test('Go to Photos page', async ({ page }) => {
-		await page.locator(selectors.navLinks[0]).click();
+		await page.locator(selectors.navLinks[0]).click(); // My Photos
 		const addPhotoButton = page.locator('button:has-text("Add Photo")');
 		await expect(addPhotoButton).toBeVisible();
-		await expect(page).toHaveURL('https://pholickr.onrender.com/photos');
-		const footerLinks = page.locator(selectors.footerLinks);
-		await expect(footerLinks).toHaveCount(expectedFooterLinks.length);
-		for (let i = 0; i < expectedFooterLinks.length; i++) {
-			await expect(footerLinks.nth(i)).toHaveAttribute(
-				'href',
-				expectedFooterLinks[i]
-			);
-		}
+		await fillCreatePhotoForm(page, {
+			title: 'Siracha',
+			description: 'Siracha slaps game',
+			imageUrl:
+				'https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg',
+		});
 	});
 	// 	test('my photos - add photos', async ({ page }) => {});
 	// 	test('my photos - option delete photos', async ({ page }) => {});
 	// 	test('my photos option move to album', async ({ page }) => {});
+	// https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg
 });
+
 test.describe('My Albums Tests', () => {
 	test.beforeEach(async ({ page }) => {
 		await navigateTo(page);
@@ -232,14 +247,7 @@ test.describe('My Albums Tests', () => {
 		const addAlbumButton = page.locator('button:has-text("Create Album")');
 		await expect(addAlbumButton).toBeVisible();
 		await expect(page).toHaveURL('https://pholickr.onrender.com/albums');
-		const footerLinks = page.locator(selectors.footerLinks);
-		await expect(footerLinks).toHaveCount(expectedFooterLinks.length);
-		for (let i = 0; i < expectedFooterLinks.length; i++) {
-			await expect(footerLinks.nth(i)).toHaveAttribute(
-				'href',
-				expectedFooterLinks[i]
-			);
-		}
+		await verifyFooterLinks(page);
 	});
 	// 	test('my albums - create album', async ({ page }) => {});
 	// 	test('my albums - option delete album', async ({ page }) => {});
