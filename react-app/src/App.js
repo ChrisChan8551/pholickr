@@ -33,7 +33,7 @@ function App() {
 	}
 
 	return (
-		<div className='wrapper'>
+		<div>
 			{!!currentUser && <Navigation loaded={loaded} />}
 
 			<Switch>
