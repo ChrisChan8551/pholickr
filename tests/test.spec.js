@@ -89,7 +89,7 @@ const fillCreatePhotoForm = async (page, data) => {
 	await fillFormfields(page, {
 		'input[name="pnoto-title"]': data.title,
 		'input[name="photo-description"]': data.description,
-		'input[name="imageUrl"]': data.imageUrl,
+		'input[name="photo-imageUrl"]': data.imageUrl,
 	});
 	await page.click('button[type="submit"]');
 };
