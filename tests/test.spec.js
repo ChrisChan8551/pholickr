@@ -14,7 +14,7 @@ const fillFormFields = async (page, fields) => {
 	}
 };
 
-const navigateTo = async (page, url = 'http://localhost:3000/') => {
+const navigateTo = async (page, url = 'https://pholickr.onrender.com/') => {
 	await page.goto(url);
 };
 
@@ -47,9 +47,9 @@ const fillSignUpForm = async (page, data) => {
 
 const performLogin = async (page, email, password) => {
 	await verifyVisibility(page, selectors.navLinks, false);
-	await verifyVisibility(page, Object.values(selectors.buttons), true);
+	await verifyVisibility(page, Object.values(selectors.navButtons), true);
 
-	await page.click(selectors.buttons.login);
+	await page.click(selectors.navButtons.login);
 	await fillFormFields(page, {
 		'input[name="email"]': email,
 		'input[name="password"]': password,
@@ -69,7 +69,7 @@ const selectors = {
 		'a[href="/photos"]:has-text("My Photos")',
 		'a[href="/albums"]:has-text("My Albums")',
 	],
-	buttons: {
+	navButtons: {
 		demo: 'button:has-text("Demo")',
 		signUp: 'button:has-text("Sign Up")',
 		login: 'button:has-text("Login")',
@@ -80,6 +80,7 @@ const selectors = {
 		button: '.svg-inline--fa.fa-chevron-down',
 		logout: 'button.blue-button.modal-label:has-text("Log out")',
 	},
+
 };
 
 const expectedFooterLinks = [
@@ -90,31 +91,13 @@ const expectedFooterLinks = [
 ];
 
 const fillCreatePhotoForm = async (page, data) => {
-    await fillFormFields(page, {
-      'input[name="photo-title"]': data.title,
-      'textarea[name="photo-description"]': data.description,
-      'textarea[name="photo-imageUrl"]': data.imageUrl,
-    });
-    await page.click('button[type="submit"]');
-  };
-
-
-// const fillCreatePhotoForm = async (page, data) => {
-//     await page.fill('input[name="photo-title"]', data.title);
-//     const titleField = await page.locator('input[name="photo-title"]');
-//     expect(await titleField.inputValue()).toBe(data.title);
-
-//     await page.fill('textarea[name="photo-description"]', data.description);
-//     const descriptionField = await page.locator('textarea[name="photo-description"]');
-//     expect(await descriptionField.inputValue()).toBe(data.description);
-
-//     await page.fill('textarea[name="photo-imageUrl"]', data.imageUrl);
-//     const imageUrlField = await page.locator('textarea[name="photo-imageUrl"]');
-//     expect(await imageUrlField.inputValue()).toBe(data.imageUrl);
-
-//     await page.click('button[type="submit"]');
-//   };
-
+	await fillFormFields(page, {
+		'input[name="photo-title"]': data.title,
+		'textarea[name="photo-description"]': data.description,
+		'textarea[name="photo-imageUrl"]': data.imageUrl,
+	});
+	await page.click('button[type="submit"]');
+};
 
 const verifyFooterLinks = async (page) => {
 	const footerLinks = page.locator(selectors.footerLinks);
@@ -134,7 +117,7 @@ test.describe('Navigation Bar Tests', () => {
 
 	test('Verify navigation bar elements', async ({ page }) => {
 		await verifyVisibility(page, selectors.navLinks, false);
-		await verifyVisibility(page, Object.values(selectors.buttons), true);
+		await verifyVisibility(page, Object.values(selectors.navButtons), true);
 	});
 
 	test('Verify footer links', async ({ page }) => {
@@ -166,7 +149,7 @@ test.describe('Sign Up Tests', () => {
 	test.beforeEach(async ({ page }) => {
 		await navigateTo(page);
 		await verifyVisibility(page, selectors.navLinks, false);
-		await verifyVisibility(page, Object.values(selectors.buttons), true);
+		await verifyVisibility(page, Object.values(selectors.navButtons), true);
 	});
 
 	test('Sign up with mismatched passwords', async ({ page }) => {
@@ -224,7 +207,7 @@ test.describe('Sign Up Tests', () => {
 			repeatPassword: 'Password123',
 		});
 		await verifyVisibility(page, selectors.navLinks, true);
-		await verifyVisibility(page, Object.values(selectors.buttons), false);
+		await verifyVisibility(page, Object.values(selectors.navButtons), false);
 	});
 });
 
@@ -232,8 +215,8 @@ test.describe('My Photo Page Tests', () => {
 	test.beforeEach(async ({ page }) => {
 		await navigateTo(page);
 		await verifyVisibility(page, selectors.navLinks, false);
-		await verifyVisibility(page, Object.values(selectors.buttons), true);
-		await page.locator(selectors.buttons.demo).click();
+		await verifyVisibility(page, Object.values(selectors.navButtons), true);
+		await page.locator(selectors.navButtons.demo).click();
 		await verifyVisibility(page, selectors.navLinks, true);
 		await verifyFooterLinks(page);
 	});
@@ -243,12 +226,17 @@ test.describe('My Photo Page Tests', () => {
 		const addPhotoButton = page.locator('button:has-text("Add Photo")');
 		await expect(addPhotoButton).toBeVisible();
 		await addPhotoButton.click();
-		await fillCreatePhotoForm(page, {
+		const photoData = {
 			title: 'Siracha',
 			description: 'Siracha slaps game',
 			imageUrl:
 				'https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg',
-		});
+		};
+		await fillCreatePhotoForm(page, photoData);
+		// Expect the page to reroute to the new photo's URL
+		await expect(page).toHaveURL(/\/photos\/\d+$/);
+		const photoTitle = page.locator('h1.title-text'); // Replace with the actual selector for the title
+		await expect(photoTitle).toHaveText(photoData.title);
 	});
 	// 	test('my photos - add photos', async ({ page }) => {});
 	// 	test('my photos - option delete photos', async ({ page }) => {});
@@ -260,10 +248,10 @@ test.describe('My Albums Tests', () => {
 	test.beforeEach(async ({ page }) => {
 		await navigateTo(page);
 		await verifyVisibility(page, selectors.navLinks, false);
-		await verifyVisibility(page, Object.values(selectors.buttons), true);
-		await page.locator(selectors.buttons.demo).click();
+		await verifyVisibility(page, Object.values(selectors.navButtons), true);
+		await page.locator(selectors.navButtons.demo).click();
 		await verifyVisibility(page, selectors.navLinks, true);
-		await verifyVisibility(page, Object.values(selectors.buttons), false);
+		await verifyVisibility(page, Object.values(selectors.navButtons), false);
 	});
 	test('Go to Albums Page', async ({ page }) => {
 		await page.locator(selectors.navLinks[1]).click();
