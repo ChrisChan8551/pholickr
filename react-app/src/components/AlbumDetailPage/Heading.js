@@ -75,7 +75,7 @@ function AlbumDetailHeading() {
 					type='button'
 					onClick={removeAlbum}
 				>
-					Delete
+					 Delete Album
 				</button>
 			</div>
 			{/* {editorOpen && <Editor setOpen={setEditorOpen} />}
