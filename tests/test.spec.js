@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const exp = require('constants');
 
 const performActionOnElements = async (page, selectors, action) => {
 	for (const selector of selectors) {
@@ -14,13 +15,12 @@ const fillFormFields = async (page, fields) => {
 	}
 };
 
-const weblink = 'https://pholickr.onrender.com/'
-const locallink = 'http://localhost:3000/'
+const weblink = 'https://pholickr.onrender.com/';
+const locallink = 'http://localhost:3000/';
 
 const navigateTo = async (page, url = weblink) => {
 	await page.goto(url);
 };
-
 
 const verifyVisibility = async (page, selectors, shouldBeVisible = true) => {
 	await performActionOnElements(page, selectors, async (element) =>
@@ -238,7 +238,7 @@ test.describe('My Photo Page Tests', () => {
 		);
 	});
 
-	test('Go to Photos page and add photo', async ({ page }) => {
+	test('Go to Photos page and add photo then delete it', async ({ page }) => {
 		await page.locator(selectors.navLinks[0]).click(); // My Photos
 		await expect(page).toHaveURL('https://pholickr.onrender.com/photos');
 		const addPhotoButton = page.locator('button:has-text("Add Photo")');
@@ -259,9 +259,31 @@ test.describe('My Photo Page Tests', () => {
 		await expect(photoTitle).toHaveText(photoData.title);
 		await expect(photoDesc).toHaveText(photoData.description);
 		await expect(photoImage).toHaveAttribute('src', photoData.imageUrl);
+		await verifyFooterLinks(page);
+		await expect(page.locator('.PhotoDetail--Image')).toHaveAttribute(
+			'src',
+			'https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg'
+		);
+
+		const deletePhotoButton = await page.locator(
+			'button:has-text("Delete Photo")'
+		);
+		const editPhotoButton = await page.locator(
+			'button:has-text("Edit Photo")'
+		);
+
+		await expect(editPhotoButton).toBeVisible();
+		await expect(deletePhotoButton).toBeVisible();
+		await expect(editPhotoButton).toHaveText('Edit Photo');
+		await expect(deletePhotoButton).toHaveText('Delete Photo');
+
+        const profileCard = page.locator('.profile-img');
+        await expect(profileCard).toBeVisible();
+
+		await deletePhotoButton.click();
+		await expect(page).toHaveURL('https://pholickr.onrender.com/photos');
 	});
 
-	// 	test('my photos - add photos', async ({ page }) => {});
 	// 	test('my photos - option delete photos', async ({ page }) => {});
 	// 	test('my photos option move to album', async ({ page }) => {});
 	// https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg
@@ -300,8 +322,6 @@ test.describe('My Albums Tests', () => {
 			.nth(0);
 
 		await expect(albumImage).toBeVisible();
-
-
 	});
 	// 	test('my albums - create album', async ({ page }) => {});
 	// 	test('my albums - option delete album', async ({ page }) => {});
