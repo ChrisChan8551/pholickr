@@ -14,12 +14,13 @@ const fillFormFields = async (page, fields) => {
 	}
 };
 
-const navigateTo = async (page, url = 'https://pholickr.onrender.com/') => {
+const weblink = 'https://pholickr.onrender.com/'
+const locallink = 'http://localhost:3000/'
+
+const navigateTo = async (page, url = weblink) => {
 	await page.goto(url);
 };
 
-//https://pholickr.onrender.com/
-//http://localhost:3000/
 
 const verifyVisibility = async (page, selectors, shouldBeVisible = true) => {
 	await performActionOnElements(page, selectors, async (element) =>
@@ -80,7 +81,6 @@ const selectors = {
 		button: '.svg-inline--fa.fa-chevron-down',
 		logout: 'button.blue-button.modal-label:has-text("Log out")',
 	},
-
 };
 
 const expectedFooterLinks = [
@@ -108,6 +108,14 @@ const verifyFooterLinks = async (page) => {
 			expectedFooterLinks[i]
 		);
 	}
+};
+
+const fillCreateAlbumForm = async (page, data) => {
+	await fillFormFields(page, {
+		'input[name="album-title"]': data.title,
+		'textarea[name="album-imageUrl"]': data.imageUrl,
+	});
+	await page.click('button[type="submit"]');
 };
 
 test.describe('Navigation Bar Tests', () => {
@@ -207,7 +215,11 @@ test.describe('Sign Up Tests', () => {
 			repeatPassword: 'Password123',
 		});
 		await verifyVisibility(page, selectors.navLinks, true);
-		await verifyVisibility(page, Object.values(selectors.navButtons), false);
+		await verifyVisibility(
+			page,
+			Object.values(selectors.navButtons),
+			false
+		);
 	});
 });
 
@@ -219,10 +231,16 @@ test.describe('My Photo Page Tests', () => {
 		await page.locator(selectors.navButtons.demo).click();
 		await verifyVisibility(page, selectors.navLinks, true);
 		await verifyFooterLinks(page);
+		await verifyVisibility(
+			page,
+			Object.values(selectors.navButtons),
+			false
+		);
 	});
 
-	test('Go to Photos page', async ({ page }) => {
+	test('Go to Photos page and add photo', async ({ page }) => {
 		await page.locator(selectors.navLinks[0]).click(); // My Photos
+		await expect(page).toHaveURL('https://pholickr.onrender.com/photos');
 		const addPhotoButton = page.locator('button:has-text("Add Photo")');
 		await expect(addPhotoButton).toBeVisible();
 		await addPhotoButton.click();
@@ -235,9 +253,14 @@ test.describe('My Photo Page Tests', () => {
 		await fillCreatePhotoForm(page, photoData);
 		// Expect the page to reroute to the new photo's URL
 		await expect(page).toHaveURL(/\/photos\/\d+$/);
-		const photoTitle = page.locator('h1.title-text'); // Replace with the actual selector for the title
+		const photoImage = page.locator('.PhotoDetail--Image');
+		const photoTitle = page.locator('h1.title-text');
+		const photoDesc = page.locator('.desc-text');
 		await expect(photoTitle).toHaveText(photoData.title);
+		await expect(photoDesc).toHaveText(photoData.description);
+		await expect(photoImage).toHaveAttribute('src', photoData.imageUrl);
 	});
+
 	// 	test('my photos - add photos', async ({ page }) => {});
 	// 	test('my photos - option delete photos', async ({ page }) => {});
 	// 	test('my photos option move to album', async ({ page }) => {});
@@ -251,14 +274,34 @@ test.describe('My Albums Tests', () => {
 		await verifyVisibility(page, Object.values(selectors.navButtons), true);
 		await page.locator(selectors.navButtons.demo).click();
 		await verifyVisibility(page, selectors.navLinks, true);
-		await verifyVisibility(page, Object.values(selectors.navButtons), false);
+		await verifyVisibility(
+			page,
+			Object.values(selectors.navButtons),
+			false
+		);
+		await verifyFooterLinks(page);
 	});
-	test('Go to Albums Page', async ({ page }) => {
-		await page.locator(selectors.navLinks[1]).click();
+	test('Go to Albums Page and create album', async ({ page }) => {
+		await page.locator(selectors.navLinks[1]).click(); // My Albums
+		await expect(page).toHaveURL('https://pholickr.onrender.com/albums');
 		const addAlbumButton = page.locator('button:has-text("Create Album")');
 		await expect(addAlbumButton).toBeVisible();
-		await expect(page).toHaveURL('https://pholickr.onrender.com/albums');
-		await verifyFooterLinks(page);
+		await addAlbumButton.click();
+		const albumData = {
+			title: 'Siracha',
+			imageUrl:
+				'https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg',
+		};
+		await fillCreateAlbumForm(page, albumData);
+		const albumImage = page
+			.locator(
+				'img[src="https://m.media-amazon.com/images/I/81hsQ2HK0mL.__AC_SX300_SY300_QL70_FMwebp_.jpg"]'
+			)
+			.nth(0);
+
+		await expect(albumImage).toBeVisible();
+
+
 	});
 	// 	test('my albums - create album', async ({ page }) => {});
 	// 	test('my albums - option delete album', async ({ page }) => {});

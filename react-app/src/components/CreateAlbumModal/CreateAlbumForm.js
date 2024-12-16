@@ -50,6 +50,7 @@ function CreateAlbumForm({ album, hideForm }) {
 					Title
 					<input
 						type='text'
+                        name='album-title'
 						className='modal-label'
 						value={title}
 						required
@@ -60,6 +61,7 @@ function CreateAlbumForm({ album, hideForm }) {
 					Image Url
 					<textarea
 						type='text'
+                        name='album-imageUrl'
 						className='modal-label'
 						value={imageUrl}
 						required
