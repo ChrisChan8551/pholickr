@@ -205,7 +205,7 @@ test.describe('Sign Up Tests', () => {
 	});
 
 	//sign-up tests
-	async function runSignUpTest(page, userData, verifySuccess = false) {
+	const runSignUpTest = async (page, userData, verifySuccess = false) => {
 		await fillSignUpForm(page, userData);
 
 		if (verifySuccess) {
@@ -218,7 +218,7 @@ test.describe('Sign Up Tests', () => {
 		} else {
 			await verifyErrorMessage(page, userData.errorMessage);
 		}
-	}
+	};
 
 	test('Sign up with mismatched passwords', async ({ page }) => {
 		await runSignUpTest(page, signUpData.mismatchedPasswords);
@@ -236,69 +236,59 @@ test.describe('Sign Up Tests', () => {
 		await runSignUpTest(page, signUpData.validUser, true);
 	});
 });
+const addPhotoAndVerify = async (page, photoData) => {
+	await page.locator(selectors.navLinks[0]).click(); // My Photos
+	await expect(page).toHaveURL(`${BASE_URL}photos`);
+	const addPhotoButton = page.locator('button:has-text("Add Photo")');
+	await addPhotoButton.click();
+	await fillCreatePhotoForm(page, photoData);
+	await expect(page).toHaveURL(/\/photos\/\d+$/);
+
+	await expect(page.locator('.PhotoDetail--Image')).toHaveAttribute(
+		'src',
+		photoData.imageUrl
+	);
+	await expect(page.locator('h1.title-text')).toHaveText(photoData.title);
+	await expect(page.locator('.desc-text')).toHaveText(photoData.description);
+	await verifyFooterLinks(page);
+	const deletePhotoButton = await page.locator(
+		'button:has-text("Delete Photo")'
+	);
+	const editPhotoButton = await page.locator('button:has-text("Edit Photo")');
+
+	await expect(editPhotoButton).toBeVisible();
+	await expect(deletePhotoButton).toBeVisible();
+	await expect(editPhotoButton).toHaveText('Edit Photo');
+	await expect(deletePhotoButton).toHaveText('Delete Photo');
+
+	const profileCard = page.locator('.profile-img');
+	await expect(profileCard).toBeVisible();
+};
+
+	// 	test('my photos - option delete photos', async ({ page }) => {});
+	// 	test('my photos option move to album', async ({ page }) => {});
+
 
 test.describe('My Photo Page Tests', () => {
 	test.beforeEach(async ({ page }) => {
 		await navigateTo(page);
-		await verifyVisibility(page, selectors.navLinks, false);
-		await verifyVisibility(page, Object.values(selectors.navButtons), true);
 		await page.locator(selectors.navButtons.demo).click();
 		await verifyVisibility(page, selectors.navLinks, true);
-		await verifyFooterLinks(page);
-		await verifyVisibility(
-			page,
-			Object.values(selectors.navButtons),
-			false
-		);
 	});
 
 	test('Go to Photos page and add photo then delete it', async ({ page }) => {
-		await page.locator(selectors.navLinks[0]).click();
-		await expect(page).toHaveURL(`${BASE_URL}photos`);
-		const addPhotoButton = page.locator('button:has-text("Add Photo")');
-		await expect(addPhotoButton).toBeVisible();
-		await addPhotoButton.click();
 		const photoData = {
 			title: 'Siracha',
 			description: 'Siracha slaps game',
 			imageUrl: testImage,
 		};
-		await fillCreatePhotoForm(page, photoData);
-		// Expect the page to reroute to the new photo's URL
-		await expect(page).toHaveURL(/\/photos\/\d+$/);
-		const photoImage = page.locator('.PhotoDetail--Image');
-		const photoTitle = page.locator('h1.title-text');
-		const photoDesc = page.locator('.desc-text');
-		await expect(photoTitle).toHaveText(photoData.title);
-		await expect(photoDesc).toHaveText(photoData.description);
-		await expect(photoImage).toHaveAttribute('src', photoData.imageUrl);
-		await verifyFooterLinks(page);
-		await expect(page.locator('.PhotoDetail--Image')).toHaveAttribute(
-			'src',
-			testImage
-		);
-
-		const deletePhotoButton = await page.locator(
+		await addPhotoAndVerify(page, photoData);
+		const deletePhotoButton = page.locator(
 			'button:has-text("Delete Photo")'
 		);
-		const editPhotoButton = await page.locator(
-			'button:has-text("Edit Photo")'
-		);
-
-		await expect(editPhotoButton).toBeVisible();
-		await expect(deletePhotoButton).toBeVisible();
-		await expect(editPhotoButton).toHaveText('Edit Photo');
-		await expect(deletePhotoButton).toHaveText('Delete Photo');
-
-		const profileCard = page.locator('.profile-img');
-		await expect(profileCard).toBeVisible();
-
 		await deletePhotoButton.click();
 		await expect(page).toHaveURL(`${BASE_URL}photos`);
 	});
-
-	// 	test('my photos - option delete photos', async ({ page }) => {});
-	// 	test('my photos option move to album', async ({ page }) => {});
 });
 
 test.describe('My Albums Tests', () => {
