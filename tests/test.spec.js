@@ -17,7 +17,7 @@ const fillFormFields = async (page, fields) => {
 
 const weblink = 'https://pholickr.onrender.com/';
 const locallink = 'http://localhost:3000/';
-const BASE_URL = locallink;
+const BASE_URL = weblink;
 
 const navigateTo = async (page, path = '', baseUrl = BASE_URL) => {
 	const fullUrl = `${baseUrl}${path}`;
@@ -289,6 +289,49 @@ test.describe('My Photo Page Tests', () => {
 		await expect(page).toHaveURL(`${BASE_URL}photos`);
 	});
 
+	// test('Go to My Photos page and add photo then delete using option', async ({
+	// 	page,
+	// }) => {
+	// 	const photoData = {
+	// 		title: 'Siracha',
+	// 		description: 'Siracha slaps game',
+	// 		imageUrl: testImage,
+	// 	};
+	// 	await addPhotoAndVerify(page, photoData);
+	// 	await page.goto(`${BASE_URL}photos`);
+
+	// 	const imageSelector = `img[src="${testImage}"]`;
+	// 	const imageElement = await page.waitForSelector(imageSelector, {
+	// 		timeout: 2000,
+	// 	});
+
+	// 	const optionsButtonHandle = await imageElement.evaluateHandle(
+	// 		(image) => {
+	// 			const parent = image.closest('.GridLayout--Image');
+	// 			if (!parent) return null;
+	// 			return parent.parentElement?.querySelector(
+	// 				'button.blue-button'
+	// 			);
+	// 		}
+	// 	);
+
+	// 	if (!optionsButtonHandle) {
+	// 		throw new Error(
+	// 			`Options button not found for image with src "${testImage}"`
+	// 		);
+	// 	}
+
+	// 	const optionsButton = await page.evaluateHandle(
+	// 		(btn) => btn,
+	// 		optionsButtonHandle
+	// 	);
+
+	// 	await optionsButton.click();
+
+	// 	const deleteButton = page.locator('button:has-text("Delete")');
+	// 	await deleteButton.click();
+	// });
+
 	test('Go to My Photos page and add photo then delete using option', async ({
 		page,
 	}) => {
@@ -297,39 +340,27 @@ test.describe('My Photo Page Tests', () => {
 			description: 'Siracha slaps game',
 			imageUrl: testImage,
 		};
+
 		await addPhotoAndVerify(page, photoData);
-		await page.goto(`${BASE_URL}photos`);
-
-		const imageSelector = `img[src="${testImage}"]`;
-		const imageElement = await page.waitForSelector(imageSelector, {
-			timeout: 2000,
-		});
-
-		const optionsButtonHandle = await imageElement.evaluateHandle(
-			(image) => {
-				const parent = image.closest('.GridLayout--Image');
-				if (!parent) return null;
-				return parent.parentElement?.querySelector(
-					'button.blue-button'
-				);
-			}
-		);
-
-		if (!optionsButtonHandle) {
-			throw new Error(
-				`Options button not found for image with src "${testImage}"`
-			);
-		}
-
-		const optionsButton = await page.evaluateHandle(
-			(btn) => btn,
-			optionsButtonHandle
-		);
-
+		await page.goto(`${BASE_URL}photos`, { timeout: 5000 });
+        await expect(page).toHaveURL(`${BASE_URL}photos`);
+		// Locate the image element using the src
+		const imageLocator = page
+			.locator(`img[alt="Siracha"][src="${testImage}"]`)
+			.first();
+		// Find the options button by navigating up to its parent element
+		const optionsButton = imageLocator
+			.locator('..') // Go to the immediate parent of the <img> tag
+			.locator('..') // Go to the grandparent container
+			.locator('button.blue-button:has-text("Options")'); // Find the options button inside the grandparent container
+		await optionsButton.waitFor({ state: 'visible', timeout: 2000 });
 		await optionsButton.click();
-
 		const deleteButton = page.locator('button:has-text("Delete")');
 		await deleteButton.click();
+		// Wait for the image to be removed from the DOM
+		await imageLocator.waitFor({ state: 'hidden', timeout: 2000 });
+		await expect(page.locator(`img[src="${testImage}"]`)).toHaveCount(0);
+		await expect(imageLocator).toBeHidden();
 	});
 });
 
@@ -360,9 +391,9 @@ test.describe('My Albums Tests', () => {
 			imageUrl: testImage,
 		};
 		await fillCreateAlbumForm(page, albumData);
-		const albumImage = page.locator(`img[src="${testImage}"]`).nth(0);
+		const albumImage = page.locator(`img[src="${testImage}"]`).first();
 		await expect(albumImage).toBeVisible();
-		const albumDiv = albumImage.locator('..');
+		const albumDiv = albumImage.locator('..').locator('..'); // navigate to the parent element of albumImage locator.
 		await albumDiv.click();
 		const albumTitle = page.locator('h1.album-title');
 		await expect(albumTitle).toHaveText(albumData.title);
@@ -373,8 +404,9 @@ test.describe('My Albums Tests', () => {
 		await expect(editAlbumButton).toBeVisible();
 		await expect(deleteAlbumButton).toBeVisible();
 		await deleteAlbumButton.click();
-		await expect(albumImage).not.toBeVisible();
 		await expect(page).toHaveURL(`${BASE_URL}albums`);
+		await expect(albumImage).not.toBeVisible();
+		await expect(albumImage).toHaveCount(0);
 	});
 	// 	test('my albums - option delete album', async ({ page }) => {});
 });
