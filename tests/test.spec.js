@@ -265,9 +265,8 @@ const addPhotoAndVerify = async (page, photoData) => {
 	await expect(profileCard).toBeVisible();
 };
 
-	// 	test('my photos - option delete photos', async ({ page }) => {});
-	// 	test('my photos option move to album', async ({ page }) => {});
-
+// 	test('my photos - option delete photos', async ({ page }) => {});
+// 	test('my photos option move to album', async ({ page }) => {});
 
 test.describe('My Photo Page Tests', () => {
 	test.beforeEach(async ({ page }) => {
@@ -288,6 +287,49 @@ test.describe('My Photo Page Tests', () => {
 		);
 		await deletePhotoButton.click();
 		await expect(page).toHaveURL(`${BASE_URL}photos`);
+	});
+
+	test('Go to My Photos page and add photo then delete using option', async ({
+		page,
+	}) => {
+		const photoData = {
+			title: 'Siracha',
+			description: 'Siracha slaps game',
+			imageUrl: testImage,
+		};
+		await addPhotoAndVerify(page, photoData);
+		await page.goto(`${BASE_URL}photos`);
+
+		const imageSelector = `img[src="${testImage}"]`;
+		const imageElement = await page.waitForSelector(imageSelector, {
+			timeout: 2000,
+		});
+
+		const optionsButtonHandle = await imageElement.evaluateHandle(
+			(image) => {
+				const parent = image.closest('.GridLayout--Image');
+				if (!parent) return null;
+				return parent.parentElement?.querySelector(
+					'button.blue-button'
+				);
+			}
+		);
+
+		if (!optionsButtonHandle) {
+			throw new Error(
+				`Options button not found for image with src "${testImage}"`
+			);
+		}
+
+		const optionsButton = await page.evaluateHandle(
+			(btn) => btn,
+			optionsButtonHandle
+		);
+
+		await optionsButton.click();
+
+		const deleteButton = page.locator('button:has-text("Delete")');
+		await deleteButton.click();
 	});
 });
 
