@@ -48,7 +48,7 @@
 
 .PhotoDetail--Page {
 	background-color: #f3f5f6;
-	padding-bottom:30px;
+	padding-bottom: 30px;
 }
 
 .full-width {
@@ -137,4 +137,25 @@
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+}
+
+.GridLayout--ImageContainer {
+	position: relative;
+}
+
+.GridLayout--Image {
+	width: 100%;
+	height: auto;
+}
+
+.GridLayout--Title {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #128fdc;
+	color: #fff;
+	padding: 5px 8px;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 5px;
 }
