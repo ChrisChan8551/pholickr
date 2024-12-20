@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllAlbums, deleteAlbum, selectMyAlbums } from '../../store/album';
 import GridLayout from '../GridLayout';
 import CreateAlbumModal from '../CreateAlbumModal';
-import Footer from '../Footer';
 
 function AlbumsPage() {
 	const dispatch = useDispatch();
