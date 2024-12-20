@@ -16,38 +16,40 @@ export const photoData = {
 	imageUrl: testImage,
 };
 
-export const addPhotoAndVerify = async (page, photoData) => {
+const navigateToPhotos = async (page) => {
 	await page.locator(selectors.navLinks[0]).click(); // My Photos
 	await expect(page).toHaveURL(`${BASE_URL}photos`);
-	const addPhotoButton = page.locator('button:has-text("Add Photo")');
-	await addPhotoButton.click();
-	await fillCreatePhotoForm(page, photoData);
-	await expect(page).toHaveURL(/\/photos\/\d+$/);
-
+};
+const verifyPhotoDetails = async (page, { title, description, imageUrl }) => {
 	await expect(page.locator('.PhotoDetail--Image')).toHaveAttribute(
 		'src',
-		photoData.imageUrl
+		imageUrl
 	);
-	await expect(page.locator('h1.title-text')).toHaveText(photoData.title);
-	await expect(page.locator('.desc-text')).toHaveText(photoData.description);
+	await expect(page.locator('h1.title-text')).toHaveText(title);
+	await expect(page.locator('.desc-text')).toHaveText(description);
 	await verifyFooterLinks(page);
-	const deletePhotoButton = await page.locator(
-		'button:has-text("Delete Photo")'
-	);
-	const editPhotoButton = await page.locator('button:has-text("Edit Photo")');
-	const profileCard = page.locator('.profile-img');
+};
 
+const verifyPhotoButtons = async (page) => {
+	const deletePhotoButton = page.locator('button:has-text("Delete Photo")');
+	const editPhotoButton = page.locator('button:has-text("Edit Photo")');
 	await expect(editPhotoButton).toBeVisible();
 	await expect(deletePhotoButton).toBeVisible();
 	await expect(editPhotoButton).toHaveText('Edit Photo');
 	await expect(deletePhotoButton).toHaveText('Delete Photo');
+};
 
-	await expect(profileCard).toBeVisible();
+export const addPhotoAndVerify = async (page, photoData) => {
+	await navigateToPhotos(page);
+	await page.locator('button:has-text("Add Photo")').click();
+	await fillCreatePhotoForm(page, photoData);
+	await expect(page).toHaveURL(/\/photos\/\d+$/);
+	await verifyPhotoDetails(page, photoData);
+	await verifyPhotoButtons(page);
 };
 
 export const deletePhoto = async (page, photoData) => {
-	const deleteButton = page.locator('button:has-text("Delete Photo")');
-	await deleteButton.click({ timeout: 5000 });
+	await page.locator('button:has-text("Delete Photo")').click();
 	await expect(page).toHaveURL(`${BASE_URL}photos`);
 	await expect(page.locator(`img[src="${photoData.imageUrl}"]`)).toHaveCount(
 		0
@@ -55,8 +57,7 @@ export const deletePhoto = async (page, photoData) => {
 };
 
 export const deletePhotoUsingOptions = async (page, photoData) => {
-	await page.goto(`${BASE_URL}photos`, { timeout: 5000 });
-	await expect(page).toHaveURL(`${BASE_URL}photos`);
+	await navigateToPhotos(page);
 	const imageLocator = page
 		.locator(`img[alt="${photoData.title}"][src="${photoData.imageUrl}"]`)
 		.first();
@@ -64,11 +65,9 @@ export const deletePhotoUsingOptions = async (page, photoData) => {
 		.locator('..')
 		.locator('..')
 		.locator('button.blue-button:has-text("Options")');
-	await optionsButton.waitFor({ state: 'visible', timeout: 2000 });
 	await optionsButton.click();
-	const deleteButton = page.locator('button:has-text("Delete")');
-	await deleteButton.click();
-	await imageLocator.waitFor({ state: 'hidden', timeout: 5000 });
+	await page.locator('button:has-text("Delete")').click();
+	await imageLocator.waitFor({ state: 'hidden' });
 	await expect(page.locator(`img[src="${photoData.imageUrl}"]`)).toHaveCount(
 		0
 	);

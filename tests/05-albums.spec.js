@@ -10,7 +10,7 @@ const {
 } = require('./helpers.js');
 
 const navigateToAlbumsPage = async (page) => {
-	await page.locator(selectors.navLinks[1]).click();
+	await page.locator(selectors.navLinks[1]).click(); // My Albums
 	await expect(page).toHaveURL(`${BASE_URL}albums`);
 };
 

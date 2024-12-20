@@ -4,7 +4,7 @@ const { expect } = require('@playwright/test');
 
 export const weblink = 'https://pholickr.onrender.com/';
 export const locallink = 'http://localhost:3000/';
-export const BASE_URL = weblink;
+export const BASE_URL = locallink;
 
 export const navigateTo = async (page, path = '', baseUrl = BASE_URL) => {
 	const fullUrl = `${baseUrl}${path}`;
