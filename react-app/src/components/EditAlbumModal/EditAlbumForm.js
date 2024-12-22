@@ -52,6 +52,7 @@ const EditAlbumForm = ({ album, hideForm }) => {
 					Title
 					<input
 						type='text'
+                        name='album-title'
 						className='modal-label'
 						value={title}
 						required
@@ -63,6 +64,7 @@ const EditAlbumForm = ({ album, hideForm }) => {
 					Image Url:
 					<textarea
 						className='modal-label'
+                        name='album-imageUrl'
 						type='text'
 						value={imageUrl}
 						onChange={(e) => {
