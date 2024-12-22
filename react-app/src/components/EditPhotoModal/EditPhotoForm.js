@@ -53,6 +53,7 @@ function EditPhotoForm({ photo, hideForm }) {
 					Title
 					<input
 						type='text'
+                        name='photo-title'
 						className='modal-label'
 						value={title}
 						required
@@ -63,6 +64,7 @@ function EditPhotoForm({ photo, hideForm }) {
 					Description
 					<textarea
 						type='text'
+                        name='photo-description'
 						className='modal-label'
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
@@ -72,6 +74,7 @@ function EditPhotoForm({ photo, hideForm }) {
 					Image Url
 					<textarea
 						type='text'
+                        name='photo-imageUrl'
 						className='modal-label'
 						value={imageUrl}
 						required

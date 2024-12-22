@@ -15,7 +15,11 @@ export const photoData = {
 	description: 'Siracha slaps game',
 	imageUrl: testImage,
 };
-
+const updatedPhotoData = {
+	title: 'Updated Siracha',
+	description: 'Siracha slaps even harder',
+	imageUrl: testImage,
+};
 const navigateToPhotos = async (page) => {
 	await page.locator(selectors.navLinks[0]).click(); // My Photos
 	await expect(page).toHaveURL(`${BASE_URL}photos`);
@@ -82,6 +86,16 @@ export const fillCreatePhotoForm = async (page, data) => {
 	await page.click('button[type="submit"]');
 };
 
+export const editPhotoAndVerify = async (page, updatedData) => {
+	await page.locator('button:has-text("Edit Photo")').click();
+	await fillFormFields(page, {
+		'input[name="photo-title"]': updatedData.title,
+		'textarea[name="photo-description"]': updatedData.description,
+	});
+	await page.click('button:has-text("Update")');
+	await verifyPhotoDetails(page, updatedData);
+};
+
 test.describe('My Photo Page Tests', () => {
 	test.describe.configure({ mode: 'serial' });
 	test.beforeEach(async ({ page }) => {
@@ -100,5 +114,13 @@ test.describe('My Photo Page Tests', () => {
 	}) => {
 		await addPhotoAndVerify(page, photoData);
 		await deletePhotoUsingOptions(page, photoData);
+	});
+
+	test('Go to Photos page and add photo, edit it, then delete it', async ({
+		page,
+	}) => {
+		await addPhotoAndVerify(page, photoData);
+		await editPhotoAndVerify(page, updatedPhotoData, { timeout: 2000 });
+		await deletePhoto(page, updatedPhotoData);
 	});
 });
